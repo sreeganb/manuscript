@@ -14,6 +14,7 @@
 \usepackage[T1]{fontenc} % Use modern font encodings
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{amsmath}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
 %% un-comment the next line.  This provides information on the
@@ -161,7 +162,9 @@ the reaction coordinates.
 
 TPS based free energy simulations have been attempted previously by Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111}
 
-Human Mat2a enzyme and plasmodium vivax adenosine deaminase \cite{Luo07JAmChemSoc129p8008} 
+One example of the TPS based free energies calculations on real protein systems \cite{Silveira21JPhysChemB125p2018}
+
+Human Mat2a enzyme and plasmodium vivax adenosine deaminase \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618} 
 \section{Theory}
 \subsection{Transition path sampling}
 %Transition path sampling is an importance sampling in the trajectory space.
@@ -268,12 +271,9 @@ dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t}$ of th
 \end{itemize}   
 
 \section{Results and discussion}
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.2 ]{figures/ts253.png}
-%\caption{Enzymatic reaction in human Mat2a enzyme}
-%  \label{fgr:mat2a_reaction}
-%\end{figure}
+\subsection{QMMM simulations}
+CHARMM force field \cite{Brooks09JComputChem30p1545}
+
 \section{Adenosine deaminase reaction coordinates and free energy}
 \begin{figure}[ht!]
 \centering
