@@ -144,21 +144,30 @@
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-Atomistic level study of the mechanism of enzyme catalysis is necessary
-to understand the efficiency of enzymes as well as to device strategies for inhibiting 
-their activity. 
-Transition path sampling \cite{Bolhuis02AnnRevPhysChem53p291,Dellago98JChemPhys108p1964}
-is an unbiased monte carlo method in the trajectory space which is used for the calculation 
-of reaction coordinates and transition states of complex chemical reactions. 
-TPS uses reactive trajectories which connect a reactant state to a product state and these 
-trajectories are rare in molecular dynamics simulations because of the energy 
-barriers separating the reactants and the products. To overcome these energy barriers and 
+Atomistic level detailed study of the mechanism of enzyme catalysis 
+reactions is necessary to understand their efficiency as well as to 
+design molecules that can act as inhibitors for their activity. 
+Molecular dynamics (MD) simulations 2 have often been used to study 
+large biomolecular systems in atomistic detail since they provide an 
+excellent computational cost to detail ratio. MD simulations to study 
+chemical reactions that go through free energy barriers are often 
+impractical to simulate since it would take a long time for the system 
+to cross over barriers.
+To overcome these energy barriers and 
 to obtain ergodic sampling several methods have been developed over the years such as 
-umbrella sampling, \cite{Kastner11WileyInterdiscipRevComputMolSci1p932} metadynamics, \cite{Barducci11WileyInterdiscipRevComputMolSci1p826}
+umbrella sampling, \cite{Kastner11WileyInterdiscipRevComputMolSci1p932} 
+metadynamics, \cite{Barducci11WileyInterdiscipRevComputMolSci1p826}
 steered MD, \cite{Park04JChemPhys120p5946}
 milestoning, etc. These methods rely on applying bias
 potentials for the system to overcome energy barriers and hence require the knowledge of 
-the reaction coordinates. 
+the reaction coordinates.  
+Transition path sampling \cite{Bolhuis02AnnRevPhysChem53p291,Dellago98JChemPhys108p1964}
+(TPS) is an enhanced sampling method for 
+rare events that transition a system between two stable states often 
+referred to as reactants and products. 6
+
+TPS focuses on transition paths and not on stable states which introduces 
+biases in the sampling of equilibrium distribution of the reaction coordinate. 
 
 TPS based free energy simulations have been attempted previously by Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111}
 
