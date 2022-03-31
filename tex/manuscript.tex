@@ -4,7 +4,7 @@
 %% The document class accepts keyval options, which should include
 %% the target journal and optionally the manuscript type.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[journal=jpcb,manuscript=article,reprint]{achemso}
+\documentclass[journal=jpcbfk,manuscript=article,layout=traditional]{achemso}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Place any additional packages needed here.  Only include packages
@@ -15,6 +15,8 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{amsmath}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
 %% un-comment the next line.  This provides information on the
@@ -116,6 +118,10 @@
 %% if an abstract is not used by the target journal.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
+  Transition path sampling (TPS) has been widely applied for the
+  calculations of transition state and reaction coordinates of 
+  condensed phase systems. Here, we discuss a scheme for the calculation
+  of free energies with the TPS method 
   We discuss a scheme for the calculation of free energies within 
   the transition path sampling (TPS) method. TPS is often used for
   the calculations of reaction coordinates of complex reactions in 
@@ -144,15 +150,23 @@
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-Atomistic level detailed study of the mechanism of enzyme catalysis 
-reactions is necessary to understand their efficiency as well as to 
-design molecules that can act as inhibitors for their activity. 
-Molecular dynamics (MD) simulations 2 have often been used to study 
-large biomolecular systems in atomistic detail since they provide an 
-excellent computational cost to detail ratio. MD simulations to study 
-chemical reactions that go through free energy barriers are often 
-impractical to simulate since it would take a long time for the system 
-to cross over barriers.
+Molecular dynamics (MD) simulations are being 
+used to calculate quantitative estimations of experimentally measurable 
+kinetic and thermodynamic parameters of enzyme catalyzed reactions. 
+\cite{Karplus02NatStructMolBiol9p646,
+Schramm98AnnuRevBiochem67p693,Zhang05AccChemRes38p379,
+Schramm11AnnuRevBiochem80p703,Schramm18ChemRev118p11194} 
+This has helped in proposing mechanisms and explanations for 
+enzyme activity, high throughput screening of millions of inhibitor 
+molecues in drug discovery,   
+
+
+This is quite useful in explaining 
+the efficiency and rate of such reactions, developing 
+inhibitors for various enzymes in pharmacology, de novo design of 
+enzymatic activity.
+MD simulations model chemical reactions by taking the system from a reactant state 
+to a product state via a high energy transition state.
 To overcome these energy barriers and 
 to obtain ergodic sampling several methods have been developed over the years such as 
 umbrella sampling, \cite{Kastner11WileyInterdiscipRevComputMolSci1p932} 
@@ -174,7 +188,7 @@ TPS based free energy simulations have been attempted previously by Brotzakis et
 One example of the TPS based free energies calculations on real protein systems \cite{Silveira21JPhysChemB125p2018}
 
 Human Mat2a enzyme and plasmodium vivax adenosine deaminase \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618} 
-\section{Theory}
+\section{Methods}
 \subsection{Transition path sampling}
 %Transition path sampling is an importance sampling in the trajectory space.
 Consider the molecular dynamics simulation of a molecular system consisting 
@@ -286,41 +300,41 @@ CHARMM force field \cite{Brooks09JComputChem30p1545}
 \section{Adenosine deaminase reaction coordinates and free energy}
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=0.25]{./figures/ada-protein.png}
+\includegraphics[scale=0.22]{./figures/ada-protein.png}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\begin{minipage}[b]{0.32\linewidth}
-\includegraphics[scale=0.3]{figures/reactant-state.png}
-\caption{Reactant state}
-\label{fig:minipage1}
-\end{minipage}
-\quad
-\begin{minipage}[b]{0.32\linewidth}
-\includegraphics[scale=0.3]{figures/int1.png}
-\caption{Intermediate state}
-\label{fig:minipage2}
-\end{minipage}
-\quad
-\begin{minipage}[b]{0.32\linewidth}
-\includegraphics[scale=0.3]{figures/product-state.png}
-\caption{Product state}
-\label{fig:minipage1}
-\end{minipage}
-\end{figure}
+%\begin{figure}[ht]
+%\centering
+%\begin{minipage}[b]{0.32\linewidth}
+%\includegraphics[scale=0.3]{figures/reactant-state.png}
+%\caption{Reactant state}
+%\label{fig:minipage1}
+%\end{minipage}
+%\quad
+%\begin{minipage}[b]{0.32\linewidth}
+%\includegraphics[scale=0.3]{figures/int1.png}
+%\caption{Intermediate state}
+%\label{fig:minipage2}
+%\end{minipage}
+%\quad
+%\begin{minipage}[b]{0.32\linewidth}
+%\includegraphics[scale=0.3]{figures/product-state.png}
+%\caption{Product state}
+%\label{fig:minipage1}
+%\end{minipage}
+%\end{figure}
 
 %\subsection{Outline}
-\begin{figure}[ht]
+\begin{figure}[ht!]
 \centering
 \begin{minipage}[b]{0.45\linewidth}
-\includegraphics[scale=0.5]{figures/reac-sc-oc-167.png}
+\includegraphics[scale=0.4]{figures/reac-sc-oc-167.png}
 \caption{Trajectory 167}
 \label{fig:minipage1}
 \end{minipage}
 \quad
 \begin{minipage}[b]{0.45\linewidth}
-\includegraphics[scale=0.9]{figures/den-fenergy-1.pdf}
+\includegraphics[scale=0.8]{figures/den-fenergy-1.pdf}
 \caption{Free energy profile for the enzymatic reaction in human Mat2a enzyme}
 \label{fig:minipage2}
 \end{minipage}
