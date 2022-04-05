@@ -161,7 +161,9 @@ enzyme activity, fast high throughput screening of thousands of inhibitor
 molecues in drug lead discovery, \cite{Jorgensen09AccChemRes42p724,Sliwoski14PharmacolRev66p334} 
 directed evolution for designing enzymes with enhanced catalytic 
 activities, \cite{Thyme09Nature461p1300,Bloom09PNAS106p9995,Schafer19JAmChemSoc141p10431} etc.    
-Straightforward MD simulations are not employed in these cases
+Straightforward MD simulations are not employed in these cases because 
+trajectories that take the system from reactant state to product state through
+a transition state are rare and would take long time 
 
 Ergodic sampling of the phase space within straighforward MD simulations 
 is often difficult to achieve with the presence of energy barriers. 
@@ -179,7 +181,7 @@ rare events that transition a system between two stable states often
 referred to as reactants and products.
 
 TPS focuses on transition paths and not on stable states which introduces 
-biases in the sampling of equilibrium distribution of the reaction coordinate. 
+biases in the sampling of equilibrium distribution of the reaction coordinate. \cite{Dellago09AdvCompSimAppp167}
 
 TPS based free energy simulations have been attempted previously by 
 Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111}
@@ -287,8 +289,8 @@ $\zeta_{i}^{min} < \zeta < \zeta_{i}^{max}$.
 a guiding trajectory for the window sampling. Pick a time slice from this trajectory 
 $\tilde{z}_{j\Delta t}$ such that the order parameter calculated for this time slice
 $\tilde{\zeta}$ satisfies $\zeta_{i}^{min} < \tilde{\zeta} < \zeta_{i}^{max}$.
-\item Using the shooting and shifting algorithm familiar from TPS simulations, harvest 
-dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t}$ of the trajectory 
+\item Using the shooting and shifting algorithm familiar from TPS simulations, \cite{dellago02AdvChemPhys123}
+harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t}$ of the trajectory 
   $\tilde{z}(\mathcal{T})$ and accept the new trajectory if at any time slice the calculated 
   order parameter $\hat{\zeta}$ satisfies $\zeta_{i}^{min} < \hat{\zeta} < \zeta_{i}^{max}$.
   \item Calculate the probability distribution ($P_i(\zeta)$) within the window $\zeta_{i}^{min} 
@@ -310,6 +312,11 @@ CHARMM force field \cite{Brooks09JComputChem30p1545}
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.22]{./figures/ada-protein.png}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.9]{./figures/ada-fenergy.pdf}
 \end{figure}
 
 %\begin{figure}[ht]
