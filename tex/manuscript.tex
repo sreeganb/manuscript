@@ -71,7 +71,7 @@
 %% optional argument to \title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[]
-  {Transition path sampling and the calculation of free energies of enzymatic
+  {Transition path sampling based calculation of free energies of enzymatic
   reactions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
@@ -161,30 +161,38 @@ enzyme activity, fast high throughput screening of thousands of inhibitor
 molecues in drug lead discovery, \cite{Jorgensen09AccChemRes42p724,Sliwoski14PharmacolRev66p334} 
 directed evolution for designing enzymes with enhanced catalytic 
 activities, \cite{Thyme09Nature461p1300,Bloom09PNAS106p9995,Schafer19JAmChemSoc141p10431} etc.    
-Straightforward MD simulations are not employed in these cases because 
-trajectories that take the system from reactant state to product state through
-a transition state are rare and would take long time 
-
-Ergodic sampling of the phase space within straighforward MD simulations 
-is often difficult to achieve with the presence of energy barriers. 
-To overcome such barriers enhanced sampling techniques 
-have been developed over the years such as 
+Straightforward MD simulations adequately sample 
+the long-lived stable reactant and product states 
+but the high energy barrier-crossing events that occur rarely and at long 
+time scales are not easily accessible using this method alone.
+To access such states at a higher frequency using MD simulations 
+several enhanced sampling techniques 
+have been developed in the past few decades some of which are 
 umbrella sampling, \cite{Kastner11WileyInterdiscipRevComputMolSci1p932} 
 metadynamics, \cite{Barducci11WileyInterdiscipRevComputMolSci1p826}
 steered MD, \cite{Park04JChemPhys120p5946}
-milestoning, \cite{Faradjian04JChemPhys120p10880} etc. These methods rely on applying bias
-potentials for the system to overcome energy barriers and hence 
-require the knowledge of the reaction coordinates.  
-Transition path sampling \cite{Bolhuis02AnnRevPhysChem53p291,Dellago98JChemPhys108p1964}
-(TPS) is an enhanced sampling method for 
-rare events that transition a system between two stable states often 
-referred to as reactants and products.
+milestoning, \cite{Faradjian04JChemPhys120p10880} and transition path sampling 
+(TPS). \cite{Pratt86JChemPhys85p5045,Bolhuis02AnnRevPhysChem53p291,Dellago98JChemPhys108p1964}
 
-TPS focuses on transition paths and not on stable states which introduces 
-biases in the sampling of equilibrium distribution of the reaction coordinate. \cite{Dellago09AdvCompSimAppp167}
+TPS in particular is an attractive method since it samples reactive trajectories
+in which the rare barrier-crossing events are guaranteed to occur and
+it does not require a priori knowledge of the reaction coordinate which can be 
+a complicated entity in large biological systems. TPS has been successfully 
+applied to study problems such as enzyme catalysis, protein folding, etc. 
+The TPS ensemble which is used to obtain a unique statistical definition for the reaction coordinate
+and transition state of a reaction consists of so called reactive trajectories which 
+link the stable reactant and product states. In this Monte-Carlo procedure in the trajecotry space
+rejected moves correspond to non-reactive trajectories. But these trajectories are 
+required to obtain the equilibrium distribution function.
+
+The TPS ensemble consists of reactive trajectories which connect a reactant state to
+a product state by going through the transition state and the probabilities of configurations thus sampled 
+do not replicate the equilibrium probabilities. To calculate equilibrium properties such as the free energy 
+of a reaction, equilibrium sampling of the configurations along a reaction coordinate is 
+required which is not obtained with straightforward TPS. \cite{Dellago09AdvCompSimAppp167}
 
 TPS based free energy simulations have been attempted previously by 
-Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111}
+Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111,Dellago04MolSimul30p795}
 
 In this work we will focus on the implementation and application of the 
 free energy based calculations within the TPS method on two enzymatic reactions: 
@@ -307,6 +315,19 @@ harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t
 CHARMM force field \cite{Brooks09JComputChem30p1545}
 
 %------------------------------------------------------------------------------ 
+\subsection{Human MethionineAdenosyltransferase 2A}
+%------------------------------------------------------------------------------ 
+The SN2 reaction catalyzed by the human Mat2a enzyme leads to the production of 
+S-Adenosylmethionine compound which is part of the ATP cycle \cite{Niland21Biochem60p791}
+\begin{figure}[ht!]
+\includegraphics[scale=0.5]{figures/comm-80-mat2a.pdf}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=0.5]{figures/mat2a-fenergy.pdf}
+\caption{The free energy as a function of the order parameter.}
+\end{figure}
+%------------------------------------------------------------------------------ 
 \subsection{Adenosine deaminase reaction coordinates and free energy}
 %------------------------------------------------------------------------------ 
 \begin{figure}[ht!]
@@ -341,20 +362,20 @@ CHARMM force field \cite{Brooks09JComputChem30p1545}
 %\end{figure}
 
 %\subsection{Outline}
-\begin{figure}[ht!]
-\centering
-\begin{minipage}[b]{0.45\linewidth}
-\includegraphics[scale=0.4]{figures/reac-sc-oc-167.png}
-\caption{Trajectory 167}
-\label{fig:minipage1}
-\end{minipage}
-\quad
-\begin{minipage}[b]{0.45\linewidth}
-\includegraphics[scale=0.8]{figures/den-fenergy-1.pdf}
-\caption{Free energy profile for the enzymatic reaction in human Mat2a enzyme}
-\label{fig:minipage2}
-\end{minipage}
-\end{figure}
+%\begin{figure}[ht!]
+%\centering
+%\begin{minipage}[b]{0.45\linewidth}
+%\includegraphics[scale=0.4]{figures/reac-sc-oc-167.png}
+%\caption{Trajectory 167}
+%\label{fig:minipage1}
+%\end{minipage}
+%\quad
+%\begin{minipage}[b]{0.45\linewidth}
+%\includegraphics[scale=0.8]{figures/den-fenergy-1.pdf}
+%\caption{Free energy profile for the enzymatic reaction in human Mat2a enzyme}
+%\label{fig:minipage2}
+%\end{minipage}
+%\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
