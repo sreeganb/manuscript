@@ -174,14 +174,20 @@ steered MD, \cite{Park04JChemPhys120p5946}
 milestoning, \cite{Faradjian04JChemPhys120p10880} and transition path sampling 
 (TPS). \cite{Pratt86JChemPhys85p5045,Bolhuis02AnnRevPhysChem53p291,Dellago98JChemPhys108p1964}
 
+TPS was developed as a reaction-coordinate free, statistical method 
+which samples trajectories that connect the stable reactant and product states 
+guaranteeing the occurence of the rare barrier crossing events. These trajectories 
+are sampled using a Monte carlo procedure leading to an ensemble of transition
+pathways that are real dynamical trajectories which contain information regarding the 
+mechanism and kinetics of the reaction.    
+
+
 TPS in particular is an attractive method since it samples reactive trajectories
 in which the rare barrier-crossing events are guaranteed to occur and
 it does not require a priori knowledge of the reaction coordinate which can be 
 a complicated entity in large biological systems. TPS has been successfully 
 applied to study problems such as enzyme catalysis, protein folding, etc. 
-The TPS ensemble which is used to obtain a unique statistical definition for the reaction coordinate
-and transition state of a reaction consists of so called reactive trajectories which 
-link the stable reactant and product states. In this Monte-Carlo procedure in the trajecotry space
+ In this Monte-Carlo procedure in the trajecotry space
 rejected moves correspond to non-reactive trajectories. But these trajectories are 
 required to obtain the equilibrium distribution function.
 
@@ -194,17 +200,23 @@ required which is not obtained with straightforward TPS. \cite{Dellago09AdvCompS
 TPS based free energy simulations have been attempted previously by 
 Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111,Dellago04MolSimul30p795}
 
-In this work we will focus on the implementation and application of the 
-free energy based calculations within the TPS method on two enzymatic reactions: 
+In this manuscript we will focus on the implementation and application of the 
+free energy based calculations within the TPS method on reactions catalyzed by two systems:
+the human MAT2A enzyme and the plasmodium vivax adenosine deaminase enzyme. \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
+These enzymes were chosen not only because of their importance in biochemical pathways and
+but also because of the availability of experimental results with which comparisons can 
+be drawn. 
+
 One example of the TPS based free energies calculations on real 
 protein systems \cite{Silveira21JPhysChemB125p2018} Human Mat2a enzyme and 
-plasmodium vivax adenosine deaminase \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
+plasmodium vivax adenosine deaminase 
 %------------------------------------------------------------------------------ 
 \section{Methods}
 %------------------------------------------------------------------------------ 
 \subsection{Transition path sampling}
 %------------------------------------------------------------------------------ 
-%Transition path sampling is an importance sampling in the trajectory space.
+Here we briefly describe the equations describing the TPS method for the purpose of
+introducing notations as well as for the sake of being complete. 
 Consider the molecular dynamics simulation of a molecular system consisting 
 of $N$ atoms. Starting from the initial positions and momenta of each atom at time $t_0$,
 the time evolution is carried out by finding the position ($\textbf{q}$) and 
@@ -315,10 +327,14 @@ harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t
 CHARMM force field \cite{Brooks09JComputChem30p1545}
 
 %------------------------------------------------------------------------------ 
-\subsection{Human MethionineAdenosyltransferase 2A}
+\subsection{Human Methionine Adenosyltransferase 2A}
 %------------------------------------------------------------------------------ 
 The SN2 reaction catalyzed by the human Mat2a enzyme leads to the production of 
 S-Adenosylmethionine compound which is part of the ATP cycle \cite{Niland21Biochem60p791}
+\begin{figure}[ht!]
+\includegraphics[scale=0.25]{figures/mat2a-transition-state.png}
+\end{figure}
+
 \begin{figure}[ht!]
 \includegraphics[scale=0.5]{figures/comm-80-mat2a.pdf}
 \end{figure}
