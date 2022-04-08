@@ -129,23 +129,11 @@
   equilibrium distribution of the reaction coordinate. This 
   distribution can then be used for the calculations of free energies
   using standard Boltzmann inversion schemes. We calculate the free
-  energy profiles of the human Mat2a enzyme and the plasmodium 
-  adenosine deaminase to demonstrate the applicability of this method
-  for enzyme catalysis reactions. 
-
-  %This is an example document for the \textsf{achemso} document
-  %class, intended for submissions to the American Chemical Society
-  %for publication. The class is based on the standard \LaTeXe\
-  %\textsf{report} file, and does not seek to reproduce the appearance
-  %of a published paper.
-
-  %This is an abstract for the \textsf{achemso} document class
-  %demonstration document.  An abstract is only allowed for certain
-  %manuscript types.  The selection of \texttt{journal} and
-  %\texttt{manuscript} will determine if an abstract is valid.  If
-  %not, the class will issue an appropriate error.
+  energy profiles of the reactions catalyzed by the human methionine 
+  S-adenosyltransferase (MAT2A) enzyme and the plasmodium 
+  vivax adenosine deaminase enzyme to demonstrate the applicability of this 
+  method. 
 \end{abstract}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -202,7 +190,8 @@ Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111,Dellago04MolSimul30p795}
 
 In this manuscript we will focus on the implementation and application of the 
 free energy based calculations within the TPS method on reactions catalyzed by two systems:
-the human MAT2A enzyme and the plasmodium vivax adenosine deaminase enzyme. \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
+the human MAT2A enzyme and the plasmodium vivax adenosine deaminase 
+enzyme. \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
 These enzymes were chosen not only because of their importance in biochemical pathways and
 but also because of the availability of experimental results with which comparisons can 
 be drawn. 
@@ -323,20 +312,30 @@ harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
 \subsection{QMMM simulations}
-%------------------------------------------------------------------------------ 
-CHARMM force field \cite{Brooks09JComputChem30p1545}
+%------------------------------------------------------------------------------ We performed computational studies on two enzymes where we have shown
+that fast dynamics is part of the reaction mechanism and calculated the electric field near
+the bond-breaking event.
+QMMM simulations were used for the TPS simulations in this work and the 
+CHARMM force field \cite{Brooks09JComputChem30p1545} is used for the 
+MM portion and the PM3 semiempirical method \cite{Repasky02JComputChem23p1601} 
+is used for the QM region. 
 
 %------------------------------------------------------------------------------ 
 \subsection{Human Methionine Adenosyltransferase 2A}
 %------------------------------------------------------------------------------ 
-The SN2 reaction catalyzed by the human Mat2a enzyme leads to the production of 
-S-Adenosylmethionine compound which is part of the ATP cycle \cite{Niland21Biochem60p791}
+Human methionine adenosyltransferase (MAT2A) is an enzyme that catalyzes the 
+reaction between Adenosine triphosphaste and L-methionine which leads to the 
+formation of S-Adenosylmethionine. \cite{Firestone17JAmChemSoc139p13754,Niland21Biochem60p791} 
+The mechanism of this reaction is determined to follow a SN$_2$ transition state
+with the sulphur atom of the L-methionine as the nucleophile with the 
+triphosphate leaving group.  
+
 \begin{figure}[ht!]
 \includegraphics[scale=0.25]{figures/mat2a-transition-state.png}
 \end{figure}
 
 \begin{figure}[ht!]
-\includegraphics[scale=0.5]{figures/comm-80-mat2a.pdf}
+\includegraphics[scale=0.5]{figures/comm-60-mat2a.pdf}
 \end{figure}
 
 \begin{figure}
@@ -376,23 +375,6 @@ S-Adenosylmethionine compound which is part of the ATP cycle \cite{Niland21Bioch
 %\label{fig:minipage1}
 %\end{minipage}
 %\end{figure}
-
-%\subsection{Outline}
-%\begin{figure}[ht!]
-%\centering
-%\begin{minipage}[b]{0.45\linewidth}
-%\includegraphics[scale=0.4]{figures/reac-sc-oc-167.png}
-%\caption{Trajectory 167}
-%\label{fig:minipage1}
-%\end{minipage}
-%\quad
-%\begin{minipage}[b]{0.45\linewidth}
-%\includegraphics[scale=0.8]{figures/den-fenergy-1.pdf}
-%\caption{Free energy profile for the enzymatic reaction in human Mat2a enzyme}
-%\label{fig:minipage2}
-%\end{minipage}
-%\end{figure}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
 %% classes.  This should be given within the "acknowledgement"
