@@ -162,26 +162,32 @@ steered MD, \cite{Park04JChemPhys120p5946}
 milestoning, \cite{Faradjian04JChemPhys120p10880} and transition path sampling 
 (TPS). \cite{Pratt86JChemPhys85p5045,Bolhuis02AnnRevPhysChem53p291,Dellago98JChemPhys108p1964}
 
-TPS was developed as a reaction-coordinate free, statistical method 
-which samples trajectories that connect the stable reactant and product states 
-guaranteeing the occurence of the rare barrier crossing events. These trajectories 
-are sampled using a Monte carlo procedure leading to an ensemble of transition
-pathways that are real dynamical trajectories which contain information regarding the 
-mechanism and kinetics of the reaction.    
-
-
 TPS in particular is an attractive method since it samples reactive trajectories
 in which the rare barrier-crossing events are guaranteed to occur and
 it does not require a priori knowledge of the reaction coordinate which can be 
-a complicated entity in large biological systems. TPS has been successfully 
+complex for large biological systems.
+TPS can be considered as a generalization of the Monte Carlo sampling of the 
+configuration space to the space of trajectories where the collected ensemble of 
+reactive pathways are real dynamical trajectories compared to articial trajectories
+generated using bias forces. The TPS ensemble can be used to obtain kinetic information
+such as the rate of the reaction as well as the transition state, reaction
+coordinate and the reaction mechanism. TPS has been successfully 
 applied to study problems such as enzyme catalysis, protein folding, etc. 
- In this Monte-Carlo procedure in the trajecotry space
-rejected moves correspond to non-reactive trajectories. But these trajectories are 
-required to obtain the equilibrium distribution function.
 
-The TPS ensemble consists of reactive trajectories which connect a reactant state to
-a product state by going through the transition state and the probabilities of configurations thus sampled 
-do not replicate the equilibrium probabilities. To calculate equilibrium properties such as the free energy 
+Since TPS focuses on collecting only reactive trajectories the information contained 
+in the non-reactive trajectories which is essential for describing the 
+equilibrium distribution is missing. 
+Methods that can be used to simultaneously calculate
+the dynamical as well as equilibrium properties of a system within 
+a certain set of asssumptions have garnered interest in recent times. \cite{Suarez14JChemTheoryComput10p2658}
+Transition interface sampling (TIS) is a variant of TPS which can be used for 
+this purpose. \cite{vanErp03JChemPhys118p7762}
+
+A common theme among such methods is to divide the reaction coordinate into
+windows within which independent sampling can be performed and interpolated
+in a way that can used to calculate equilibrium properties
+
+To calculate equilibrium properties such as the free energy 
 of a reaction, equilibrium sampling of the configurations along a reaction coordinate is 
 required which is not obtained with straightforward TPS. \cite{Dellago09AdvCompSimAppp167}
 
@@ -312,9 +318,7 @@ harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
 \subsection{QMMM simulations}
-%------------------------------------------------------------------------------ We performed computational studies on two enzymes where we have shown
-that fast dynamics is part of the reaction mechanism and calculated the electric field near
-the bond-breaking event.
+%------------------------------------------------------------------------------ 
 QMMM simulations were used for the TPS simulations in this work and the 
 CHARMM force field \cite{Brooks09JComputChem30p1545} is used for the 
 MM portion and the PM3 semiempirical method \cite{Repasky02JComputChem23p1601} 
@@ -324,7 +328,7 @@ is used for the QM region.
 \subsection{Human Methionine Adenosyltransferase 2A}
 %------------------------------------------------------------------------------ 
 Human methionine adenosyltransferase (MAT2A) is an enzyme that catalyzes the 
-reaction between Adenosine triphosphaste and L-methionine which leads to the 
+reaction between adenosine triphosphaste and L-methionine which leads to the 
 formation of S-Adenosylmethionine. \cite{Firestone17JAmChemSoc139p13754,Niland21Biochem60p791} 
 The mechanism of this reaction is determined to follow a SN$_2$ transition state
 with the sulphur atom of the L-methionine as the nucleophile with the 
@@ -342,6 +346,21 @@ triphosphate leaving group.
 \includegraphics[scale=0.5]{figures/mat2a-fenergy.pdf}
 \caption{The free energy as a function of the order parameter.}
 \end{figure}
+We used transition path sampling to generate and
+analyze the ensemble of reactive trajectories. As order
+parameters that define the reactant and product basins, we
+used the donor-hydride and acceptor-hydride distances. The
+reactant basin was defined as a donor-hydride distance smaller
+than 1.6  and the product basin as an acceptor-hydride
+distance smaller than 1.6 . To seed the generation of the path
+ensemble, we generated a biased trajectory by applying a
+harmonic force between the hydride and the acceptor and
+allowed the system to propagate for 250 fs. New trajectories
+were generated by the shooting algorithm: we perturbed the
+momenta of a randomly chosen slice of a reactive trajectory,
+and using the new momenta, we allowed the system to
+propagate forward and backward in time for 250 fs. A total of
+120 reactive trajectories were generated.
 %------------------------------------------------------------------------------ 
 \subsection{Adenosine deaminase reaction coordinates and free energy}
 %------------------------------------------------------------------------------ 
@@ -352,7 +371,7 @@ triphosphate leaving group.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=0.9]{./figures/ada-fenergy.pdf}
+\includegraphics[scale=0.6]{./figures/ada-fenergy.pdf}
 \end{figure}
 
 %\begin{figure}[ht]
@@ -375,6 +394,13 @@ triphosphate leaving group.
 %\label{fig:minipage1}
 %\end{minipage}
 %\end{figure}
+%------------------------------------------------------------------------------ 
+\section{Conclusions}
+%------------------------------------------------------------------------------ 
+We have discussed the application of a scheme to calculate the 
+free energies of enzymatic reactions within the TPS method using the MAT2A
+and the ADA enzymes as examples. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
 %% classes.  This should be given within the "acknowledgement"
