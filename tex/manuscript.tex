@@ -166,30 +166,27 @@ TPS in particular is an attractive method since it samples reactive trajectories
 in which the rare barrier-crossing events are guaranteed to occur and
 it does not require a priori knowledge of the reaction coordinate which can be 
 complex for large biological systems.
-TPS can be considered as a generalization of the Monte Carlo sampling of the 
-configuration space to the space of trajectories where the collected ensemble of 
-reactive pathways are real dynamical trajectories compared to articial trajectories
-generated using bias forces. The TPS ensemble can be used to obtain kinetic information
-such as the rate of the reaction as well as the transition state, reaction
-coordinate and the reaction mechanism. TPS has been successfully 
-applied to study problems such as enzyme catalysis, protein folding, etc. 
+TPS is based on the Monte Carlo importance sampling in the 
+space of trajectories where the collected ensemble of 
+reactive pathways are real dynamical trajectories generated without the 
+application of any bias forces. Thus the TPS ensemble can be used to obtain 
+kinetic information such as the rate of the reaction as well as to elucidate 
+the transition state, reaction coordinate and the reaction mechanism. 
+TPS has been successfully applied to study problems such as enzyme catalysis, 
+protein folding, etc. 
 
-Since TPS focuses on collecting only reactive trajectories the information contained 
-in the non-reactive trajectories which is essential for describing the 
-equilibrium distribution is missing. 
+Calculating equilibrium properties such as the free energy of an enzymatic 
+catalysis reaction within TPS needs more attention. 
+Since the TPS path ensemble only consists of reactive trajectories, the information from 
+the discarded non-reactive trajectories which is required for obtaining the 
+equilibrium probability distribution of the order parameter is missing. \cite{Dellago09AdvCompSimAppp167}
+
+
 Methods that can be used to simultaneously calculate
 the dynamical as well as equilibrium properties of a system within 
 a certain set of asssumptions have garnered interest in recent times. \cite{Suarez14JChemTheoryComput10p2658}
 Transition interface sampling (TIS) is a variant of TPS which can be used for 
 this purpose. \cite{vanErp03JChemPhys118p7762}
-
-A common theme among such methods is to divide the reaction coordinate into
-windows within which independent sampling can be performed and interpolated
-in a way that can used to calculate equilibrium properties
-
-To calculate equilibrium properties such as the free energy 
-of a reaction, equilibrium sampling of the configurations along a reaction coordinate is 
-required which is not obtained with straightforward TPS. \cite{Dellago09AdvCompSimAppp167}
 
 TPS based free energy simulations have been attempted previously by 
 Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111,Dellago04MolSimul30p795}
@@ -313,39 +310,36 @@ harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t
   accepted trajectories for the window $i$. 
   \item Combine the probability distributions in successive windows by adjusting the constants $C$
   such that the free energy $A$ from Eq. \ref{eqn:fenergy} is continuous. 
-\end{itemize}   
+\end{itemize}
 %------------------------------------------------------------------------------ 
-\section{Results and discussion}
+\section{Computational details}
 %------------------------------------------------------------------------------ 
-\subsection{QMMM simulations}
-%------------------------------------------------------------------------------ 
-QMMM simulations were used for the TPS simulations in this work and the 
-CHARMM force field \cite{Brooks09JComputChem30p1545} is used for the 
-MM portion and the PM3 semiempirical method \cite{Repasky02JComputChem23p1601} 
-is used for the QM region. 
+\subsection{System preparation}
+%------------------------------------------------------------------------------
+We used the crystal structure of human MAT2A 
+bound to methylthioadenosine and di-imido triphosphate (PNPNP)
+(7L1A from the protein data bank (PDB)) reported by Niland 
+et al. \cite{Niland21Biochem60p791} and the crystal structure of \textit{pv}ADA 
+in complex with MT-coformycin (3EWC from the PDB) reported by Ho et 
+al. \cite{Ho09Biochemistry48p9618} as the starting points of our two 
+simulations. Molecular dynamics simulations within classical and hybrid 
+quantum mechanics/molecular mechanics (QMMM) approximations were performed 
+using the CHARMM program package and using the CHARMM 36 force 
+field \cite{Brooks09JComputChem30p1545} for the MM part and the 
+approximate PM3 semiempirical method \cite{Repasky02JComputChem23p1601} for the QM part.
 
-%------------------------------------------------------------------------------ 
-\subsection{Human Methionine Adenosyltransferase 2A}
-%------------------------------------------------------------------------------ 
-Human methionine adenosyltransferase (MAT2A) is an enzyme that catalyzes the 
-reaction between adenosine triphosphaste and L-methionine which leads to the 
-formation of S-Adenosylmethionine. \cite{Firestone17JAmChemSoc139p13754,Niland21Biochem60p791} 
-The mechanism of this reaction is determined to follow a SN$_2$ transition state
-with the sulphur atom of the L-methionine as the nucleophile with the 
-triphosphate leaving group.  
+Each protein was solvated within
+a 15 $\AA$ sphere using TIP3 waters and neutralized using
+potassium ions. We minimized the system with 50 steps of the
+Steepest Descent method, followed by 2000 steps of the
+adopted Basis Newton-Raphson method. The system was
+heated slowly to 300 K for 30 ps, starting with harmonic
+constraints except on H atoms and TIP3 waters that were
+gradually reduced to force constant 1. We started the
+equilibration with 15 ps with harmonic constraints of force
+constant 1, which were then removed and the equilibration ran
+for 60 ps.
 
-\begin{figure}[ht!]
-\includegraphics[scale=0.25]{figures/mat2a-transition-state.png}
-\end{figure}
-
-\begin{figure}[ht!]
-\includegraphics[scale=0.5]{figures/comm-60-mat2a.pdf}
-\end{figure}
-
-\begin{figure}
-\includegraphics[scale=0.5]{figures/mat2a-fenergy.pdf}
-\caption{The free energy as a function of the order parameter.}
-\end{figure}
 We used transition path sampling to generate and
 analyze the ensemble of reactive trajectories. As order
 parameters that define the reactant and product basins, we
@@ -361,6 +355,35 @@ momenta of a randomly chosen slice of a reactive trajectory,
 and using the new momenta, we allowed the system to
 propagate forward and backward in time for 250 fs. A total of
 120 reactive trajectories were generated.
+%------------------------------------------------------------------------------ 
+\subsection{Plasmodium vivax adenosine deaminase}
+%------------------------------------------------------------------------------ 
+
+%------------------------------------------------------------------------------ 
+\section{Results and discussion}
+%------------------------------------------------------------------------------ 
+\subsection{Human Methionine Adenosyltransferase 2A}
+%------------------------------------------------------------------------------ 
+Human methionine adenosyltransferase (MAT2A) is an enzyme that catalyzes the 
+reaction between adenosine triphosphaste and L-methionine which leads to the 
+formation of S-Adenosylmethionine. \cite{Firestone17JAmChemSoc139p13754,Niland21Biochem60p791} 
+The mechanism of this reaction is experimentally determined to follow a 
+SN$_2$ transition state with the sulphur atom of the L-methionine as the 
+nucleophile with the triphosphate leaving group.  
+
+\begin{figure}[ht!]
+\includegraphics[scale=0.25]{figures/mat2a-transition-state.png}
+\end{figure}
+
+\begin{figure}[ht!]
+\includegraphics[scale=0.5]{figures/comm-60-mat2a.pdf}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=0.5]{figures/mat2a-fenergy.pdf}
+\caption{The free energy as a function of the order parameter.}
+\end{figure}
+
 %------------------------------------------------------------------------------ 
 \subsection{Adenosine deaminase reaction coordinates and free energy}
 %------------------------------------------------------------------------------ 
