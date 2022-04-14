@@ -4,7 +4,7 @@
 %% The document class accepts keyval options, which should include
 %% the target journal and optionally the manuscript type.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[journal=jpcbfk,manuscript=article,layout=traditional]{achemso}
+\documentclass[journal=jpcbfk,manuscript=article,layout=twocolumn]{achemso}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Place any additional packages needed here.  Only include packages
@@ -71,8 +71,8 @@
 %% optional argument to \title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[]
-  {Transition path sampling based calculation of free energies of enzymatic
-  reactions}
+  {Transition path sampling based calculations of free energies of enzymatic
+  reactions: the case of human MAT2A and plasmodium vivax adenosine deaminase}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
 %% supplied. These should be set up here, and will be printed after
@@ -184,33 +184,42 @@ is only satisfied if the trajectory begins in the reactant basin and ends in
 the product basin or vice versa, hence trajectories that are localized in the 
 reactant or product basins are rejected. The localized trajectories contribute
 to the probability density distribution function ($P(\lambda)$) which is the 
-probability to find the system at a particular value of the order parameter $\lambda$.
+probability of a system at equilibrium to have a particular value of the 
+order parameter $\lambda$. \cite{Dellago09AdvCompSimAppp167} 
 
-Since the TPS path ensemble only consists of reactive trajectories, the information from 
-the discarded non-reactive trajectories which is required for obtaining the 
-equilibrium probability distribution of the order parameters is 
-missing. \cite{Dellago09AdvCompSimAppp167} Radhakrishnan et al. developed 
-`BOLAS' which combines the shooting and shifting algorithms of 
-TPS with a window based sampling technique 
+Frenkel has shown that inclusion of rejected states in Markov state Monte 
+Carlo algorith can help speed up the convergence of the calculations of 
+order-parameter distribution of a two-dimensional
+Ising model. \cite{Frenkel04ProcNatAcadSci101p17571}
+Inclusion of rejected trajectories within TPS was first discussed by Radhakrishnan 
+et al. \cite{Radhakrishnan04JChemPhys121p2436} who developed `BOLAS' which combines 
+the shooting and shifting algorithms of TPS with a window based sampling technique 
 in the spirit of umbrella sampling to calculate equilibrium free energy 
-differences. \cite{Radhakrishnan04JChemPhys121p2436} 
-Baron peters developed a variant of this scheme called the 
+differences. Peters et al. used a variant of the BOLAS scheme called the 
 equilibrium path sampling (EPS) where they use aimless shooting 
-to create the ensemble within each window. \cite{Peters08JAmChemSoc130p17342,Silveira21JPhysChemB125p2018} 
-Apart from these schemes a recent work by 
-Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111,Dellago04MolSimul30p795}
-has attempted to look at the TPS based free energy calculations for 
-reactions that are diffusive in nature where 
-Transition interface sampling (TIS) \cite{vanErp03JChemPhys118p7762}
-could work well. 
+combined with window based sampling for free energy calculations. \cite{Peters08JAmChemSoc130p17342,Beckham10epsbook} 
+More recently Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111}
+have developed a reweighted path ensemble scheme within the standard TPS method 
+called virtual interface exchange TPS (VIE-TPS) to calculate the free energy 
+landscape. VIE-TPS is shown to produce reasonable free energies for 
+diffusive reactions whereas it is less accurate otherwise.
 
-In this manuscript we will focus on the implementation and application of the 
-free energy based calculations within the TPS method on reactions catalyzed by two systems:
+Free energy calculations based on the TPS shooting algorithm is 
+appealing but not a lot of examples exist in the literature 
+which compare the computational calculations with experimental
+results for enzymatic reactions.  
+In this manuscript we implement and apply the 
+algorithm developed by Radhakrishnan et al. \cite{Radhakrishnan04JChemPhys121p2436} 
+to calculate the free energies of reactions catalyzed by two systems:
 the human MAT2A enzyme and the plasmodium vivax adenosine deaminase 
 enzyme. \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
-These enzymes were chosen not only because of their importance in biochemical pathways and
-but also because of the availability of experimental results with which comparisons can 
-be drawn. 
+These enzymes were chosen not only because of their importance in various 
+biochemical applications but also because of the availability of experimental 
+results with which comparisons can be drawn. The manuscript is organized as 
+follows: first we discuss the TPS method and the algorithm that we use 
+to calculate the free energies briefly, then we show calculations which apply this 
+method on the two enzymatic reactions. Finally we compare our results to expeiments
+and provide conclusions. 
 %------------------------------------------------------------------------------ 
 \section{Methods}
 %------------------------------------------------------------------------------ 
@@ -330,40 +339,40 @@ harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t
 %------------------------------------------------------------------------------
 We used the crystal structure of the human MAT2A enzyme 
 bound to methylthioadenosine and di-imido triphosphate (PNPNP)
-(7L1A from the protein data bank) reported by Niland 
+(protein data bank ID: 7L1A) reported by Niland 
 et al. \cite{Niland21Biochem60p791} and the crystal structure of \textit{pv}ADA 
-in complex with MT-coformycin (3EWC from the protein data bank) reported by Ho et 
+in complex with MT-coformycin (protein data bank ID: 3EWC) reported by Ho et 
 al. \cite{Ho09Biochemistry48p9618} as the starting points of our two 
-simulations. For the human MAT2A enzyme the substrates were modified to 
-S-Adenosyl methionine (SAM) and adenosyl triphosphate (ATP) whereas for the \textit{pv}ADA
+simulations. For the MAT2A enzyme the substrates were modified to 
+L-methionine and adenosyl triphosphate (ATP) whereas for the \textit{pv}ADA
 enzyme the substrates were modified to $2^{'}-$deoxyadenosine and hydroxide ion. 
-
-MD simulations within classical and hybrid 
-quantum mechanics/molecular mechanics (QMMM) approximations were carried out 
-using the CHARMM program package. \cite{Brooks83JComputChem4p187,Brooks09JComputChem30p1545} 
+MD simulations within classical and hybrid quantum mechanics/molecular mechanics 
+(QMMM) approximations were carried out using the CHARMM program 
+package. \cite{Brooks83JComputChem4p187,Brooks09JComputChem30p1545} 
 For the MM calculations the CHARMM36 force field \cite{Brooks09JComputChem30p1545} 
 was used and for the QM calculations the approximate PM3 semiempirical 
-method \cite{Repasky02JComputChem23p1601} was used. Both the
-systems were solvated with water molecules using the TIP3P model
-in a nanodroplet, whose volume was set to be $15\;\AA$ away from
-the surface of the protein, and then neutralized with potassium
-ions.
-
-Each protein was solvated within
-a 15 $\AA$ sphere using TIP3 waters and neutralized using
-potassium ions. We minimized the system with 50 steps of the
-Steepest Descent method, followed by 2000 steps of the
-adopted Basis Newton-Raphson method. The system was
-heated slowly to 300 K for 30 ps, starting with harmonic
-constraints except on H atoms and TIP3 waters that were
-gradually reduced to force constant 1. We started the
-equilibration with 15 ps with harmonic constraints of force
-constant 1, which were then removed and the equilibration ran
-for 60 ps.
-
-We used transition path sampling to generate and
-analyze the ensemble of reactive trajectories. As order
-parameters that define the reactant and product basins, we
+method \cite{Repasky02JComputChem23p1601} was used. 
+We solvated the two proteins using TIP3P water molecules 
+in a nanodroplet sphere whose volume was fixed at $15$ {\AA}
+away from the protein's surface and the total charge was neutralized 
+using potassium ions. Both the systems were minimized with 50 steps of the
+steepest descent method, followed by 2000 steps of the
+adopted basis Newton-Raphson method. The minimized systems were
+heated slowly to 300 K for 35 ps beginning with harmonic
+constraints on all atoms except on the H atoms and the TIP3 
+waters with gradual reduction of the restraint forces to 1. 
+15 ps of equilibration was carried out starting with harmonic 
+constraints of force constant 1 followed by 20 ps of contraint free 
+equilibration to prepare the systems for production runs.  
+%------------------------------------------------------------------------------ 
+\subsection{Transition path sampling}
+%------------------------------------------------------------------------------
+We used TPS to generate an ensemble of reactive trajectories. 
+The time step that we used for all our calculations was $1\;fs$ with a total
+of 250 steps forward and 250 steps backward which amounts to a total of $0.5\;ps$
+trajectory.  
+\subsubsection{human MAT2A}
+As order parameters that define the reactant and product basins, we
 used the donor-hydride and acceptor-hydride distances. The
 reactant basin was defined as a donor-hydride distance smaller
 than 1.6  and the product basin as an acceptor-hydride
@@ -375,7 +384,15 @@ were generated by the shooting algorithm: we perturbed the
 momenta of a randomly chosen slice of a reactive trajectory,
 and using the new momenta, we allowed the system to
 propagate forward and backward in time for 250 fs. A total of
-120 reactive trajectories were generated.
+120 reactive trajectories were generated. 
+
+\subsubsection{plasmodium vivax ADA}
+%------------------------------------------------------------------------------ 
+\subsection{Free energy calculations}
+%------------------------------------------------------------------------------ 
+For the free energy calculations we divided the reaction coordinate into 13 windows for 
+MAT2A and 20 windows for pvADA with a $15\%$ overlap on each side of the window. 
+
 %------------------------------------------------------------------------------ 
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
@@ -405,13 +422,11 @@ nucleophile with the triphosphate leaving group.
 \subsection{Adenosine deaminase reaction coordinates and free energy}
 %------------------------------------------------------------------------------ 
 \begin{figure}[ht!]
-\centering
-\includegraphics[scale=0.22]{./figures/ada-protein.png}
+\includegraphics[scale=0.15]{./figures/ada-protein.png}
 \end{figure}
 
 \begin{figure}[ht!]
-\centering
-\includegraphics[scale=0.6]{./figures/ada-fenergy.pdf}
+\includegraphics[scale=0.5]{./figures/ada-fenergy.pdf}
 \end{figure}
 
 %\begin{figure}[ht]
