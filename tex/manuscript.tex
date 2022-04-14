@@ -167,29 +167,42 @@ in which the rare barrier-crossing events are guaranteed to occur and
 it does not require a priori knowledge of the reaction coordinate which can be 
 complex for large biological systems.
 TPS is based on the Monte Carlo importance sampling in the 
-space of trajectories where the collected ensemble of 
-reactive pathways are real dynamical trajectories generated without the 
-application of any bias forces. Thus the TPS ensemble can be used to obtain 
+space of trajectories. It uses the shooting and shifting algorithm 
+to collect an ensemble of reactive pathways that are real dynamical 
+trajectories generated without the application of any bias forces. \cite{dellago02AdvChemPhys123} 
+Therefore the TPS ensemble can be used to obtain 
 kinetic information such as the rate of the reaction as well as to elucidate 
 the transition state, reaction coordinate and the reaction mechanism. 
 TPS has been successfully applied to study problems such as enzyme catalysis, 
-protein folding, etc. 
+\cite{Antoniou01JPhysChemB105p5553,Hay12NatChem4p161,Schwartz09NatChemBiol5p551} 
+protein folding, \cite{Bolhuis03ProcNatlAcadSci100p12129,Juraszek12ChemPhys396p30} etc. 
 
 Calculating equilibrium properties such as the free energy of an enzymatic 
-catalysis reaction within TPS needs more attention. 
+catalysis reaction within TPS is not straighforward. 
+The Monte Carlo algorithm used in TPS has an acceptance criterion that 
+is only satisfied if the trajectory begins in the reactant basin and ends in 
+the product basin or vice versa, hence trajectories that are localized in the 
+reactant or product basins are rejected. The localized trajectories contribute
+to the probability density distribution function ($P(\lambda)$) which is the 
+probability to find the system at a particular value of the order parameter $\lambda$.
+
 Since the TPS path ensemble only consists of reactive trajectories, the information from 
 the discarded non-reactive trajectories which is required for obtaining the 
-equilibrium probability distribution of the order parameter is missing. \cite{Dellago09AdvCompSimAppp167}
-
-
-Methods that can be used to simultaneously calculate
-the dynamical as well as equilibrium properties of a system within 
-a certain set of asssumptions have garnered interest in recent times. \cite{Suarez14JChemTheoryComput10p2658}
-Transition interface sampling (TIS) is a variant of TPS which can be used for 
-this purpose. \cite{vanErp03JChemPhys118p7762}
-
-TPS based free energy simulations have been attempted previously by 
+equilibrium probability distribution of the order parameters is 
+missing. \cite{Dellago09AdvCompSimAppp167} Radhakrishnan et al. developed 
+`BOLAS' which combines the shooting and shifting algorithms of 
+TPS with a window based sampling technique 
+in the spirit of umbrella sampling to calculate equilibrium free energy 
+differences. \cite{Radhakrishnan04JChemPhys121p2436} 
+Baron peters developed a variant of this scheme called the 
+equilibrium path sampling (EPS) where they use aimless shooting 
+to create the ensemble within each window. \cite{Peters08JAmChemSoc130p17342,Silveira21JPhysChemB125p2018} 
+Apart from these schemes a recent work by 
 Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111,Dellago04MolSimul30p795}
+has attempted to look at the TPS based free energy calculations for 
+reactions that are diffusive in nature where 
+Transition interface sampling (TIS) \cite{vanErp03JChemPhys118p7762}
+could work well. 
 
 In this manuscript we will focus on the implementation and application of the 
 free energy based calculations within the TPS method on reactions catalyzed by two systems:
@@ -198,10 +211,6 @@ enzyme. \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
 These enzymes were chosen not only because of their importance in biochemical pathways and
 but also because of the availability of experimental results with which comparisons can 
 be drawn. 
-
-One example of the TPS based free energies calculations on real 
-protein systems \cite{Silveira21JPhysChemB125p2018} Human Mat2a enzyme and 
-plasmodium vivax adenosine deaminase 
 %------------------------------------------------------------------------------ 
 \section{Methods}
 %------------------------------------------------------------------------------ 
@@ -213,9 +222,12 @@ Consider the molecular dynamics simulation of a molecular system consisting
 of $N$ atoms. Starting from the initial positions and momenta of each atom at time $t_0$,
 the time evolution is carried out by finding the position ($\textbf{q}$) and 
 momenta ($\textbf{p}$) of each atom at regular intervals of time $t_i = t_0 + i\Delta t$  
-($i = 0,1,2,\ldots$). At each of the time slices, the positions and momenta can be collectively represented as
-the set $z = \{\textbf{q},\textbf{p}\}$. If the MD simulation is run for a total 
-time of $\mathcal{T}$ the number of time slices is given by $L = \mathcal{T}/\Delta t +1$ and for this sequence of 
+($i = 0,1,2,\ldots$). At each of the time slices, the positions and 
+momenta can be collectively represented as
+the set $z = \{\textbf{q},\textbf{p}\}$. If the MD simulation is 
+run for a total 
+time of $\mathcal{T}$ the number of time slices is given by 
+$L = \mathcal{T}/\Delta t +1$ and for this sequence of 
 times the state of the system can be represented as 
 \begin{equation}
 z(\mathcal{T}) = \{z_0, z_{\Delta t}, z_{2\Delta t},\ldots,z_{\mathcal{T}}\}
@@ -316,17 +328,26 @@ harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t
 %------------------------------------------------------------------------------ 
 \subsection{System preparation}
 %------------------------------------------------------------------------------
-We used the crystal structure of human MAT2A 
+We used the crystal structure of the human MAT2A enzyme 
 bound to methylthioadenosine and di-imido triphosphate (PNPNP)
-(7L1A from the protein data bank (PDB)) reported by Niland 
+(7L1A from the protein data bank) reported by Niland 
 et al. \cite{Niland21Biochem60p791} and the crystal structure of \textit{pv}ADA 
-in complex with MT-coformycin (3EWC from the PDB) reported by Ho et 
+in complex with MT-coformycin (3EWC from the protein data bank) reported by Ho et 
 al. \cite{Ho09Biochemistry48p9618} as the starting points of our two 
-simulations. Molecular dynamics simulations within classical and hybrid 
-quantum mechanics/molecular mechanics (QMMM) approximations were performed 
-using the CHARMM program package and using the CHARMM 36 force 
-field \cite{Brooks09JComputChem30p1545} for the MM part and the 
-approximate PM3 semiempirical method \cite{Repasky02JComputChem23p1601} for the QM part.
+simulations. For the human MAT2A enzyme the substrates were modified to 
+S-Adenosyl methionine (SAM) and adenosyl triphosphate (ATP) whereas for the \textit{pv}ADA
+enzyme the substrates were modified to $2^{'}-$deoxyadenosine and hydroxide ion. 
+
+MD simulations within classical and hybrid 
+quantum mechanics/molecular mechanics (QMMM) approximations were carried out 
+using the CHARMM program package. \cite{Brooks83JComputChem4p187,Brooks09JComputChem30p1545} 
+For the MM calculations the CHARMM36 force field \cite{Brooks09JComputChem30p1545} 
+was used and for the QM calculations the approximate PM3 semiempirical 
+method \cite{Repasky02JComputChem23p1601} was used. Both the
+systems were solvated with water molecules using the TIP3P model
+in a nanodroplet, whose volume was set to be $15\;\AA$ away from
+the surface of the protein, and then neutralized with potassium
+ions.
 
 Each protein was solvated within
 a 15 $\AA$ sphere using TIP3 waters and neutralized using
@@ -355,10 +376,6 @@ momenta of a randomly chosen slice of a reactive trajectory,
 and using the new momenta, we allowed the system to
 propagate forward and backward in time for 250 fs. A total of
 120 reactive trajectories were generated.
-%------------------------------------------------------------------------------ 
-\subsection{Plasmodium vivax adenosine deaminase}
-%------------------------------------------------------------------------------ 
-
 %------------------------------------------------------------------------------ 
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
