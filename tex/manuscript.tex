@@ -72,7 +72,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[]
   {Transition path sampling based calculations of free energies of enzymatic
-  reactions: the case of human MAT2A and plasmodium vivax adenosine deaminase}
+  reactions: the case of human methionine adenosyl transferase and plasmodium 
+  vivax adenosine deaminase}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
 %% supplied. These should be set up here, and will be printed after
@@ -304,7 +305,7 @@ they are not distributed according to the equilibrium distribution function.
 The restriction that the pathways start from the reactant state and end in the product state can be relaxed
 to obtain an ensemble of trajectories that will be distributed according to the equilibrium distribution. 
 %------------------------------------------------------------------------------ 
-\subsection{The algorithm}
+\subsection{Algorithm for free energy calculations}\label{ssec:algorithm}
 %------------------------------------------------------------------------------ 
 We follow the steps proposed by Radhakrishnan et al. \cite{Radhakrishnan04JChemPhys121p2436} 
 to sample TPS trajectories within windows of the order parameter. 
@@ -343,30 +344,46 @@ al. \cite{Ho09Biochemistry48p9618} as the starting points of our two
 simulations. For calculations involving the MAT2A enzyme the substrates were modified to 
 L-methionine and adenosyl triphosphate (ATP) whereas for calculations with the \textit{pv}ADA
 enzyme the substrates were modified to $2^{'}-$deoxyadenosine and hydroxide ion. 
+We solvated both the systems using TIP3P water molecules 
+in a nanodroplet sphere whose volume was fixed at $15$ {\AA}
+away from the protein's surface and the total charge was neutralized 
+using potassium ions. 
+
 MD simulations within classical and hybrid quantum mechanics/molecular mechanics 
 (QMMM) approximations were carried out using the CHARMM program 
 package. \cite{Brooks83JComputChem4p187,Brooks09JComputChem30p1545} 
 For the MM calculations the CHARMM36 force field \cite{Brooks09JComputChem30p1545} 
 was used and for the QM calculations the approximate PM3 semiempirical 
 method \cite{Repasky02JComputChem23p1601} was used. 
-We solvated the two proteins using TIP3P water molecules 
-in a nanodroplet sphere whose volume was fixed at $15$ {\AA}
-away from the protein's surface and the total charge was neutralized 
-using potassium ions. 
-Both the systems were minimized with 50 steps of the
+For the MAT2A system the partitioned QM region consisted of 
+the ATP and MET molecules along with three Mg$^{2+}$ ions 
+whereas for the $pv$ADA system it consisted of 
+the adenosine molecule, an hydroxide anion, Zn$^{2+}$ ion and 
+a portion of the Glu229 residue which was partitioned within the generalized 
+hybrid orbital (GHO) scheme. \cite{Gao98JPhysChemA102p4714}  
+
+Both the systems were minimized within classical molecular mechanics 
+with 50 steps of the
 steepest descent method, followed by 2000 steps of the
-adopted basis Newton-Raphson method. The minimized systems were
+adopted basis Newton-Raphson method. 
+The minimized systems were
 heated slowly to 300 K for 35 ps beginning with harmonic
 constraints on all atoms except on the H atoms and the TIP3 
 waters with gradual reduction of the restraint forces to 1. 
 15 ps of equilibration was carried out starting with harmonic 
 constraints of force constant 1 followed by 20 ps of contraint free 
-equilibration to prepare the systems for TPS simulations.  
+equilibration to prepare the systems for TPS simulations. 
+During the heating and equilibration steps, bonds that contain 
+hydrogen atoms in the MM region were restrained to their equilibrium values 
+using the SHAKE procedure. \cite{Ryckaert77JComputPhys23p327} 
+ 
 %------------------------------------------------------------------------------ 
 \subsection{Transition path sampling}
 %------------------------------------------------------------------------------
-TPS calculations collect reactive trajectories based on the Monte Carlo algorithm 
-and requires a proper definition of the reactant and product states. 
+TPS simulations require the definition of unique reactant and product states
+to collect reactive trajectories based on the Monte Carlo algorithm. Here we 
+discuss the details of the reactions involving the MAT2A and the $pv$ADA enzymes 
+to identify and define the parameters characterizing the reactant and product basins.  
 
 The reaction catalyzed by the human MAT2A enzyme is shown in Fig. \ref{fig:mat2a-reaction}
 between adenosyl $5'$-triphosphate (ATP) and L-methionine (MET) molecules resulting in the formation of
@@ -376,10 +393,10 @@ fundamental importance to metabolism of compounds such as hormones, neureotransm
 and nucleic acids. \cite{Friedel89Drugs38p389} The reaction was experimentally characterized by 
 Firestone et al. \cite{Firestone17JAmChemSoc139p13754} to follow a S$_{\text{N}}2$ transition 
 state. The key bond parameters for this reaction consists of the distance between the
-nucleophilic sulfur atom of MET and the $5'-C$ atom of the ATP ($S-C$), and the distance between 
-oxygen atom of the phosphate group and the $5'-C$ atom of ATP ($O-C$).
-For the TPS calculations we define the reactant state to have $O-C$ distance to be 
-less than 1.7 {\AA} and the product state to have the $S-C$ distance being less than 1.7 {\AA}. 
+nucleophilic sulfur atom of MET and the $5'-C$ atom of the ATP (denoted as $dis(SC)$), and the distance between 
+oxygen atom of the phosphate group and the $5'-C$ atom of ATP ($dis(OC)$).
+For the TPS calculations we define the reactant state to have $dis(OC)$ to be 
+less than 1.7 {\AA} and the product state to have the $dis(SC)$ less than 1.7 {\AA}. 
 
 \begin{figure}
 \includegraphics[scale=0.6]{figures/mat2a-reaction.png}
@@ -398,10 +415,10 @@ complex while the N1 atom on the adenosyl ring starts to get
 protonated by the Glu229 residue of $pv$ADA. At the transition state, experimental findings 
 suggest that the dissociation of the C6$-$N6 bond as well as the protonation of the N1 
 atom are almost complete. \cite{Luo07JAmChemSoc129p8008} The key bond parameters are 
-the distance between the approaching hydroxyl oxygen and the C6 atom ($O-C$) and the 
-dissociating C6$-$N6 ($N-C$) bond distance. For the TPS simulaions we defined the reactant state to 
-have the $O-C$ distance being less than $1.7$ {\AA} and the product state to have the $O-C$ 
-distance being less than $1.7$ {\AA}.
+the distance between the approaching hydroxyl oxygen and the C6 atom (denoted as $dis(OC)$) and the 
+dissociating C6$-$N6 ($dis(NC)$) bond distance. For the TPS simulaions we define the reactant state to 
+have $dis(NC)$ being less than $1.7$ {\AA} and the product state to have the 
+$dis(OC)$ less than $1.7$ {\AA}.
 
 \begin{figure}
 \includegraphics[scale=0.6]{figures/ada-new.png}
@@ -425,12 +442,24 @@ enzymes, respectively.
 %------------------------------------------------------------------------------ 
 \subsection{Free energy calculations}
 %------------------------------------------------------------------------------ 
-Window based free energy calculations such as WHAM divide the reaction coordinate
-into windows and calculate the individual populations within the windows and 
-decouple the applied bias with some formulas. 
-For the free energy calculations we divided the reaction coordinate into 13 windows for 
-MAT2A and 20 windows for pvADA with a $15\%$ overlap on each side of the window. 
-
+To obtain the free energy profile along the order parameter, we use the method 
+discussed in sec. \ref{ssec:algorithm}. The order paratemer for the MAT2A system 
+is defined to be $dis(OC)-dis(SC)$ and that for the $pv$ADA is defined as 
+$dis(NC)-dis(OC)$. For the MAT2A system, configurations are sampled within 
+the range $[-2.0,2.0]$ and this range is divided into 14 overlapping windows 
+($0.09$ {\AA} overlap on either side). For the $pv$ADA system configurations are
+sampled along the order parameter within the range $[-2.0, 2.0]$ where the range is
+divided into 20 overlapping windows ($0.09$ {\AA} overlap on either side of each window). 
+A reactive trajectory from the TPS ensemble is chosen to be the guide trajectory 
+for sampling within each of the windows. To sample in a particular window $w$, a 
+frame from this reactive trajectory is chosen such that the value of the 
+order parameter calculated for this frame falls within $w$. Using the shooting algorithm
+the momenta are perturbed and dynamics is run for 10 steps forwards and backwards with a 
+$1\;fs$ time step to obtain a trajectory with a time period of $20\;fs$.    
+Within each window 3000 TPS trajectories are collected using the acceptance criteria 
+discussed in sec. \ref{ssec:algorithm}. The equilibrium probability distribution function 
+for the order parameter within window $w$ is then calculated as normalized histogram
+similar to the WHAM procedure. \cite{Kumar92JComputChem13p1011}
 %------------------------------------------------------------------------------ 
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
