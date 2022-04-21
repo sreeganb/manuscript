@@ -79,7 +79,7 @@
 %% supplied. These should be set up here, and will be printed after
 %% the title and author information, if needed.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\abbreviations{TPS,NMR,UV}
+\abbreviations{TPS,WHAM}
 \keywords{American Chemical Society, \LaTeX}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -344,32 +344,33 @@ al. \cite{Ho09Biochemistry48p9618} as the starting points of our two
 simulations. For calculations involving the MAT2A enzyme the substrates were modified to 
 L-methionine and adenosyl triphosphate (ATP) whereas for calculations with the \textit{pv}ADA
 enzyme the substrates were modified to $2^{'}-$deoxyadenosine and hydroxide ion. 
-We solvated both the systems using TIP3P water molecules 
+We solvated both the systems using TIP3P water molecules \cite{Jorgensen83JChemPhys79p926}
 in a nanodroplet sphere whose volume was fixed at $15$ {\AA}
 away from the protein's surface and the total charge was neutralized 
 using potassium ions. 
 
 MD simulations within classical and hybrid quantum mechanics/molecular mechanics 
 (QMMM) approximations were carried out using the CHARMM program 
-package. \cite{Brooks83JComputChem4p187,Brooks09JComputChem30p1545} 
+package. \cite{Brooks83JComputChem4p187} 
 For the MM calculations the CHARMM36 force field \cite{Brooks09JComputChem30p1545} 
 was used and for the QM calculations the approximate PM3 semiempirical 
 method \cite{Repasky02JComputChem23p1601} was used. 
-For the MAT2A system the partitioned QM region consisted of 
-the ATP and MET molecules along with three Mg$^{2+}$ ions 
-whereas for the $pv$ADA system it consisted of 
+For the hybrid QMMM simulations, the MAT2A system was partitioned into a QM
+region consisting of the ATP and MET molecules along with three Mg$^{2+}$ ions 
+and the MM region consists of the rest of the molecules. 
+For the $pv$ADA system the QM region consisted of 
 the adenosine molecule, an hydroxide anion, Zn$^{2+}$ ion and 
 a portion of the Glu229 residue which was partitioned within the generalized 
 hybrid orbital (GHO) scheme. \cite{Gao98JPhysChemA102p4714}  
 
-Both the systems were minimized within classical molecular mechanics 
-with 50 steps of the
+The energies of both the systems were minimized using 50 steps of the 
 steepest descent method, followed by 2000 steps of the
-adopted basis Newton-Raphson method. 
+adopted basis Newton-Raphson method where only classical molecular mechanics 
+was used for the dynamics. 
 The minimized systems were
 heated slowly to 300 K for 35 ps beginning with harmonic
-constraints on all atoms except on the H atoms and the TIP3 
-waters with gradual reduction of the restraint forces to 1. 
+constraints on all atoms except on the H atoms and the TIP3P 
+water molecules with gradual reduction of the restraint forces to 1. 
 15 ps of equilibration was carried out starting with harmonic 
 constraints of force constant 1 followed by 20 ps of contraint free 
 equilibration to prepare the systems for TPS simulations. 
@@ -383,14 +384,15 @@ using the SHAKE procedure. \cite{Ryckaert77JComputPhys23p327}
 TPS simulations require the definition of unique reactant and product states
 to collect reactive trajectories based on the Monte Carlo algorithm. Here we 
 discuss the details of the reactions involving the MAT2A and the $pv$ADA enzymes 
-to identify and define the parameters characterizing the reactant and product basins.  
+to identify and define the order parameters characterizing the reactant and product basins.  
 
-The reaction catalyzed by the human MAT2A enzyme is shown in Fig. \ref{fig:mat2a-reaction}
+The reaction catalyzed by the human MAT2A enzyme is
 between adenosyl $5'$-triphosphate (ATP) and L-methionine (MET) molecules resulting in the formation of
-S-adenosyl-L-methionine (SAM). SAM is an essential metabolite which is distributed to almost all 
+S-adenosyl-L-methionine (SAM) which is depicted in Fig. \ref{fig:mat2a-reaction}.
+SAM is an essential metabolite which is distributed to almost all 
 body tissues and fluids, is an universal methyl donor and is of
-fundamental importance to metabolism of compounds such as hormones, neureotransmitters, proteins, 
-and nucleic acids. \cite{Friedel89Drugs38p389} The reaction was experimentally characterized by 
+fundamental importance to the metabolism of compounds such as hormones, neureotransmitters, proteins, 
+and nucleic acids. \cite{Friedel89Drugs38p389} This reaction was experimentally characterized by 
 Firestone et al. \cite{Firestone17JAmChemSoc139p13754} to follow a S$_{\text{N}}2$ transition 
 state. The key bond parameters for this reaction consists of the distance between the
 nucleophilic sulfur atom of MET and the $5'-C$ atom of the ATP (denoted as $dis(SC)$), and the distance between 
@@ -447,19 +449,23 @@ discussed in sec. \ref{ssec:algorithm}. The order paratemer for the MAT2A system
 is defined to be $dis(OC)-dis(SC)$ and that for the $pv$ADA is defined as 
 $dis(NC)-dis(OC)$. For the MAT2A system, configurations are sampled within 
 the range $[-2.0,2.0]$ and this range is divided into 14 overlapping windows 
-($0.09$ {\AA} overlap on either side). For the $pv$ADA system configurations are
-sampled along the order parameter within the range $[-2.0, 2.0]$ where the range is
-divided into 20 overlapping windows ($0.09$ {\AA} overlap on either side of each window). 
-A reactive trajectory from the TPS ensemble is chosen to be the guide trajectory 
+($0.09$ {\AA} overlap on either side). 
+Configurations are sampled for the $pv$ADA system within the interval $[-3.0, 3.0]$ {\AA}
+of the order parameter value. 
+This interval is divided into 20 overlapping windows ($0.045$ {\AA} between 
+neighboring windows). A reactive trajectory from the TPS ensemble is chosen to be the guide trajectory 
 for sampling within each of the windows. To sample in a particular window $w$, a 
-frame from this reactive trajectory is chosen such that the value of the 
-order parameter calculated for this frame falls within $w$. Using the shooting algorithm
+frame from this reactive trajectory is chosen such that the value of its 
+order parameter falls within $w$. Using the shooting algorithm
 the momenta are perturbed and dynamics is run for 10 steps forwards and backwards with a 
 $1\;fs$ time step to obtain a trajectory with a time period of $20\;fs$.    
-Within each window 3000 TPS trajectories are collected using the acceptance criteria 
-discussed in sec. \ref{ssec:algorithm}. The equilibrium probability distribution function 
-for the order parameter within window $w$ is then calculated as normalized histogram
-similar to the WHAM procedure. \cite{Kumar92JComputChem13p1011}
+Within each window 3000 TPS trajectories are collected. The 
+probability distribution function for the order parameter within window $w$ 
+is then calculated as normalized histograms which represent the populations 
+of the configurations within the window at equilibrium. 
+Then we calculate the free energy profile in a similar fashion to the WHAM 
+procedure \cite{Kumar92JComputChem13p1011} which is generally used to obtain the 
+potential of mean force from umbrella sampling calculations. 
 %------------------------------------------------------------------------------ 
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
