@@ -406,10 +406,10 @@ less than 1.7 {\AA} and the product state to have the $dis(SC)$ less than 1.7 {\
 \label{fig:mat2a-reaction}
 \end{figure}
 
-The reaction catalyzed by $pv$ADA is shown in  
-Fig. \ref{fig:ada-reaction} which is between the adenosine molecule and a hydroxide ion
-which results in the formation of inosine with ammonia as a by product. 
-$pv$ADA is an essential enzyme in the purine salvage pathway for plasmodium vivax and 
+$pv$ADA catalyzes the reaction between adenosine and hydroxide ion 
+resulting in the formation of inosine and ammonia as shown in
+Fig. \ref{fig:ada-reaction}.
+$pv$ADA is an essential enzyme in the purine salvage pathway and 
 inhibiting this enzyme is a promising approach to treat malaria. \cite{Madrid08JBiolChem283p35899}  
 This reaction proceeds with the nucleophilic O atom (O$^{\text{hydroxyl}}$) of the hydroxide anion
 attacking the electrophilic C6 atom of the adenosyl ring leading to the formation of a Meisenheimer 
@@ -470,13 +470,15 @@ potential of mean force from umbrella sampling calculations.
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
 \subsection{Human Methionine Adenosyltransferase 2A}
-%------------------------------------------------------------------------------ 
-Human methionine adenosyltransferase (MAT2A) is an enzyme that catalyzes the 
-reaction between adenosine triphosphaste and L-methionine which leads to the 
-formation of S-Adenosylmethionine. \cite{Firestone17JAmChemSoc139p13754,Niland21Biochem60p791} 
-The mechanism of this reaction is experimentally determined to follow a 
-SN$_2$ transition state with the sulphur atom of the L-methionine as the 
-nucleophile with the triphosphate leaving group.  
+The TPS ensemble was used to analyze the reaction pathway for the S$_{\text{N}}2$
+mechanism and a typical trajectory is provided here
+\begin{figure}
+\includegraphics[scale=0.5]{figures/mat2a-diff60.pdf}
+\caption{A reactive trajectory}
+\label{fig:mat2a-reactive-traj}
+\end{figure}
+The order parameters of the system along a typical reactive trajectory is 
+shown in Fig. \ref{fig:mat2a-reactive-traj}.
 
 \begin{figure}[ht!]
 \includegraphics[scale=0.25]{figures/mat2a-transition-state.png}
