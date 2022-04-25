@@ -4,7 +4,7 @@
 %% The document class accepts keyval options, which should include
 %% the target journal and optionally the manuscript type.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[journal=jpcbfk,manuscript=article,layout=traditional]{achemso}
+\documentclass[journal=jpcbfk,manuscript=article,layout=twocolumn]{achemso}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Place any additional packages needed here.  Only include packages
@@ -470,10 +470,12 @@ potential of mean force from umbrella sampling calculations.
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
 \subsection{Human Methionine Adenosyltransferase 2A}
+The binding pocket image is shown for this enzyme here
+% width: 3.330, height: 1.873
 The TPS ensemble was used to analyze the reaction pathway for the S$_{\text{N}}2$
 mechanism and a typical trajectory is provided here
 \begin{figure}
-\includegraphics[scale=0.5]{figures/mat2a-diff60.pdf}
+\includegraphics[scale=1.0]{figures/mat2a-diff60.pdf}
 \caption{A reactive trajectory}
 \label{fig:mat2a-reactive-traj}
 \end{figure}
@@ -489,7 +491,7 @@ shown in Fig. \ref{fig:mat2a-reactive-traj}.
 \end{figure}
 
 \begin{figure}
-\includegraphics[scale=0.5]{figures/mat2a-fenergy.pdf}
+\includegraphics[scale=1.0]{figures/mat2a-fenergy.pdf}
 \caption{The free energy as a function of the order parameter.}
 \end{figure}
 
