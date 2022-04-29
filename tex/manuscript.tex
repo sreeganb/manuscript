@@ -201,6 +201,9 @@ have developed a reweighted path ensemble scheme within the standard TPS method
 called virtual interface exchange TPS (VIE-TPS) to calculate the free energy 
 landscape. VIE-TPS is shown to produce reasonable free energies for 
 diffusive reactions whereas it is less accurate otherwise.
+Transition interface sampling (TIS) has been used to obtain 
+reweighted path ensemble which can give access to free energy 
+and committor surfaces. \cite{Rogal10JChemPhys17p174109}
 
 Free energy calculations based on the TPS shooting algorithm is 
 appealing but not a lot of examples exist in the literature 
@@ -277,10 +280,6 @@ The set of all reactive trajectories characterized by the distribution function
 given by Eq. \ref{eqn:tpsensem} is the transition path ensemble. 
 
 \subsection{Equilibrium distribution of order parameters}
-%Monte carlo methods in trajectory space the probability of a path is 
-%\begin{equation}
-%P(x_A)
-%\end{equation}
 The free energy as a function of the order parameter $\zeta$ is defined
 as 
 \begin{equation}
@@ -338,9 +337,9 @@ harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t
 We used the crystal structure of the human MAT2A enzyme 
 bound to methylthioadenosine and di-imido triphosphate (PNPNP)
 (protein data bank ID: 7L1A) reported by Niland 
-et al. \cite{Niland21Biochem60p791} and the crystal structure of \textit{pv}ADA 
-in complex with MT-coformycin (protein data bank ID: 3EWC) reported by Ho et 
-al. \cite{Ho09Biochemistry48p9618} as the starting points of our two 
+et al. \cite{Niland21Biochem60p791,Ghosh21JAmChemSoc143p18325} and the crystal 
+structure of \textit{pv}ADA in complex with MT-coformycin (protein data bank ID: 3EWC) 
+reported by Ho et al. \cite{Ho09Biochemistry48p9618} as the starting points of our two 
 simulations. For calculations involving the MAT2A enzyme the substrates were modified to 
 L-methionine and adenosyl triphosphate (ATP) whereas for calculations with the \textit{pv}ADA
 enzyme the substrates were modified to $2^{'}-$deoxyadenosine and hydroxide ion. 
@@ -377,7 +376,6 @@ equilibration to prepare the systems for TPS simulations.
 During the heating and equilibration steps, bonds that contain 
 hydrogen atoms in the MM region were restrained to their equilibrium values 
 using the SHAKE procedure. \cite{Ryckaert77JComputPhys23p327} 
- 
 %------------------------------------------------------------------------------ 
 \subsection{Transition path sampling}
 %------------------------------------------------------------------------------
@@ -440,7 +438,6 @@ dynamics for a total of 250 steps forward and 250 steps backward which amounts t
 total of $0.5\;ps$. 
 A total of 150 and 100 reactive trajectories were generated for the MAT2A and $pv$ADA
 enzymes, respectively. 
-
 %------------------------------------------------------------------------------ 
 \subsection{Free energy calculations}
 %------------------------------------------------------------------------------ 
@@ -470,18 +467,18 @@ potential of mean force from umbrella sampling calculations.
 \section{Results and discussion}
 %------------------------------------------------------------------------------ 
 \subsection{Human Methionine Adenosyltransferase 2A}
+The equilibrated structure of the MAT2A enzyme in complex with 
 \begin{figure}[ht!]
 \includegraphics[scale=0.2]{figures/mat2a-equil.png}
 \label{fig:mat2a-equil}
-\caption{Equilibriated structure of MAT2A enzyme}
+\caption{Equilibriated structure of the MAT2A enzyme in complex with ATP and 
+MET along with 2 Mg$^{2+}$ ions.}
 \end{figure}
+The adenosyl part of the ATP is held together through $\pi-\pi$ interactions 
+by Phe250 and Ile117 residues. 
 
-The binding pocket image is shown for this enzyme here
-% width: 3.330, height: 1.873
-The TPS ensemble was used to analyze the reaction pathway for the S$_{\text{N}}2$
-mechanism and a typical trajectory is provided here
 \begin{figure}
-\includegraphics[scale=1.0]{figures/mat2a-diff60.pdf}
+\includegraphics[scale=1.0]{figures/mat2a-diff167.pdf}
 \caption{A reactive trajectory}
 \label{fig:mat2a-reactive-traj}
 \end{figure}
@@ -493,22 +490,55 @@ shown in Fig. \ref{fig:mat2a-reactive-traj}.
 %\includegraphics[scale=0.2]{figures/mat2a-active-site2.png}
 \end{figure}
 
-\begin{figure}[ht!]
-\includegraphics[scale=1.0]{figures/comm-60-mat2a.pdf}
-\end{figure}
+\begin{figure*}[ht!]
+\centering
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[width=\textwidth]{figures/comm-60-mat2a-nocons.pdf}
+%\caption{}
+\label{fig:minipage1}
+\end{minipage}
+\quad
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[width=\textwidth]{figures/comm-60-mat2a.pdf}
+%\caption{}
+\label{fig:minipage2}
+\end{minipage}
+\caption{Committor distribution analysis}
+\end{figure*}
+
+The activation energy of this reaction was experimentally measured by 
+Niland et al. \cite{Niland21Biochem60p791} where they measured the rate constant of the reaction 
+at various temperatures while keeping the substrate concentrations near saturation.
+Using the Arrhenius equation they estimated the activation energy to be 
+$17.27\;\pm\;1.5\;\text{Kcal mol}^{-1}$. Compared to typical enzyme catalyzed 
+reactions calculated activation energy is small.  
 
 \begin{figure}
 \includegraphics[scale=1.0]{figures/mat2a-fenergy.pdf}
 \caption{The free energy as a function of the order parameter.}
 \end{figure}
-
+From our TPS based calculations we calculated the free energy barrier to be 
+$16\;\text{Kcal mol}^{-1}$.
 %------------------------------------------------------------------------------ 
 \subsection{Adenosine deaminase reaction coordinates and free energy}
 %------------------------------------------------------------------------------ 
+The equilibrated structure for the ADA enzyme complexed with adenosine, 
+OH$^{-}$ anion and Zn$^{2+}$ ion is shown in Fig. \ref{fig:ada-equil}.
+The Zn$^{2+}$ cation interacts with His42, His44 and His226 residues
+along with the hydroxide ion in the pocket. Glu229 is part of the 
+QM region and it acts as a proton donor to the adenosine molecule.  
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.2]{./figures/ada-equil.png}
 \caption{Equilibriated structure of ADA protein}
+\label{fig:ada-equil}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=1.0]{figures/ada-diff60.pdf}
+\caption{A reactive trajectory}
+\label{fig:ada-reactive-traj}
 \end{figure}
 
 \begin{figure}[ht!]
@@ -516,27 +546,6 @@ shown in Fig. \ref{fig:mat2a-reactive-traj}.
 \label{fig:ada-fenergy}
 \caption{The free energy curve for the ADA reaction}
 \end{figure}
-
-%\begin{figure}[ht]
-%\centering
-%\begin{minipage}[b]{0.32\linewidth}
-%\includegraphics[scale=0.3]{figures/reactant-state.png}
-%\caption{Reactant state}
-%\label{fig:minipage1}
-%\end{minipage}
-%\quad
-%\begin{minipage}[b]{0.32\linewidth}
-%\includegraphics[scale=0.3]{figures/int1.png}
-%\caption{Intermediate state}
-%\label{fig:minipage2}
-%\end{minipage}
-%\quad
-%\begin{minipage}[b]{0.32\linewidth}
-%\includegraphics[scale=0.3]{figures/product-state.png}
-%\caption{Product state}
-%\label{fig:minipage1}
-%\end{minipage}
-%\end{figure}
 %------------------------------------------------------------------------------ 
 \section{Conclusions}
 %------------------------------------------------------------------------------ 
