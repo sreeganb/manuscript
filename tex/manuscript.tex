@@ -157,7 +157,8 @@ umbrella sampling, \cite{Kastner11WileyInterdiscipRevComputMolSci1p932}
 metadynamics, \cite{Barducci11WileyInterdiscipRevComputMolSci1p826}
 steered MD, \cite{Park04JChemPhys120p5946}
 milestoning, \cite{Faradjian04JChemPhys120p10880} and transition path sampling 
-(TPS). \cite{Pratt86JChemPhys85p5045,Bolhuis02AnnRevPhysChem53p291,Dellago98JChemPhys108p1964}
+(TPS). \cite{Pratt86JChemPhys85p5045,Bolhuis02AnnRevPhysChem53p291,
+Dellago98JChemPhys108p1964,Bolhuis21AdvTheory4p2000237}
 
 TPS in particular is an attractive method since it samples reactive trajectories
 in which the rare barrier-crossing events are guaranteed to occur and
@@ -199,8 +200,8 @@ combined with window based sampling for free energy calculations.
 More recently Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111}
 have developed a reweighted path ensemble scheme within the standard TPS method 
 called virtual interface exchange TPS (VIE-TPS) to calculate the free energy 
-landscape. VIE-TPS is shown to produce reasonable free energies for 
-diffusive reactions whereas it is less accurate otherwise.
+landscape. VIE-TPS is shown to produce reasonably accurate free energy profiles for 
+chemical reactions that are diffusive in nature whereas it is less accurate otherwise.
 Transition interface sampling (TIS) has been used to obtain 
 reweighted path ensemble which can give access to free energy 
 and committor surfaces. \cite{Rogal10JChemPhys17p174109}
@@ -485,32 +486,54 @@ by Phe250 and Ile117 residues.
 The order parameters of the system along a typical reactive trajectory is 
 shown in Fig. \ref{fig:mat2a-reactive-traj}.
 
+Committor analysis and committor distribution analysis are used to deduce 
+the transition states and the reaction coordinates, respectively. 
+Committor analysis is carried out for a reactive trajectory 
+from the TPS ensemble by choosing a time slice randomly from the trajectory, assigning
+momenta picked at random from the Boltzmann distribution for all the atoms, and running 
+dynamics for $250\;fs$. The commitment probability of a time slice is calculated by 
+repeating this procedure several times and finding the fraction of trajectories that go 
+to the reactant, product or neither. The transition state for the reaction is defined as 
+the structure from the time slice that has equal probability to commit to the reactant 
+and the product state. Repeating this process for several trajectories from the TPS
+ensemble results in a collection of transition states called the separatrix. 
+The reaction coordinate might contain not just the atoms from the molecules that 
+are directly involved in the reaction but also residues from side chains that can 
+promote the reaction. Taking this into account the committor distribution analysis
+starts by constraining the residues and molecules that are theorized to be part of the 
+reaction and using this constrained system trajectories are started   
+
 \begin{figure}[ht!]
 \includegraphics[scale=0.2]{figures/mat2a-transition-state.png}
 %\includegraphics[scale=0.2]{figures/mat2a-active-site2.png}
 \end{figure}
 
+From the committor distribution analysis for a reactive trajectory we see that the 
+constrained region consisting of just the QM part which is the ATP and MET molecules 
+along with two Mg$^{2+}$ ions results in a distribution that is not peaked 
+at 0.5 whereas when the residues ... are constrained we obtain a distribution 
+that is peaked at 0.5. Therefore we conclude that the reaction coordinate consists
+of these residues as well. 
 \begin{figure*}[ht!]
 \centering
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[width=\textwidth]{figures/comm-60-mat2a-nocons.pdf}
-%\caption{}
 \label{fig:minipage1}
 \end{minipage}
 \quad
 \begin{minipage}[b]{0.45\linewidth}
 \includegraphics[width=\textwidth]{figures/comm-60-mat2a.pdf}
-%\caption{}
 \label{fig:minipage2}
 \end{minipage}
 \caption{Committor distribution analysis}
 \end{figure*}
 
 The activation energy of this reaction was experimentally measured by 
-Niland et al. \cite{Niland21Biochem60p791} where they measured the rate constant of the reaction 
-at various temperatures while keeping the substrate concentrations near saturation.
-Using the Arrhenius equation they estimated the activation energy to be 
-$17.27\;\pm\;1.5\;\text{Kcal mol}^{-1}$. Compared to typical enzyme catalyzed 
+Niland et al. \cite{Niland21Biochem60p791} where they measured the rate 
+constant of the reaction at various temperatures while keeping the 
+substrate concentrations near saturation. Using the Arrhenius equation 
+they estimated the activation energy to be $17.27\;\pm\;1.5\;
+\text{Kcal mol}^{-1}$. Compared to typical enzyme catalyzed 
 reactions calculated activation energy is small.  
 
 \begin{figure}
@@ -528,6 +551,11 @@ The Zn$^{2+}$ cation interacts with His42, His44 and His226 residues
 along with the hydroxide ion in the pocket. Glu229 is part of the 
 QM region and it acts as a proton donor to the adenosine molecule.  
 
+The formation of Meissenheimer complex is part of the 
+transition state as well as the partial protonation of the 
+N1 atom on the adenosyl moity as observed from experiments. 
+The reaction free energy is supposed to have two peaks with 
+an intermediate state and we observe the same from our calculations. 
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.2]{./figures/ada-equil.png}
@@ -541,17 +569,34 @@ QM region and it acts as a proton donor to the adenosine molecule.
 \label{fig:ada-reactive-traj}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[scale=0.12]{blender-images/ada/ada-trans.png}
+\label{fig:ada-trans}
+\caption{The transition state structure of the reaction catalyzed by the ADA enzyme}
+\end{figure}
+
 \begin{figure}[ht!]
 \includegraphics[scale=1.0]{./figures/ada-fenergy.pdf}
 \label{fig:ada-fenergy}
 \caption{The free energy curve for the ADA reaction}
 \end{figure}
+
 %------------------------------------------------------------------------------ 
 \section{Conclusions}
 %------------------------------------------------------------------------------ 
 We have discussed the application of a scheme to calculate the 
 free energies of enzymatic reactions within the TPS method using the MAT2A
-and the ADA enzymes as examples. 
+and the ADA enzymes as examples. The MAT2A enzymatic reaction consists of 
+the residues that are ... as part of its reaction coordinate. The reaction 
+proceeds through a SN2 mechanism and the transition state consists of 
+$dis(SC)$ being 2.3 and $dis(OC)$ being 2.03 {\AA}. From the calculations 
+we obtain a free energy barrier of 16.0 kcal mol which is in good agreement 
+with the 17.1 kcal mol measured from the experiments using the Arrhenius equation.
+Furthermore we looked at the reaction catalyzed by the ADA enzyme and 
+calculated the free energy profile for this reaction. Here we found two free energy
+barriers separated by an intermediate state which is consistent with 
+experimental findings. We calculate a free energy barrier of 25 kcal mol.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
