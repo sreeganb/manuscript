@@ -469,18 +469,22 @@ potential of mean force from umbrella sampling calculations.
 %------------------------------------------------------------------------------ 
 \subsection{Human Methionine Adenosyltransferase 2A}
 The equilibrated structure of the MAT2A enzyme in complex with 
+ATP, MET and two Mg$^{2+}$ ions is shown in Fig. \ref{fig:mat2a-equil}.
 \begin{figure}[ht!]
+\centering
 \includegraphics[scale=0.2]{figures/mat2a-equil.png}
-\label{fig:mat2a-equil}
 \caption{Equilibriated structure of the MAT2A enzyme in complex with ATP and 
 MET along with 2 Mg$^{2+}$ ions.}
+\label{fig:mat2a-equil}
 \end{figure}
-The adenosyl part of the ATP is held together through $\pi-\pi$ interactions 
-by Phe250 and Ile117 residues. 
+In the binding pocket the adenosyl moiety and the Phe250 and Ile117 residues 
+are found to have $\pi-\pi$ interactions stabilizing the molecule. The triphosphate 
+moiety forms hydrogen bonds with ... residues. 
 
 \begin{figure}
 \includegraphics[scale=1.0]{figures/mat2a-diff167.pdf}
-\caption{A reactive trajectory}
+\caption{Bond breaking ($dis(OC)$), bond forming ($dis(SC)$) distances for a typical 
+reactive trajectory for the reaction catalyzed by the MAT2A enzyme.}
 \label{fig:mat2a-reactive-traj}
 \end{figure}
 The order parameters of the system along a typical reactive trajectory is 
@@ -503,10 +507,23 @@ promote the reaction. Taking this into account the committor distribution analys
 starts by constraining the residues and molecules that are theorized to be part of the 
 reaction and using this constrained system trajectories are started   
 
-\begin{figure}[ht!]
-\includegraphics[scale=0.2]{figures/mat2a-transition-state.png}
+%\begin{figure}[ht!]
+%\includegraphics[scale=0.2]{figures/mat2a-transition-state.png}
 %\includegraphics[scale=0.2]{figures/mat2a-active-site2.png}
+%\end{figure}
+
+\begin{figure}[ht!]
+\includegraphics[scale=0.12]{blender-images/ada/mat2a-trans-labelled.png}
+\caption{Transition state structure of the reaction catalyzed by the human MAT2A enzyme.
+The S$-$C distance is $2.09$ {\AA} and the O$-$C distance is $2.32$ {\AA} which represents 
+an advanced transition state.}
+\label{fig:mat2a-trans-struct}
 \end{figure}
+The transition state structure follows a S$_{\text{N}}2$ 
+mechanism with a product like structure, the O$-$C bond is cleaved and 
+has a value of $2.32$ {\AA}.
+Experimentally the transition state structures of enzymatic reactions
+can be elucidated using kinetic isotope effects (KIE). \cite{Schramm99MetEnzym308p301}
 
 From the committor distribution analysis for a reactive trajectory we see that the 
 constrained region consisting of just the QM part which is the ATP and MET molecules 
@@ -525,7 +542,9 @@ of these residues as well.
 \includegraphics[width=\textwidth]{figures/comm-60-mat2a.pdf}
 \label{fig:minipage2}
 \end{minipage}
-\caption{Committor distribution analysis}
+\caption{Committor distribution analysis for obtaining the reaction coordinate of the 
+MAT2A catalyzed reaction. The figure on the left has the QM region constrained and the figure 
+on the right has the QM region along with the Gln113, Ser114, Arg249 and Arg264 residues constrained.}
 \end{figure*}
 
 The activation energy of this reaction was experimentally measured by 
@@ -546,10 +565,18 @@ $16\;\text{Kcal mol}^{-1}$.
 \subsection{Adenosine deaminase reaction coordinates and free energy}
 %------------------------------------------------------------------------------ 
 The equilibrated structure for the ADA enzyme complexed with adenosine, 
-OH$^{-}$ anion and Zn$^{2+}$ ion is shown in Fig. \ref{fig:ada-equil}.
-The Zn$^{2+}$ cation interacts with His42, His44 and His226 residues
-along with the hydroxide ion in the pocket. Glu229 is part of the 
+OH$^{-}$ anion and Zn$^{2+}$ cation is shown in Fig. \ref{fig:ada-equil}.
+The Zn$^{2+}$ cation interacts with the His42, His44 and His226 residues
+and stabilizes the OH$^{-}$ anion in the pocket. 
+
+Glu229 is part of the 
 QM region and it acts as a proton donor to the adenosine molecule.  
+
+Experimentally KIE studies 
+from Schramm and coworkers \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
+predict the transition state structures for the plasmodium falciparum, human and bovine 
+ADA enzymes. They reported inhibition studies on the plasmodium vivax ADA by using 
+MT coformycin as the inhibitor molecule. 
 
 The formation of Meissenheimer complex is part of the 
 transition state as well as the partial protonation of the 
@@ -571,15 +598,19 @@ an intermediate state and we observe the same from our calculations.
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.12]{blender-images/ada/ada-trans.png}
+\includegraphics[scale=0.12]{blender-images/ada/new-ada-trans.png}
 \label{fig:ada-trans}
-\caption{The transition state structure of the reaction catalyzed by the ADA enzyme}
+\caption{The transition state structure of the reaction catalyzed by the ADA enzyme.
+The formation of the Meissenheimer complex is the rate limiting step and the N-C distance is 
+1.60 {\AA} and the O-C distance is 1.48 {\AA}.}
 \end{figure}
 
 \begin{figure}[ht!]
 \includegraphics[scale=1.0]{./figures/ada-fenergy.pdf}
 \label{fig:ada-fenergy}
-\caption{The free energy curve for the ADA reaction}
+\caption{The free energy in $\text{Kcal}\;\text{mol}^{-1}$ as a function of the reaction 
+parameter for the ADA catalyzed reaction. The Meissenheimer complex where the OH$^{-}$ anion
+is bonded to the C atom and the leaving NH$_2$ moeity is also still bonded.}
 \end{figure}
 
 %------------------------------------------------------------------------------ 
