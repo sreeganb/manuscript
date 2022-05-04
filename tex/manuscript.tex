@@ -1,10 +1,11 @@
+\pdfoptionpdfminorversion=4
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% This is a (brief) model paper using the achemso class
 %% The document class accepts keyval options, which should include
 %% the target journal and optionally the manuscript type.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[journal=jpcbfk,manuscript=article,layout=twocolumn]{achemso}
+\documentclass[journal=jpcbfk,manuscript=article,layout=traditional]{achemso}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Place any additional packages needed here.  Only include packages
@@ -16,7 +17,7 @@
 \usepackage{caption}
 \usepackage{amsmath}
 \usepackage{mathptmx}
-%\usepackage[scaled=0.92]{helvet}
+\usepackage[scaled=0.92]{helvet}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
 %% un-comment the next line.  This provides information on the
@@ -207,17 +208,29 @@ reweighted path ensemble which can give access to free energy
 and committor surfaces. \cite{Rogal10JChemPhys17p174109}
 
 Free energy calculations based on the TPS shooting algorithm is 
-appealing but not a lot of examples exist in the literature 
-which compare the computational calculations with experimental
-results for enzymatic reactions.  
+appealing but rare in the literature. Applications of this 
+method to study enzymatic reactions and comparisons of the calculated 
+free energies to experimental measurements can shine light on the 
+accuracy of this approach compared to the standard methods used for 
+free energy calculations.    
 In this manuscript we implement and apply the 
 algorithm developed by Radhakrishnan et al. \cite{Radhakrishnan04JChemPhys121p2436} 
 to calculate the free energies of reactions catalyzed by two systems:
 the human MAT2A enzyme and the plasmodium vivax adenosine deaminase 
 enzyme. \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
-These enzymes were chosen not only because of their importance in various 
+Human MAT2A catalyzes the formation of S-adenosyl L-methionine (SAM).
+SAM is an essential metabolite which is 
+distributed to almost all body tissues and fluids, is an universal 
+methyl donor and is of fundamental importance to the metabolism of 
+compounds such as hormones, neureotransmitters, proteins, 
+and nucleic acids. \cite{Friedel89Drugs38p389}
+plasmodium vivax is a parasite that is responsible for the most number 
+of cases of malaria globally. Targeting proteins that are essential to
+the metabolism of this bacteria such as the adenosine deaminase enzyme 
+is a good anti-malarial drug development strategy. \cite{Madrid08JBiolChem283p35899} 
+These enzymes were chosen not only because of their importance in 
 biochemical applications but also because of the availability of experimental 
-results with which comparisons can be drawn. The manuscript is organized as 
+results with which comparisons can be drawn. This manuscript is organized as 
 follows: first we discuss the TPS method and the algorithm that we use 
 to calculate the free energies briefly, then we show calculations which apply this 
 method on the two enzymatic reactions. Finally we compare our results to expeiments
@@ -310,9 +323,9 @@ to obtain an ensemble of trajectories that will be distributed according to the 
 We follow the steps proposed by Radhakrishnan et al. \cite{Radhakrishnan04JChemPhys121p2436} 
 to sample TPS trajectories within windows of the order parameter. 
 \begin{itemize}
-  \item An appropriate order parameter is chosen for the reaction of interest 
-  that can distinguish the reactant and product states sufficiently well and the TPS ensemble is harvested 
-  which consists only of reactive trajectories.
+\item An appropriate order parameter is chosen for the reaction of interest 
+that can distinguish the reactant and product states sufficiently well and the TPS ensemble is harvested 
+which consists only of reactive trajectories.
 \item Divide the order parameter into windows $\{\zeta_i\}$ within which the 
 order parameters are given by 
 $\zeta_{i}^{min} < \zeta < \zeta_{i}^{max}$.
@@ -322,13 +335,13 @@ $\tilde{z}_{j\Delta t}$ such that the order parameter calculated for this time s
 $\tilde{\zeta}$ satisfies $\zeta_{i}^{min} < \tilde{\zeta} < \zeta_{i}^{max}$.
 \item Using the shooting and shifting algorithm familiar from TPS simulations, \cite{dellago02AdvChemPhys123}
 harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t}$ of the trajectory 
-  $\tilde{z}(\mathcal{T})$ and accept the new trajectory if at any time slice the calculated 
-  order parameter $\hat{\zeta}$ satisfies $\zeta_{i}^{min} < \hat{\zeta} < \zeta_{i}^{max}$.
-  \item Calculate the probability distribution ($P_i(\zeta)$) within the window $\zeta_{i}^{min} 
-  < \zeta < \zeta_{i}^{max}$ by constructing histograms obtained from the ensemble of 
-  accepted trajectories for the window $i$. 
-  \item Combine the probability distributions in successive windows by adjusting the constants $C$
-  such that the free energy $A$ from Eq. \ref{eqn:fenergy} is continuous. 
+$\tilde{z}(\mathcal{T})$ and accept the new trajectory if at any time slice the calculated 
+order parameter $\hat{\zeta}$ satisfies $\zeta_{i}^{min} < \hat{\zeta} < \zeta_{i}^{max}$.
+\item Calculate the probability distribution ($P_i(\zeta)$) within the window $\zeta_{i}^{min} 
+< \zeta < \zeta_{i}^{max}$ by constructing histograms obtained from the ensemble of 
+accepted trajectories for the window $i$. 
+\item Combine the probability distributions in successive windows by adjusting the constants $C$
+such that the free energy $A$ from Eq. \ref{eqn:fenergy} is continuous. 
 \end{itemize}
 %------------------------------------------------------------------------------ 
 \section{Computational details}
@@ -388,10 +401,7 @@ to identify and define the order parameters characterizing the reactant and prod
 The reaction catalyzed by the human MAT2A enzyme is
 between adenosyl $5'$-triphosphate (ATP) and L-methionine (MET) molecules resulting in the formation of
 S-adenosyl-L-methionine (SAM) which is depicted in Fig. \ref{fig:mat2a-reaction}.
-SAM is an essential metabolite which is distributed to almost all 
-body tissues and fluids, is an universal methyl donor and is of
-fundamental importance to the metabolism of compounds such as hormones, neureotransmitters, proteins, 
-and nucleic acids. \cite{Friedel89Drugs38p389} This reaction was experimentally characterized by 
+ This reaction was experimentally characterized by 
 Firestone et al. \cite{Firestone17JAmChemSoc139p13754} to follow a S$_{\text{N}}2$ transition 
 state. The key bond parameters for this reaction consists of the distance between the
 nucleophilic sulfur atom of MET and the $5'-C$ atom of the ATP (denoted as $dis(SC)$), and the distance between 
@@ -409,7 +419,7 @@ $pv$ADA catalyzes the reaction between adenosine and hydroxide ion
 resulting in the formation of inosine and ammonia as shown in
 Fig. \ref{fig:ada-reaction}.
 $pv$ADA is an essential enzyme in the purine salvage pathway and 
-inhibiting this enzyme is a promising approach to treat malaria. \cite{Madrid08JBiolChem283p35899}  
+inhibiting this enzyme is a promising approach to treat malaria.   
 This reaction proceeds with the nucleophilic O atom (O$^{\text{hydroxyl}}$) of the hydroxide anion
 attacking the electrophilic C6 atom of the adenosyl ring leading to the formation of a Meisenheimer 
 complex while the N1 atom on the adenosyl ring starts to get 
@@ -432,12 +442,11 @@ of 1500 to break the $O-C$ bond and form the $S-C$ bond for the MAT2A enzyme and
 to break the $N-C$ bond and form the $O-C$ bond for the case of the $pv$ADA enzyme. 
 Using the biased trajectory as the starting point and after removing the restraint 
 forces, the shooting algorithm was used to generate
-new trajectories within which first a random time slice is chosen from the reactive 
-trajectory and perturbing the momenta of the system. 
-The time step that we used for all our calculations was $1\;fs$ and we propagate the 
-dynamics for a total of 250 steps forward and 250 steps backward which amounts to a 
-total of $0.5\;ps$. 
-A total of 150 and 100 reactive trajectories were generated for the MAT2A and $pv$ADA
+new trajectories. The well known shooting algorithm begins with the choice of a 
+random time slice from the biased reactive trajectory and perturbing the momenta of the system.
+Then the dynamics is propagated for 250 steps forawards and backwards using $1\;fs$ time steps
+resulting in a trajectory with a time period of $0.5\;ps$.
+A total of 150 and 130 reactive trajectories were generated for the MAT2A and $pv$ADA
 enzymes, respectively. 
 %------------------------------------------------------------------------------ 
 \subsection{Free energy calculations}
@@ -567,35 +576,28 @@ $16\;\text{Kcal mol}^{-1}$.
 The equilibrated structure for the ADA enzyme complexed with adenosine, 
 OH$^{-}$ anion and Zn$^{2+}$ cation is shown in Fig. \ref{fig:ada-equil}.
 The Zn$^{2+}$ cation interacts with the His42, His44 and His226 residues
-and stabilizes the OH$^{-}$ anion in the pocket. 
-
-Glu229 is part of the 
-QM region and it acts as a proton donor to the adenosine molecule.  
-
-Experimentally KIE studies 
-from Schramm and coworkers \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
-predict the transition state structures for the plasmodium falciparum, human and bovine 
-ADA enzymes. They reported inhibition studies on the plasmodium vivax ADA by using 
-MT coformycin as the inhibitor molecule. 
-
-The formation of Meissenheimer complex is part of the 
-transition state as well as the partial protonation of the 
-N1 atom on the adenosyl moity as observed from experiments. 
-The reaction free energy is supposed to have two peaks with 
-an intermediate state and we observe the same from our calculations. 
+and stabilizes the OH$^{-}$ anion in the pocket. The N1 atom on the adensoyl 
+molecule hydrogen bonds with the carboxylic acid hydrogen atom of the Glu229 
+residue.  
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.2]{./figures/ada-equil.png}
 \caption{Equilibriated structure of ADA protein}
 \label{fig:ada-equil}
 \end{figure}
-
-\begin{figure}
+The bond forming ($dis(OC)$) and bond breaking ($dis(NC)$) distances 
+for a reactive trajectory from the TPS ensemble is depicted 
+in Fig. \ref{fig:ada-reactive-traj}.
+\begin{figure}[ht!]
 \includegraphics[scale=1.0]{figures/ada-diff60.pdf}
 \caption{A reactive trajectory}
 \label{fig:ada-reactive-traj}
 \end{figure}
-
+Committor analysis is performed to determine the transition state of this reaction
+and the structure obtained from the calculations is shown in Fig. \ref{fig:ada-trans}.
+At the transition state the N$1-$H bond distance is $1.1\;${\AA}, suggesting that the 
+Glu229 residue has completed the proton donation to the adenosine molecule. This protonation
+then triggers a base rotation which can be observed    
 \begin{figure}
 \centering
 \includegraphics[scale=0.12]{blender-images/ada/new-ada-trans.png}
@@ -604,6 +606,20 @@ an intermediate state and we observe the same from our calculations.
 The formation of the Meissenheimer complex is the rate limiting step and the N-C distance is 
 1.60 {\AA} and the O-C distance is 1.48 {\AA}.}
 \end{figure}
+Experimentally KIE studies 
+from Schramm and coworkers \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
+predict the transition state structures for the plasmodium falciparum, human and bovine 
+ADA enzymes. They reported inhibition studies on the plasmodium vivax ADA by using 
+MT coformycin as the inhibitor molecule. 
+
+
+The formation of Meissenheimer complex is part of the 
+transition state as well as the partial protonation of the 
+N1 atom on the adenosyl moity as observed from experiments. 
+The reaction free energy is supposed to have two peaks with 
+an intermediate state and we observe the same from our calculations. 
+
+
 
 \begin{figure}[ht!]
 \includegraphics[scale=1.0]{./figures/ada-fenergy.pdf}
