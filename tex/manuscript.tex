@@ -399,15 +399,17 @@ discuss the details of the reactions involving the MAT2A and the $pv$ADA enzymes
 to identify and define the order parameters characterizing the reactant and product basins.  
 
 The reaction catalyzed by the human MAT2A enzyme is
-between adenosyl $5'$-triphosphate (ATP) and L-methionine (MET) molecules resulting in the formation of
-S-adenosyl-L-methionine (SAM) which is depicted in Fig. \ref{fig:mat2a-reaction}.
- This reaction was experimentally characterized by 
-Firestone et al. \cite{Firestone17JAmChemSoc139p13754} to follow a S$_{\text{N}}2$ transition 
-state. The key bond parameters for this reaction consists of the distance between the
-nucleophilic sulfur atom of MET and the $5'-C$ atom of the ATP (denoted as $dis(SC)$), and the distance between 
-oxygen atom of the phosphate group and the $5'-C$ atom of ATP ($dis(OC)$).
-For the TPS calculations we define the reactant state to have $dis(OC)$ to be 
-less than 1.7 {\AA} and the product state to have the $dis(SC)$ less than 1.7 {\AA}. 
+between adenosyl $5'$-triphosphate (ATP) and L-methionine (MET) molecules 
+resulting in the formation of S-adenosyl-L-methionine (SAM) which is 
+depicted in Fig. \ref{fig:mat2a-reaction}. This reaction follows a S$_{\text{N}}2$ 
+mechanism and was experimentally characterized by 
+Firestone et al. \cite{Firestone17JAmChemSoc139p13754}. The key bond 
+parameters for this reaction consists of the distance between the
+nucleophilic sulfur atom of MET and the $5'-C$ atom of the ATP (denoted as d$_{\mathrm{SC}}$), 
+and the distance between oxygen atom of the phosphate group and the $5'-C$ 
+atom of ATP (d$_{\mathrm{OC}}$). For the TPS calculations we define the 
+reactant state to have d$_{\mathrm{OC}}$ to be less than 1.7 {\AA} and the product 
+state to have the d$_{\mathrm{SC}}$ less than 1.7 {\AA}. 
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{figures/mat2a-reaction.png}
@@ -492,7 +494,8 @@ moiety forms hydrogen bonds with ... residues.
 
 \begin{figure}
 \includegraphics[scale=1.0]{figures/mat2a-diff167.pdf}
-\caption{Bond breaking ($dis(OC)$), bond forming ($dis(SC)$) distances for a typical 
+\caption{Bond breaking ($\mathrm{d}_{\mathrm{OC}}$), bond forming 
+($\mathrm{d}_{\mathrm{SC}}$) distances for a typical 
 reactive trajectory for the reaction catalyzed by the MAT2A enzyme.}
 \label{fig:mat2a-reactive-traj}
 \end{figure}
@@ -517,11 +520,6 @@ starts by constraining the residues and molecules that are hypothesized to be pa
 reaction coordinate and using this constrained system as the starting point 
 trajectories are launched assigning momenta at random from the Boltzmann distribution at 
 $300\;\text{K}$.     
-
-%\begin{figure}[ht!]
-%\includegraphics[scale=0.2]{figures/mat2a-transition-state.png}
-%\includegraphics[scale=0.2]{figures/mat2a-active-site2.png}
-%\end{figure}
 
 \begin{figure}[ht!]
 \includegraphics[scale=0.12]{blender-images/ada/mat2a-trans-labelled.png}
@@ -591,7 +589,9 @@ for a reactive trajectory from the TPS ensemble is depicted
 in Fig. \ref{fig:ada-reactive-traj}.
 \begin{figure}[ht!]
 \includegraphics[scale=1.0]{figures/ada-diff60.pdf}
-\caption{A reactive trajectory}
+\caption{Bond breaking ($\mathrm{d}_{\mathrm{NC}}$), bond forming 
+($\mathrm{d}_{\mathrm{OC}}$) distances for a typical 
+reactive trajectory for the reaction catalyzed by the $pv$ADA enzyme.}
 \label{fig:ada-reactive-traj}
 \end{figure}
 The deamination is an aromatic nucleophilic substitution reaction 
@@ -662,7 +662,7 @@ with a double well shape similar to that measured from experiments.
 %% environment, which will make the correct section or running title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{acknowledgement}
-
+SGB acknowledges funding from ...
 
 \end{acknowledgement}
 
