@@ -458,9 +458,9 @@ $dis(NC)-dis(OC)$. For the MAT2A system, configurations are sampled within
 the range $[-2.0,2.0]$ and this range is divided into 14 overlapping windows 
 ($0.09$ {\AA} overlap on either side). 
 Configurations are sampled for the $pv$ADA system within the interval $[-3.0, 3.0]$ {\AA}
-of the order parameter value. 
-This interval is divided into 20 overlapping windows ($0.045$ {\AA} between 
-neighboring windows). A reactive trajectory from the TPS ensemble is chosen to be the guide trajectory 
+of the order parameter value which is divided into 20 overlapping 
+windows ($0.045$ {\AA} between neighboring windows). A reactive 
+trajectory from the TPS ensemble is chosen to be the guide trajectory 
 for sampling within each of the windows. To sample in a particular window $w$, a 
 frame from this reactive trajectory is chosen such that the value of its 
 order parameter falls within $w$. Using the shooting algorithm
@@ -513,8 +513,10 @@ ensemble results in a collection of transition states called the separatrix.
 The reaction coordinate might contain not just the atoms from the molecules that 
 are directly involved in the reaction but also residues from side chains that can 
 promote the reaction. Taking this into account the committor distribution analysis
-starts by constraining the residues and molecules that are theorized to be part of the 
-reaction and using this constrained system trajectories are started   
+starts by constraining the residues and molecules that are hypothesized to be part of the 
+reaction coordinate and using this constrained system as the starting point 
+trajectories are launched assigning momenta at random from the Boltzmann distribution at 
+$300\;\text{K}$.     
 
 %\begin{figure}[ht!]
 %\includegraphics[scale=0.2]{figures/mat2a-transition-state.png}
@@ -556,6 +558,12 @@ MAT2A catalyzed reaction. The figure on the left has the QM region constrained a
 on the right has the QM region along with the Gln113, Ser114, Arg249 and Arg264 residues constrained.}
 \end{figure*}
 
+\begin{figure}
+\includegraphics[scale=1.0]{figures/mat2a-fenergy.pdf}
+\caption{The free energy as a function of the order parameter.}
+\end{figure}
+From our TPS based calculations we calculated the free energy barrier to be 
+$16\;\text{Kcal mol}^{-1}$.
 The activation energy of this reaction was experimentally measured by 
 Niland et al. \cite{Niland21Biochem60p791} where they measured the rate 
 constant of the reaction at various temperatures while keeping the 
@@ -563,13 +571,6 @@ substrate concentrations near saturation. Using the Arrhenius equation
 they estimated the activation energy to be $17.27\;\pm\;1.5\;
 \text{Kcal mol}^{-1}$. Compared to typical enzyme catalyzed 
 reactions calculated activation energy is small.  
-
-\begin{figure}
-\includegraphics[scale=1.0]{figures/mat2a-fenergy.pdf}
-\caption{The free energy as a function of the order parameter.}
-\end{figure}
-From our TPS based calculations we calculated the free energy barrier to be 
-$16\;\text{Kcal mol}^{-1}$.
 %------------------------------------------------------------------------------ 
 \subsection{Adenosine deaminase reaction coordinates and free energy}
 %------------------------------------------------------------------------------ 
@@ -593,58 +594,68 @@ in Fig. \ref{fig:ada-reactive-traj}.
 \caption{A reactive trajectory}
 \label{fig:ada-reactive-traj}
 \end{figure}
-Committor analysis is performed to determine the transition state of this reaction
-and the structure obtained from the calculations is shown in Fig. \ref{fig:ada-trans}.
-At the transition state the N$1-$H bond distance is $1.1\;${\AA}, suggesting that the 
-Glu229 residue has completed the proton donation to the adenosine molecule. This protonation
-then triggers a base rotation which can be observed    
+The deamination is an aromatic nucleophilic substitution reaction 
+where intermediate Meisenheimer complex is formed at the transition state
+as shown in Fig. \ref{fig:ada-trans}. 
+The approaching O atom of the hydroxide anion is at a distance of $1.48$ {\AA}
+from the C6 atom whereas the N atom of the amine leaving group is at $1.60$ {\AA}.
+The N$1-$H bond distance is $1.1\;${\AA} 
+suggesting that the proton transfer from the Glu229 residue is almost complete.
 \begin{figure}
 \centering
 \includegraphics[scale=0.12]{blender-images/ada/new-ada-trans.png}
-\label{fig:ada-trans}
 \caption{The transition state structure of the reaction catalyzed by the ADA enzyme.
 The formation of the Meissenheimer complex is the rate limiting step and the N-C distance is 
 1.60 {\AA} and the O-C distance is 1.48 {\AA}.}
+\label{fig:ada-trans}
 \end{figure}
-Experimentally KIE studies 
-from Schramm and coworkers \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
-predict the transition state structures for the plasmodium falciparum, human and bovine 
-ADA enzymes. They reported inhibition studies on the plasmodium vivax ADA by using 
-MT coformycin as the inhibitor molecule. 
-
-
-The formation of Meissenheimer complex is part of the 
-transition state as well as the partial protonation of the 
-N1 atom on the adenosyl moity as observed from experiments. 
-The reaction free energy is supposed to have two peaks with 
-an intermediate state and we observe the same from our calculations. 
-
-
-
-\begin{figure}[ht!]
+These observations are consistent with the 
+experimental KIE studies from Luo et al. \cite{Luo07JAmChemSoc129p8008}
+who predict the transition state structure for the deamination reaction 
+catalyzed by the plasmodium falciparum ADA enzyme which shares
+$72\%$ identity with the $pv$ADA enzyme that we study here. The frequency of the 
+configurations (order parameter values) that are calculated within each of the 
+windows is used to  
+\begin{figure}[h!]
+\centering
 \includegraphics[scale=1.0]{./figures/ada-fenergy.pdf}
-\label{fig:ada-fenergy}
 \caption{The free energy in $\text{Kcal}\;\text{mol}^{-1}$ as a function of the reaction 
 parameter for the ADA catalyzed reaction. The Meissenheimer complex where the OH$^{-}$ anion
 is bonded to the C atom and the leaving NH$_2$ moeity is also still bonded.}
+\label{fig:ada-fenergy}
 \end{figure}
-
+The free energy profile that we calculated is shown in Fig. \ref{fig:ada-fenergy}.
+The free energy barrier is calculated to be $23\;\text{Kcal}\;\text{mol}^{-1}$.
 %------------------------------------------------------------------------------ 
 \section{Conclusions}
 %------------------------------------------------------------------------------ 
-We have discussed the application of a scheme to calculate the 
-free energies of enzymatic reactions within the TPS method using the MAT2A
-and the ADA enzymes as examples. The MAT2A enzymatic reaction consists of 
-the residues that are ... as part of its reaction coordinate. The reaction 
-proceeds through a SN2 mechanism and the transition state consists of 
-$dis(SC)$ being 2.3 and $dis(OC)$ being 2.03 {\AA}. From the calculations 
-we obtain a free energy barrier of 16.0 kcal mol which is in good agreement 
-with the 17.1 kcal mol measured from the experiments using the Arrhenius equation.
-Furthermore we looked at the reaction catalyzed by the ADA enzyme and 
-calculated the free energy profile for this reaction. Here we found two free energy
-barriers separated by an intermediate state which is consistent with 
-experimental findings. We calculate a free energy barrier of 25 kcal mol.  
+In this study, we presented an application of the TPS method for the calculation 
+of free energy profiles of enzymatic reactions. The order parameter along which the 
+free energy profile is to be obtained is partitioned into windows similar to 
+umbrella sampling. But instead of using bias potentials to sample the configurations
+within the windows the shooting algorithm is used to
+obtain an ensemble of trajectories according to the Monte carlo algorithm. A 
+trajectory is accepted if it visits the window at least in one of the time steps. 
+Using this ensemble of trajectories unbiased equilibrium probability distribution 
+function of the order parameter of the reaction within each window is obtained.
+Furthermore the free energy as a function of the order parameter is computed within 
+each of the windows and the entirte profile is obtained by shifting the free energies
+such that the function is continuous at the boundaries.   
 
+The MAT2A enzymatic reaction was analyzed in detail to elucidate the transition state,
+reaction coordinate and the free energy profile. The reaction proceeds through a 
+S$_\text{N}$2 mechanism, the d$_{\text{OC}}$ and d$_{\text{SC}}$ are $2.1$ {\AA}
+and $2.3$ {\AA}, respectively. The reaction coordinate is determined to involve  
+the Gln113, Ser114, Arg249 and Arg264 residues. 
+The free energy barrier for this reaction was calculated to be 
+$16.0\;\text{Kcal}\;\text{mol}^{-1}$ which is in good agreement 
+with the experimentally measured activation energy of $17.27\;\pm\;1.5\;\text{Kcal mol}^{-1}$. 
+Furthermore the reaction catalyzed by the $pv$ADA enzyme is analyzed in detail to obtain the  
+transition state and calculate the free energy profile.
+The transition state has a Meisenheimer complex like structure with the 
+d$_\text{NC}$ and d$_\text{OC}$ being $1.60$ {\AA} and $1.48$ {\AA}, respectively.
+The free energy barrier for this reaction for found to be $23\;\text{Kcal}\;\text{mol}^{-1}$
+with a double well shape similar to that measured from experiments.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
 %% classes.  This should be given within the "acknowledgement"
