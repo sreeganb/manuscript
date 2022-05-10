@@ -52,7 +52,7 @@
 %% On the other hand, \alsoaffiliation is used on a per author basis
 %% when authors are associated with multiple institutions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\author{Sree ganesh balasubramani}
+\author{Sree Ganesh Balasubramani}
 \affiliation{Department of Chemistry and Biochemistry, University of Arizona, Tucson, Arizona 85721, United States}
 \author{Steven D. Schwartz}
 \affiliation{Department of Chemistry and Biochemistry, University of Arizona, Tucson, Arizona 85721, United States}
@@ -72,7 +72,7 @@
 %% optional argument to \title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[]
-  {Transition path sampling based calculations of free energies of enzymatic
+  {Transition path sampling based calculations of free energies for enzymatic
   reactions: the case of human methionine adenosyl transferase and plasmodium 
   vivax adenosine deaminase}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,36 +125,36 @@
   coordinates of condensed phase systems. Here we discuss a scheme 
   for the calculation of free energies using the ensemble of TPS reactive 
   trajectories in combination with a window based sampling technique 
-  %introduced by 
-  %Radhakrishnan et al. (Radhakrishnan, R.; Schlick, T., J. Chem. Phys. 2004, 121, 2436.) 
   for enzyme catalyzed reactions. We calculate the free energy profiles of 
   the reactions catalyzed by the human methionine S-adenosyltransferase (MAT2A) 
-  enzyme and the plasmodium vivax adenosine deaminase enzyme to assess 
+  enzyme and the plasmodium vivax adenosine deaminase ($pv$ADA) enzyme to assess 
   the accuracy of this method. MAT2A catalyzes the formation of S-adenosine-L-methionine
   following a S$_{\text{N}}2$ mechanism and using our method we estimate
-  the free energy barrier to be $16\;\text{Kcal}\;\text{mol}^{-1}$ which
+  the free energy barrier for this reaction to 
+  be $16\;\text{Kcal}\;\text{mol}^{-1}$ which
   is in excellent agreement with the experimentally measured activation 
-  energy of $17.27\;\text{Kcal}\;\text{mol}^{-1}$. Furthermore for the 
+  energy of $17.27\;\text{Kcal}\;\text{mol}^{-1}$. Furthermore, for the 
   $pv$ADA enzyme catalyzed reaction we estimate a free energy barrier of 
-  $23\;\text{Kcal}\;\text{mol}^{-1}$ and the calcualted free energy profile is
+  $23\;\text{Kcal}\;\text{mol}^{-1}$ and the calculated free energy profile is
   similar to that predicted from experimental observations.
-  We show that calculating free energies within TPS is lucrative as it is 
-  bias free, accurate compared to experimental measurements 
-  and computationally reasonable.    
+  Calculating free energies employing our simple method within TPS 
+  provides significant advantages over such methods as umbrella sampling 
+  since it is free from any applied external bias, accurate compared to 
+  experimental measurements and has a reasonable computational cost.    
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 Molecular dynamics (MD) simulations are increasingly being
-used to calculate quantitative estimations of experimentally measurable 
+used to calculate quantitative estimates of experimentally measurable 
 kinetic and thermodynamic parameters of enzyme catalyzed reactions. 
 \cite{Karplus02NatStructMolBiol9p646,
 Schramm98AnnuRevBiochem67p693,Zhang05AccChemRes38p379,
 Schramm11AnnuRevBiochem80p703,Schramm18ChemRev118p11194} 
 This has helped in proposing mechanisms and explanations for 
 enzyme activity, fast high throughput screening of thousands of inhibitor 
-molecues in drug lead discovery, \cite{Jorgensen09AccChemRes42p724,Sliwoski14PharmacolRev66p334} 
+molecules in drug lead discovery, \cite{Jorgensen09AccChemRes42p724,Sliwoski14PharmacolRev66p334} 
 directed evolution for designing enzymes with enhanced catalytic 
 activities, \cite{Thyme09Nature461p1300,Bloom09PNAS106p9995,Schafer19JAmChemSoc141p10431} etc.    
 Straightforward MD simulations adequately sample 
@@ -163,7 +163,7 @@ but the high energy barrier-crossing events that occur rarely and at long
 time scales are not easily accessible using this method alone.
 To access such states at a higher frequency using MD simulations 
 several enhanced sampling techniques 
-have been developed in the past few decades some of which are 
+have been developed in the past few decades. These include 
 umbrella sampling, \cite{Kastner11WileyInterdiscipRevComputMolSci1p932} 
 metadynamics, \cite{Barducci11WileyInterdiscipRevComputMolSci1p826}
 steered MD, \cite{Park04JChemPhys120p5946}
@@ -171,11 +171,11 @@ milestoning, \cite{Faradjian04JChemPhys120p10880} and transition path sampling
 (TPS). \cite{Pratt86JChemPhys85p5045,Bolhuis02AnnRevPhysChem53p291,
 Dellago98JChemPhys108p1964,Bolhuis21AdvTheory4p2000237}
 
-TPS in particular is an attractive method since it samples reactive trajectories
+TPS is an attractive method since it samples reactive trajectories
 in which the rare barrier-crossing events are guaranteed to occur and
 it does not require a priori knowledge of the reaction coordinate which can be 
 complex for large biological systems.
-TPS is based on the Monte Carlo importance sampling in the 
+TPS is based on Monte Carlo importance sampling in the 
 space of trajectories. It uses the shooting and shifting algorithm 
 to collect an ensemble of reactive pathways that are real dynamical 
 trajectories generated without the application of any bias forces. \cite{dellago02AdvChemPhys123} 
@@ -184,21 +184,23 @@ kinetic information such as the rate of the reaction as well as to elucidate
 the transition state, reaction coordinate and the reaction mechanism. 
 TPS has been successfully applied to study problems such as enzyme catalysis, 
 \cite{Antoniou01JPhysChemB105p5553,Hay12NatChem4p161,Schwartz09NatChemBiol5p551} 
-protein folding, \cite{Bolhuis03ProcNatlAcadSci100p12129,Juraszek12ChemPhys396p30} etc. 
+and protein folding. \cite{Bolhuis03ProcNatlAcadSci100p12129,Juraszek12ChemPhys396p30}
 
 Calculating equilibrium properties such as the free energy of an enzymatic 
-catalysis reaction within TPS is not straighforward. 
+catalysis reaction within TPS is not straightforward. 
 The Monte Carlo algorithm used in TPS has an acceptance criterion that 
 is only satisfied if the trajectory begins in the reactant basin and ends in 
 the product basin or vice versa, hence trajectories that are localized in the 
-reactant or product basins are rejected. The localized trajectories contribute
-to the probability density distribution function ($P(\lambda)$) which is the 
-probability of a system at equilibrium to have a particular value of the 
-order parameter $\lambda$. \cite{Dellago09AdvCompSimAppp167} 
+reactant or product basins, without visiting both are rejected. 
+If one defines an order parameter $\zeta$, which separates reactant from 
+product basins, then all trajectories, reactive and non-reactive, 
+contribute to the probability density distribution function 
+($P(\zeta)$) which is the probability of a system at equilibrium to have 
+a particular value of the order parameter. \cite{Dellago09AdvCompSimAppp167} 
 
-Frenkel has shown that inclusion of rejected states in Markov state Monte 
-Carlo algorith can help speed up the convergence of the calculations of 
-order-parameter distribution of a two-dimensional
+Frenkel has shown that inclusion of rejected states in a Markov state Monte 
+Carlo algorithm can help speed up the convergence of the calculations of 
+the order parameter distribution of a two-dimensional
 Ising model. \cite{Frenkel04ProcNatAcadSci101p17571}
 Inclusion of rejected trajectories within TPS was first discussed by Radhakrishnan 
 et al. \cite{Radhakrishnan04JChemPhys121p2436} who developed `BOLAS' which combines 
@@ -209,12 +211,12 @@ equilibrium path sampling (EPS) where they use aimless shooting
 combined with window based sampling for free energy calculations. 
 \cite{Peters08JAmChemSoc130p17342,Beckham10epsbook} 
 More recently Brotzakis et al., \cite{Brotzakis19JChemPhys151p174111}
-have developed a reweighted path ensemble scheme within the standard TPS method 
+have developed a re-weighted path ensemble scheme within the standard TPS method 
 called virtual interface exchange TPS (VIE-TPS) to calculate the free energy 
 landscape. VIE-TPS is shown to produce reasonably accurate free energy profiles for 
 chemical reactions that are diffusive in nature whereas it is less accurate otherwise.
 Transition interface sampling (TIS) has been used to obtain 
-reweighted path ensemble which can give access to free energy 
+a re-weighted path ensemble which can give access to free energies 
 and committor surfaces. \cite{Rogal10JChemPhys17p174109}
 
 Free energy calculations based on the TPS shooting algorithm is 
@@ -230,20 +232,20 @@ the human MAT2A enzyme and the plasmodium vivax adenosine deaminase
 enzyme. \cite{Luo07JAmChemSoc129p8008,Ho09Biochemistry48p9618}
 Human MAT2A catalyzes the formation of S-adenosyl L-methionine (SAM).
 SAM is an essential metabolite which is 
-distributed to almost all body tissues and fluids, is an universal 
+distributed to almost all body tissues and fluids, is a universal 
 methyl donor and is of fundamental importance to the metabolism of 
 compounds such as hormones, neureotransmitters, proteins, 
 and nucleic acids. \cite{Friedel89Drugs38p389}
-plasmodium vivax is a parasite that is responsible for the most number 
+Plasmodium vivax is a parasite that is responsible for the largest number 
 of cases of malaria globally. Targeting proteins that are essential to
 the metabolism of this bacteria such as the adenosine deaminase enzyme 
-is a good anti-malarial drug development strategy. \cite{Madrid08JBiolChem283p35899} 
+is a possible anti-malarial drug development strategy. \cite{Madrid08JBiolChem283p35899} 
 These enzymes were chosen not only because of their importance in 
 biochemical applications but also because of the availability of experimental 
 results with which comparisons can be drawn. This manuscript is organized as 
 follows: first we discuss the TPS method and the algorithm that we use 
-to calculate the free energies briefly, then we show calculations which apply this 
-method on the two enzymatic reactions. Finally we compare our results to expeiments
+to calculate the free energies, then we show calculations which apply this 
+method on the two enzymatic reactions. Finally we compare our results to experiments
 and provide conclusions. 
 %------------------------------------------------------------------------------ 
 \section{Methods}
@@ -251,7 +253,7 @@ and provide conclusions.
 \subsection{Transition path sampling}
 %------------------------------------------------------------------------------ 
 Here we briefly describe the equations describing the TPS method for the purpose of
-introducing notations as well as for the sake of being complete. 
+introducing notations as well as for the sake of completeness. 
 Consider the molecular dynamics simulation of a molecular system consisting 
 of $N$ atoms. Starting from the initial positions and momenta of each atom at time $t_0$,
 the time evolution is carried out by finding the position ($\textbf{q}$) and 
@@ -269,7 +271,7 @@ z(\mathcal{T}) = \{z_0, z_{\Delta t}, z_{2\Delta t},\ldots,z_{\mathcal{T}}\}
 The probability to obtain a particular sequence of states is determined by the initial 
 conditions and the type of dynamics used for the time evolution. If the time evolution is 
 Markovian, the probability to go from $z_{i\Delta t}$ to $z_{(i+1)\Delta t}$ depends only 
-on $z_{i\Delta t}$ and not on conditions before the time $i\Delta t$ the total path probablility can 
+on $z_{i\Delta t}$ and not on conditions before the time $i\Delta t$ the total path probability can 
 be expressed as the product of individual probabilities $p(i\rightarrow j)$ as 
 \begin{equation}
 \mathcal{P}[z(\mathcal{T})] = \rho(z_0)\Pi_{i=0}^{\mathcal{T}/\Delta t-1} p(z_{i\Delta t}\rightarrow z_{(i+1)\Delta t}),
@@ -300,33 +302,40 @@ where
     0,              & \text{otherwise}
 \end{cases}
 \]
-The set of all reactive trajectories characterized by the distribution function
-given by Eq. \ref{eqn:tpsensem} is the transition path ensemble. 
+and $Z_{\mathcal{AB}}(\mathcal{T})$ is the normalization factor for this 
+probability distribution function.
+The set of all reactive trajectories characterized by the probability 
+distribution function given by Eq. \ref{eqn:tpsensem} is the 
+transition path ensemble. 
 
 \subsection{Equilibrium distribution of order parameters}
-The free energy as a function of the order parameter $\zeta$ is defined
-as 
+The free energy of a molecular system as a function of the order parameter $\zeta$ 
+is defined as 
 \begin{equation}
 \text{A}(\zeta) = -k_{\text{B}}T\text{ln}(P(\zeta)) + C, \label{eqn:fenergy}
 \end{equation}
-where $P(\zeta)$ is the probability distribution of the reaction coordinate
-$\zeta$ and $C$ is an arbitrary constant. At equilibrium the probability distribution of the 
-reaction coordinate 
-can be obtained from the distribution function for the phase space $\rho(\textbf{q})$ as
+where $P(\zeta)$ is the probability distribution function of the reaction coordinate
+$\zeta$, $C$ is an arbitrary constant, $k_{\text{B}}$ is the Boltzmann constant
+and $T$ is the temperature. At equilibrium the probability distribution of the 
+reaction coordinate can be obtained from the distribution function for the phase 
+space $\rho(\textbf{q})$ as
 \begin{equation}
 P(\zeta) = \int d\textbf{V} \rho(\textbf{q})\delta\left[\zeta-\tilde{\zeta}(\textbf{q})\right].
 \end{equation}
-The integration is over the entire phase space. In practice the calculation of this distribution function
+The integration is over the entire phase space. In practice, the calculation of this distribution function
 often proceeds using histogram based methods where the reaction coordinate is 
-divided into bins and the frequency of the occurence of the reaction coordinate within a particular window
-during the course of molecular dynamics simulations is used to calculate the probability distribution. 
-Since some values of the reaction coordinates particulary close to the transition state are 
+divided into bins and the frequency of the occurrence of the reaction coordinate 
+within a particular window during the course of MD simulation is used to calculate 
+the probability distribution function. Since some values of the reaction coordinates 
+particularly close to the transition state are 
 rarely sampled in a conventional MD simulations, enhanced sampling techniques such as the umbrella sampling
 are necessary to sample the low probability regions. TPS is designed to sample these regions in phase space 
-without the application of any external bias, but the trajectories sampled with TPS are only reactive and hence
+without the application of any external bias, but the trajectories 
+sampled with TPS are only reactive and hence
 they are not distributed according to the equilibrium distribution function. 
-The restriction that the pathways start from the reactant state and end in the product state can be relaxed
-to obtain an ensemble of trajectories that will be distributed according to the equilibrium distribution. 
+The restriction that the pathways start from the reactant state and end in the 
+product state can be relaxed to obtain an ensemble of trajectories that will 
+be distributed according to the equilibrium distribution. 
 %------------------------------------------------------------------------------ 
 \subsection{Algorithm for free energy calculations}\label{ssec:algorithm}
 %------------------------------------------------------------------------------ 
@@ -336,22 +345,22 @@ to sample TPS trajectories within windows of the order parameter.
 \item An appropriate order parameter is chosen for the reaction of interest 
 that can distinguish the reactant and product states sufficiently well and the TPS ensemble is harvested 
 which consists only of reactive trajectories.
-\item Divide the order parameter into windows $\{\zeta_i\}$ within which the 
-order parameters are given by 
-$\zeta_{i}^{min} < \zeta < \zeta_{i}^{max}$.
+\item The order parameter is divided into windows $\{\zeta_i\}$ and within each window,
+$\zeta_{i}^{min} < \zeta < \zeta_{i}^{max}$ is to be sampled.
 \item Choose a reactive trajectory $\tilde{z}(\mathcal{T})$ from the TPS ensemble as 
 a guiding trajectory for the window sampling. Pick a time slice from this trajectory 
 $\tilde{z}_{j\Delta t}$ such that the order parameter calculated for this time slice
 $\tilde{\zeta}$ satisfies $\zeta_{i}^{min} < \tilde{\zeta} < \zeta_{i}^{max}$.
 \item Using the shooting and shifting algorithm familiar from TPS simulations, \cite{dellago02AdvChemPhys123}
 harvest dynamics trajectories starting from the time slice $\tilde{z}_{j\Delta t}$ of the trajectory 
-$\tilde{z}(\mathcal{T})$ and accept the new trajectory if at any time slice the calculated 
+$\tilde{z}(\mathcal{T})$ and accept the new trajectory if for any time slice the calculated 
 order parameter $\hat{\zeta}$ satisfies $\zeta_{i}^{min} < \hat{\zeta} < \zeta_{i}^{max}$.
 \item Calculate the probability distribution ($P_i(\zeta)$) within the window $\zeta_{i}^{min} 
 < \zeta < \zeta_{i}^{max}$ by constructing histograms obtained from the ensemble of 
-accepted trajectories for the window $i$. 
-\item Combine the probability distributions in successive windows by adjusting the constants $C$
-such that the free energy $A$ from Eq. \ref{eqn:fenergy} is continuous. 
+accepted trajectories for the window referenced by the index $i$. 
+\item Calculate the free energies for each of the windows according to Eq. \ref{eqn:fenergy}
+and combine them such that the function $\text{A}(\zeta)$ is continuous 
+by adjusting the constants $C$. 
 \end{itemize}
 %------------------------------------------------------------------------------ 
 \section{Computational details}
@@ -393,9 +402,9 @@ was used for the dynamics.
 The minimized systems were
 heated slowly to 300 K for 35 ps beginning with harmonic
 constraints on all atoms except on the H atoms and the TIP3P 
-water molecules with gradual reduction of the restraint forces to 1. 
+water molecules with gradual reduction of the restraint forces. 
 15 ps of equilibration was carried out starting with harmonic 
-constraints of force constant 1 followed by 20 ps of contraint free 
+restraint forces followed by 20 ps of constraint free 
 equilibration to prepare the systems for TPS simulations. 
 During the heating and equilibration steps, bonds that contain 
 hydrogen atoms in the MM region were restrained to their equilibrium values 
@@ -419,10 +428,10 @@ nucleophilic sulfur atom of MET and the $5'-C$ atom of the ATP (denoted as d$_{\
 and the distance between oxygen atom of the phosphate group and the $5'-C$ 
 atom of ATP (d$_{\mathrm{OC}}$). For the TPS calculations we define the 
 reactant state to have d$_{\mathrm{OC}}$ to be less than 1.7 {\AA} and the product 
-state to have the d$_{\mathrm{SC}}$ less than 1.7 {\AA}. 
+state to have the d$_{\mathrm{SC}}$ less than 2.0 {\AA}. 
 
 \begin{figure}
-\includegraphics[width=0.5\textwidth]{figures/mat2a-reaction.png}
+\includegraphics[width=\columnwidth]{figures/mat2a-reaction.png}
 \caption{The reaction catalyzed by the human MAT2A enzyme between ATP and L-methionine resulting in the 
 formation of S-adenosyl L-methionine and triphosphate leaving group.}
 \label{fig:mat2a-reaction}
@@ -437,12 +446,12 @@ formation of a Meisenheimer complex like structure while the N1 atom
 on the adenosyl moiety gets protonated by the Glu229 residue of $pv$ADA. 
 The key bond parameters are the distance between the approaching hydroxyl 
 oxygen and the C6 atom (denoted as d$_{\text{OC}}$) and the 
-dissociating C6$-$N6 (d$_{\text{NC}}$) bond distance. For the TPS simulaions 
-we define the reactant state to have d$_{\text{NC}}$ being less than $1.7$ {\AA} 
-and the product state to have the d$_{\text{OC}}$ less than $1.7$ {\AA}.
+dissociating C6$-$N6 (d$_{\text{NC}}$) bond distance. For the TPS simulations 
+we define the reactant state to have d$_{\text{NC}}$ being less than $1.8$ {\AA} 
+and the product state to have the d$_{\text{OC}}$ less than $1.8$ {\AA}.
 
 \begin{figure}
-\includegraphics[scale=0.6]{figures/ada-new.png}
+\includegraphics[width=\columnwidth]{figures/ada-new-reaction.png}
 \caption{The reaction catalyzed by the $pv$ADA enzyme between adenosine and hydroxide ion
 resulting in the formation of inosine and ammonia.}
 \label{fig:ada-reaction}
@@ -455,7 +464,7 @@ forces, the shooting algorithm \cite{dellago02AdvChemPhys123} was used to genera
 new trajectories. The shooting algorithm begins with the choice of a 
 random time slice from the biased initial reactive trajectory and perturbs 
 the momenta of all the atoms in the system. Then the dynamics is propagated for 
-250 steps forawards and backwards using $1\;fs$ time steps
+250 steps forwards and backwards using $1\;fs$ time steps
 resulting in a trajectory with a time period of $0.5\;ps$.
 A total of 150 reactive trajectories were generated for both the MAT2A and $pv$ADA
 systems.
@@ -464,7 +473,7 @@ systems.
 %------------------------------------------------------------------------------ 
 We follow the algorithm discussed previously to calculate the free energy
 profile for the two enzymatic reactions using the TPS reactive trajectories. 
-The order paratemer for the MAT2A system 
+The order parameter for the MAT2A system 
 is defined to be d$_{\text{OC}}-$d$_{\text{SC}}$ and that for the $pv$ADA is defined as 
 d$_{\text{NC}}-$d$_{\text{OC}}$. For the MAT2A system, configurations are sampled
 for order parameter values within the range $[-2.0,2.0]$ and this range is divided 
@@ -474,10 +483,12 @@ within the interval $[-3.0, 3.0]$ {\AA} which is divided into 20 overlapping
 windows ($0.09$ {\AA} between neighboring windows). A reactive 
 trajectory from the TPS ensemble is chosen to guide the sampling 
 within each of the windows in the same spirit as a steered MD trajectory 
-is used to guide the window based umbrella sampling simulations. 
-To sample in a particular window $w$, a frame from this reactive 
+is used to guide the window based umbrella sampling simulations (though in this case,
+of course, this is an unbiased dynamically exact reactive trajectory). 
+To sample in a particular window $\zeta_i$, a frame from this reactive 
 trajectory is chosen such that the value of its 
-order parameter falls within $w$. Using the shooting algorithm
+order parameter ($\zeta$) falls within 
+$\zeta_{i}^{min} < \zeta < \zeta_{i}^{max}$. Using the shooting algorithm
 the momenta of all the atoms in the system are perturbed 
 and dynamics is run for 10 steps forwards and backwards with a 
 $1\;fs$ time step to obtain a trajectory with a time period of $20\;fs$.
@@ -499,7 +510,7 @@ ATP, MET and two Mg$^{2+}$ ions is shown in Fig. \ref{fig:mat2a-equil}.
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.2]{figures/mat2a-equil.png}
-\caption{Equilibriated structure of the MAT2A enzyme in complex with ATP and 
+\caption{Equilibrated structure of the MAT2A enzyme in complex with ATP and 
 MET along with 2 Mg$^{2+}$ ions.}
 \label{fig:mat2a-equil}
 \end{figure}
@@ -518,7 +529,7 @@ Committor analysis is carried out for a reactive trajectory
 from the TPS ensemble by choosing a time slice randomly from the trajectory, assigning
 momenta picked at random from the Boltzmann distribution for all the atoms, and running 
 dynamics for $250\;fs$. The commitment probability of a time slice is calculated by 
-repeating this procedure several times and finding the fraction of trajectories that go 
+repeating this procedure many times and finding the fraction of trajectories that go 
 to the reactant, product or neither. The transition state for the reaction is defined as 
 the structure from the time slice that has equal probability to commit to the reactant 
 and the product state. Repeating this process for several trajectories from the TPS
@@ -543,8 +554,9 @@ respectively and our calculated values are in close agreement to this result.
 
 The reaction coordinate might contain not just the atoms from the molecules that 
 are directly involved in the reaction but also residues from side chains that can 
-promote the reaction. Taking this into account the committor distribution analysis
-starts by constraining the residues and molecules that are hypothesized to be part of the 
+promote the reaction. \cite{Schramm18Biochem57p3299} Taking this into account the 
+committor distribution analysis
+begins by constraining the residues and molecules that are hypothesized to be part of the 
 reaction coordinate and using this constrained system as the starting point 
 trajectories are launched assigning momenta at random from the Boltzmann distribution at 
 $300\;\text{K}$ to all the atoms in the system. 
@@ -576,11 +588,15 @@ Niland et al. \cite{Niland21Biochem60p791} where they measured the rate
 constant of the reaction at various temperatures while keeping the 
 substrate concentrations near saturation. Using the Arrhenius equation 
 they estimated the activation energy to be $17.27\;\pm\;1.5\;
-\text{Kcal mol}^{-1}$ which is small Compared to typical enzyme catalyzed 
-reactions.
+\text{Kcal mol}^{-1}$.
 \begin{figure}
 \includegraphics[scale=1.0]{figures/mat2a-fenergy.pdf}
-\caption{The free energy as a function of the order parameter.}
+\caption{The free energy as a function of the order 
+parameter for the reaction catalyzed
+by the human MAT2A enzyme. The activation barrier is 
+calculated to be $16\;\text{Kcal mol}^{-1}$. The solid colored disks represent the free energies 
+calculated within the individual windows which is adjusted to make the free energy as a function 
+of the order parameter a continuous function.}
 \label{fig:mat2a-fenergy}
 \end{figure}
 The free energy profile from our TPS based calculations is shown in 
@@ -598,7 +614,8 @@ residue.
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.2]{./figures/ada-equil.png}
-\caption{Equilibriated structure of ADA protein}
+\caption{Equilibrated structure of $pv$ADA enzyme complexed with adenosine, 
+OH$^{-}$ anion and Zn$^{2+}$.}
 \label{fig:ada-equil}
 \end{figure}
 The bond forming (d$_{\text{OC}}$) and bond breaking (d$_{\text{NC}}$) distances 
@@ -614,16 +631,17 @@ reactive trajectory for the reaction catalyzed by the $pv$ADA enzyme.}
 The deamination is an aromatic nucleophilic substitution reaction 
 where an intermediate Meisenheimer complex like structure is formed 
 at the transition state as shown in Fig. \ref{fig:ada-trans}. 
-The approaching O atom of the OH$^{-}$ anion is at a distance of $1.48$ {\AA}
-from the C6 atom whereas the N atom of the amine leaving group is at $1.60$ {\AA}.
+The approaching O atom of the OH$^{-}$ anion is at a distance of $1.49$ {\AA}
+from the C6 atom whereas the N atom of the amine leaving group is at $1.62$ {\AA}
+from the C6 atom.
 The N$1-$H bond distance is $1.1\;${\AA} 
 suggesting that the proton transfer from the Glu229 residue is almost complete.
 \begin{figure}
 \centering
 \includegraphics[scale=0.12]{blender-images/ada/new-ada-trans.png}
 \caption{The transition state structure of the reaction catalyzed by the ADA enzyme.
-The formation of the Meissenheimer complex like structure with 
-d$_{\text{NC}}=1.60$ {\AA} and d$_{\text{OC}}=1.48$ {\AA} is observed.}
+The formation of the Meisenheimer complex like structure with 
+d$_{\text{NC}}=1.62$ {\AA} and d$_{\text{OC}}=1.49$ {\AA} is observed.}
 \label{fig:ada-trans}
 \end{figure}
 These observations are consistent with the 
@@ -640,12 +658,14 @@ The free energy profile that we calculated is shown in Fig. \ref{fig:ada-fenergy
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=1.0]{./figures/ada-fenergy.pdf}
-\caption{The free energy in $\text{Kcal}\;\text{mol}^{-1}$ as a function of the reaction 
-parameter for the ADA catalyzed reaction. The Meissenheimer complex where the OH$^{-}$ anion
-is bonded to the C atom and the leaving NH$_2$ moeity is also still bonded.}
+\caption{The free energy as a function of the reaction 
+parameter for the ADA catalyzed reaction. The activation barrier is calculated as 
+$21\;\text{Kcal}\;\text{mol}^{-1}$. The solid colored disks represent the free energies 
+calculated within the individual windows which is adjusted to make the free energy as a function 
+of the order parameter a continuous function.}
 \label{fig:ada-fenergy}
 \end{figure}
-The free energy barrier is calculated to be $23\;\text{Kcal}\;\text{mol}^{-1}$
+The free energy barrier is calculated to be $21\;\text{Kcal}\;\text{mol}^{-1}$
 and the overall shape of the function is very similar to that hypothesized 
 by Luo et al. \cite{Luo07JAmChemSoc129p8008}
 %------------------------------------------------------------------------------ 
@@ -653,49 +673,51 @@ by Luo et al. \cite{Luo07JAmChemSoc129p8008}
 %------------------------------------------------------------------------------ 
 In this study, we presented an application of the TPS method for the calculation 
 of free energy profiles of enzymatic reactions. The order parameter along which the 
-free energy profile is to be obtained is partitioned into windows similar to 
-umbrella sampling. But instead of using bias potentials to sample the configurations
+free energy profile is to be obtained is partitioned into windows as is done in 
+umbrella sampling, but instead of using bias potentials to sample the configurations
 within the windows the shooting algorithm is used to
-obtain an ensemble of trajectories according to the Monte carlo algorithm. A 
+obtain an ensemble of trajectories according to the Monte Carlo algorithm. A 
 trajectory is accepted if it visits the window at least in one of the time steps. 
-Using this ensemble of trajectories unbiased equilibrium probability distribution 
+Using this ensemble of trajectories the unbiased equilibrium probability distribution 
 function of the order parameter of the reaction within each window is obtained.
 Furthermore the free energy as a function of the order parameter is computed within 
-each of the windows and the entirte profile is obtained by shifting the free energies
+each of the windows and the entire profile is obtained by shifting the free energies
 such that the function is continuous at the boundaries.   
 
 The MAT2A enzymatic reaction was analyzed in detail to elucidate the transition state,
 reaction coordinate and the free energy profile. The reaction proceeds through a 
-S$_\text{N}$2 mechanism, the d$_{\text{OC}}$ and d$_{\text{SC}}$ are $2.1$ {\AA}
-and $2.3$ {\AA}, respectively. The reaction coordinate is determined to involve  
+S$_\text{N}$2 mechanism, the d$_{\text{OC}}$ and d$_{\text{SC}}$ are $2.09$ {\AA}
+and $2.31$ {\AA}, respectively. The reaction coordinate is determined to involve  
 the Gln113, Ser114, Arg249 and Arg264 residues. 
 The free energy barrier for this reaction was calculated to be 
-$16.0\;\text{Kcal}\;\text{mol}^{-1}$ which is in good agreement 
+$16\;\text{Kcal}\;\text{mol}^{-1}$ which is in good agreement 
 with the experimentally measured activation energy of $17.27\;\pm\;1.5\;\text{Kcal mol}^{-1}$. 
 Furthermore the reaction catalyzed by the $pv$ADA enzyme is analyzed in detail to obtain the  
 transition state and calculate the free energy profile.
 The transition state has a Meisenheimer complex like structure with the 
-d$_\text{NC}$ and d$_\text{OC}$ being $1.60$ {\AA} and $1.48$ {\AA}, respectively.
-The free energy barrier for this reaction for found to be $23\;\text{Kcal}\;\text{mol}^{-1}$
-with a double well shape similar to that measured from experiments.  
+d$_\text{NC}$ and d$_\text{OC}$ being $1.62$ {\AA} and $1.49$ {\AA}, respectively.
+The free energy barrier for this reaction for found to be $21\;\text{Kcal}\;\text{mol}^{-1}$
+with a double well shape similar to that measured from experiments. 
+These results show that free energy simulations based on unbiased transition 
+path sampling computations can result in accurate and computationally
+efficient predictions of both free energy profiles and mechanisms.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
 %% classes.  This should be given within the "acknowledgement"
 %% environment, which will make the correct section or running title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{acknowledgement}
-SGB acknowledges funding from ...
-
+SGB acknowledges funding from the NIH through grant number GM127594.
 \end{acknowledgement}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The same is true for Supporting Information, which should use the
 %% suppinfo environment.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{suppinfo}
+%\begin{suppinfo}
 
 
-\end{suppinfo}
+%\end{suppinfo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The appropriate \bibliography command should be placed here.
