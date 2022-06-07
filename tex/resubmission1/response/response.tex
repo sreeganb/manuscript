@@ -1,0 +1,300 @@
+\pdfoptionpdfminorversion=4
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is a (brief) model paper using the achemso class
+%% The document class accepts keyval options, which should include
+%% the target journal and optionally the manuscript type.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[journal=jpcbfk,manuscript=article,layout=traditional]{achemso}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional packages needed here.  Only include packages
+%% which are essential, to avoid problems later.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{chemformula} % Formula subscripts using \ch{}
+\usepackage[T1]{fontenc} % Use modern font encodings
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+\usepackage{microtype,xparse,tcolorbox}
+\usepackage{helvet}
+\newcommand{\newtext}[1]{{\color{blue} #1}}
+\newcommand{\vamsee}[1]{{\color{applegreen} #1}}
+\newcommand{\filipp}[1]{{\color{red} #1}}
+
+\newenvironment{reviewer-comment }{}{}
+\tcbuselibrary{skins}
+\tcolorboxenvironment{reviewer-comment }{empty,
+  left = 1em, top = 1ex, bottom = 1ex,
+  borderline west = {2pt} {0pt} {black!20},
+}
+\ExplSyntaxOn
+\NewDocumentEnvironment {response} { +m O{black!20} } {
+  \IfValueT {#1} {
+    \begin{reviewer-comment~}
+      \setlength\parindent{2em}
+      \noindent
+      \ttfamily #1
+    \end{reviewer-comment~}
+  }
+  \par\noindent\ignorespaces
+} { \bigskip\par }
+
+\NewDocumentCommand \Reviewer { m } {
+  \section*{Comments~by~Reviewer~#1}
+}
+\ExplSyntaxOff
+%\AtBeginDocument{\maketitle\thispagestyle{empty}\noindent}
+
+% You can get probably get rid of these definitions:
+%\newcommand\meta[1]{$\langle\hbox{#1}\rangle$}
+%\newcommand\PaperTitle[1]{``\textit{#1}''}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Sree Ganesh Balasubramani}
+\affiliation{Department of Chemistry and Biochemistry, University of Arizona, Tucson, Arizona 85721, United States}
+\author{Steven D. Schwartz}
+\affiliation{Department of Chemistry and Biochemistry, University of Arizona, Tucson, Arizona 85721, United States}
+%\author{I. Ken Groupleader}
+%\altaffiliation{A shared footnote}
+\email{sschwartz@email.arizona.edu}
+%\phone{+123 (0)123 4445556}
+%\fax{+123 (0)123 4445557}
+%\affiliation[Unknown University]
+%{Department of Chemistry, Unknown University, Unknown Town}
+%\alsoaffiliation[Second University]
+%{Department of Chemistry, Second University, Nearby Town}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The document title should be given as usual. Some journals require
+%% a running title from the author: this should be supplied as an
+%% optional argument to \title.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[]
+  {Transition path sampling based calculations of free energies for enzymatic
+  reactions: the case of human methionine adenosyl transferase and plasmodium 
+  vivax adenosine deaminase}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Some journals require a list of abbreviations or keywords to be
+%% supplied. These should be set up here, and will be printed after
+%% the title and author information, if needed.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\abbreviations{TPS,WHAM}
+\keywords{American Chemical Society, \LaTeX}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The manuscript does not need to include \maketitle, which is
+%% executed automatically.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%\date{\today} 
+
+\maketitle
+
+
+%Additions to the manuscript are indicated in  \textit{\newtext{blue text}}. 
+
+
+\Reviewer{1}
+
+We would like to thank the Reviewer for his/her time and for evaluating
+the manuscript. 
+
+%\begin{response}
+%{The current work shows the application of the BOLAS method to two enzyme-catalyzed reactions. 
+%The BOLAS method is a transition path sampling algorithm that can be extended to calculate free 
+%energies along a pre-defined reaction coordinate. There are already several methods to calculate 
+%free energy profiles and many have been applied to enzymatic reactions, but none is a black-box, 
+%and therefore the implementation and application of this method to an enzymatic reaction is an 
+%important advance. The text is well written and clear.}
+%reply
+%TPS based free energy calculations have been attempted previously for the calculations
+%involving model problems involving analytical potential energy surfaces or for 
+%configurational or structural changes of an enzyme. A chemical reaction catalyzed by 
+%an enzyme can involve a complicated reaction coordinate and TPS based method using the 
+%shooting algorithm provides a bias free technique for calculating the free energy
+%of the reaction. 
+
+%\end{response}
+
+\begin{response}
+{First one needs to know how the specific parameters of the method affect 
+the results. Or at least, how or why they were chosen. If not for all parameters, 
+at least for the most relevant ones (but this needs also to be specified). 
+For example:
+* why use 150 reactive trajectories?}
+%reply
+
+%The application of TPS for stuyding the kinetics and transition states of 
+%enzyme catalyzed reactions has been repeorted several times by our group as well
+%as by others we decided to not list out every detail. But we have now included 
+%some details about the choice the number of trajectories and so on.
+The number of reactive trajectories in a TPS ensemble is decided based 
+on how quickly the shooting algorithm results in decorrelation of the reactive 
+trajectories from the initial biased trajectory. If the decorrelation is fast 
+then fewer trajectoreis are sufficient for further committor analysis. 
+To be sure that we do not use trajecotries that are correlated to the initial 
+biased trajectory we ignore the first 100 trajectories for committor analysis. 
+This choice for the number of trajectories is also based on computational cost, 
+while obtaining the additional trajectories may not provide any more information 
+we use up computational resources in the process.
+
+\end{response}
+
+\begin{response}
+  {why should each reaction last 0.5 ps? How is it known if that time is too short 
+  or too long?}
+We used longer trajectories (1 ps) and checked to make sure that the reaction occurs within
+the time that we used (0.5 ps) before collecting the TPS ensemble. 
+
+\end{response}
+
+{\begin{response}
+{* why 20 windows?}
+%reply
+This choice was made based on the order parameter window that we are scanning.
+20 windows results in a window size of 0.39 angstroms and we use a overlap of
+0.09 angstroms on either side of the window to make sure that we have configurations
+that are common to neighboring windows which is necessary to obtain a continuous free energy
+profile. Smaller window sizes result in inefficient sampling because the TPS based method
+does not include bias forces to keep the trajectories within the windows and we end up
+sampling outside the windows especially in regions where the free energy has a steeper slope.  
+
+% We are somewhat at loss how to respond to this criticism,
+% which seems to contradict Reviewer B's statements,
+% ``I have to stress that the paper discusses complex material and still
+% it is in general clearly written. It can be accessible for readers who
+% are less familiar with RPA or many-body theory.''
+
+
+\end{response}
+
+\begin{response}
+{* When calculating the commitor, you cannot say "repeating this procedure many times". 
+How many are needed to obtain a given precision or to obtain the given figure?
+\newline
+* As before, when calculating the separatrix, you can not say "repeating this 
+process for several trajectories".}
+%reply
+Since this is the discussion of the committor analysis and committor distribution 
+analysis in general and not for the specific case for the enzymes we had not
+provided the number of trajectories that were used in these calculations.
+
+\end{response}
+
+\begin{response}{Some of these questions arise because nowhere in 
+the manuscript are confidence intervals given. Neither in the energy 
+profile nor in the transition state structure distances (Fig. 5). 
+Therefore the effect of these parameters on the precision of the 
+results is not known.
+}
+The transition state structure depicted in Fig. 5 is a representative
+from the ensemble of transition states that were obtained from committor
+analysis. We could provide the mean and standard deviation of the bond distances
+but this does not provide the any more 
+
+\end{response}
+
+\begin{response}{Some of these questions also arise because the 
+code to implement the method is not made public. Doing so would 
+not only clarify some questions but also prevent others from 
+reinventing the wheel, that is, coding the implementation again 
+to check the results of this paper or to apply the method to their specific enzymes.}
+
+% REPLY
+We agree that the availability of code is necessary for reproducibility of the results.
+TPS based free energies calculations are akin to vanilla TPS calculations with 
+only a few modifications to the acceptance criteria as discussed in the manuscript as well
+as in the original BOLAS paper. We followed the algorithm stated in the manuscript
+and implemented it as python scripts but it was hard coded to model the MAT2A and 
+$\textit{pv}$ADA catalyzed reactions. We would release it in a public repository once it is 
+tailored for general purpose usage.  
+\end{response}
+
+\begin{response}{The second piece of information needed is how the method 
+performs compared to others. Both in terms of computational cost and in 
+terms of accuracy. Comparison with experiment is interesting but not very 
+enlightening as the computational results depend on the method to calculate 
+the free energy profile (tested here) but also on the chosen reaction coordinate, 
+the QM region and the QM method, among others. A comparison with Umbrella Sampling, 
+which also uses a reaction coordinate and also uses windows would be ideal. Again, 
+to make fair comparisons we would need error bars to estimate the convergence of 
+the results and reports of computational costs.}
+
+% REPLY
+
+\end{response}
+
+\begin{response}{Beyond these general issues raised so far, there are some other points 
+that deserve some attention.
+\newline
+1. How is the initial reactive trajectory generated? Although obtaining an initial reactive 
+trajectory is not the crux of the algorithm it is a non-trivial step that should be more 
+detailed. In particular, for the pvADA enzyme, which involves a two-step reaction, how 
+do the way these 2 steps take place in the initial trajectory condition of the TPS ensemble?}
+
+% REPLY
+For the \textit{pv}ADA enzyme the two steps in the reaction are the nucleophilic attack 
+of the OH$^{-}$ on the C6 atom and the transfer of the proton from the OH$^{-}$ 
+to the N6 atom with the formation of NH$_3$. We are including the time series of the 
+N6-H1 distances in the supporting information which would show the sequence of events 
+along a typical TPS trajectory for this reaction. 
+
+\end{response}
+
+\begin{response}{2. Related to the previous question, considering that the barriers 
+surrounding the intermediate are higher than kT, shouldn't the trajectories remain 
+trapped in the intermediate? In other words, isn't the duration of the whole trajectory 
+determining the mechanism by enforcing a ballistic trajectory? Is the d(NC)-d(OC) still 
+a good reaction coordinate to describe the second step? If not, shouldn't that underestimate 
+the barrier, something that should be compensated by a (not calculated) transmission coefficient?}
+
+% REPLY
+
+\end{response}
+
+\begin{response}
+{3. I find the free energy profiles in fig 7 and 11 worrying. Take the 4th window in 
+Fig. 7: it is clearly showing a smaller slope than the interpolation and this is because 
+there are jumps between the windows. The first point of this window and the next one are 
+"disconnected" from the other ones. Why is this so? Repeating the calculations with smaller 
+windows would show the effect of window size on the result (that would address one of my 
+questions regarding the choice of parameters).}
+% REPLY
+\end{response}
+
+\begin{response}
+{4. The author should check they cite the appropriate works. I am afraid 
+ref 20 is not an application of TPS to enzyme catalysis. To my knowledge, The first 
+applications of TPS to enzyme catalysis are  $J. Am. Chem. Soc.2005, 127, 13822-13831$ 
+and $J. Phys. Chem. B 2007, 111, 20, 5708-5718$.}
+% REPLY
+
+We thank the Reviewer for pointing out this mistake. We have made the appropriate changes to that
+citation in the manuscript. 
+\end{response}
+
+
+\begin{response}{Overall this is a relevant work, but the authors need to go 
+deeper into the scientific details to be useful to other members of the 
+community, because what the manuscript should be describing is not that the 
+method works --we already knew that-- but how to make it work in enzymatic reactions.}
+% REPLY
+\end{response}
+
+\section*{Other Changes}
+
+
+
+\end{document}
+
+
+
+
+
