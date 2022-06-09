@@ -58,9 +58,11 @@
 %\newcommand\PaperTitle[1]{``\textit{#1}''}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \author{Sree Ganesh Balasubramani}
-\affiliation{Department of Chemistry and Biochemistry, University of Arizona, Tucson, Arizona 85721, United States}
+\affiliation{Department of Chemistry and Biochemistry, University of Arizona, 
+Tucson, Arizona 85721, United States}
 \author{Steven D. Schwartz}
-\affiliation{Department of Chemistry and Biochemistry, University of Arizona, Tucson, Arizona 85721, United States}
+\affiliation{Department of Chemistry and Biochemistry, University of Arizona, 
+Tucson, Arizona 85721, United States}
 %\author{I. Ken Groupleader}
 %\altaffiliation{A shared footnote}
 \email{sschwartz@email.arizona.edu}
@@ -141,10 +143,8 @@ trajectories from the initial biased trajectory. If the decorrelation is fast
 then fewer trajectoreis are sufficient for further committor analysis. 
 To be sure that we do not use trajecotries that are correlated to the initial 
 biased trajectory we ignore the first 100 trajectories for committor analysis. 
-This choice for the number of trajectories is also based on computational cost, 
-while obtaining the additional trajectories may not provide any more information 
-we use up computational resources in the process.
-
+Additionally we have added a discussion on the acceptance percentage of reactive 
+trajectories in the manuscript. 
 \end{response}
 
 \begin{response}
@@ -165,14 +165,6 @@ that are common to neighboring windows which is necessary to obtain a continuous
 profile. Smaller window sizes result in inefficient sampling because the TPS based method
 does not include bias forces to keep the trajectories within the windows and we end up
 sampling outside the windows especially in regions where the free energy has a steeper slope.  
-
-% We are somewhat at loss how to respond to this criticism,
-% which seems to contradict Reviewer B's statements,
-% ``I have to stress that the paper discusses complex material and still
-% it is in general clearly written. It can be accessible for readers who
-% are less familiar with RPA or many-body theory.''
-
-
 \end{response}
 
 \begin{response}
@@ -185,7 +177,6 @@ process for several trajectories".}
 Since this is the discussion of the committor analysis and committor distribution 
 analysis in general and not for the specific case for the enzymes we had not
 provided the number of trajectories that were used in these calculations.
-
 \end{response}
 
 \begin{response}{Some of these questions arise because nowhere in 
@@ -194,11 +185,10 @@ profile nor in the transition state structure distances (Fig. 5).
 Therefore the effect of these parameters on the precision of the 
 results is not known.
 }
+We have added a supporting information file which contains analysis on the transition
+state ensemble providing more information about the structures that we had calculated. 
 The transition state structure depicted in Fig. 5 is a representative
-from the ensemble of transition states that were obtained from committor
-analysis. We could provide the mean and standard deviation of the bond distances
-but this does not provide the any more 
-
+from the ensemble of transition states.
 \end{response}
 
 \begin{response}{Some of these questions also arise because the 
@@ -240,12 +230,14 @@ detailed. In particular, for the pvADA enzyme, which involves a two-step reactio
 do the way these 2 steps take place in the initial trajectory condition of the TPS ensemble?}
 
 % REPLY
-For the \textit{pv}ADA enzyme the two steps in the reaction are the nucleophilic attack 
-of the OH$^{-}$ on the C6 atom and the transfer of the proton from the OH$^{-}$ 
-to the N6 atom with the formation of NH$_3$. We are including the time series of the 
-N6-H1 distances in the supporting information which would show the sequence of events 
-along a typical TPS trajectory for this reaction. 
-
+The reaction catalyzed by the \textit{pv}ADA enzyme consists of 
+the nucleophilic attack of the OH$^{-}$ on the C6 atom, proton transfer from the 
+GLU 223 residue to the N1 atom in the adenosyl moeity and finally the 
+the transfer of the proton from the OH$^{-}$ to the N6 atom resulting in the formation 
+of NH$_3$ and inosine. We have included the time series of the key distances in 
+the supporting information which shows that we collect trajectories which contain all these
+steps taking the system from the reactant state to the product state with the order of events
+as predicted from experiments. 
 \end{response}
 
 \begin{response}{2. Related to the previous question, considering that the barriers 

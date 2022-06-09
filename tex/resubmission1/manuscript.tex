@@ -468,7 +468,20 @@ the momenta of all the atoms in the system. Then the dynamics is propagated for
 250 steps forwards and backwards using $1\;fs$ time steps
 resulting in a trajectory with a time period of $0.5\;ps$.
 A total of 150 reactive trajectories were generated for both the MAT2A and $pv$ADA
-systems.
+systems. The percentage of TPS trajectories that were accepted were 24$\%$ and 
+19$\%$ for the MAT2A and $pv$ADA systems, respectively.
+For optimal sampling with a good balance between the number of 
+accepted reactive trajectories and decorrelation from the initial constrained
+trajectory as well from one another, the acceptance percentage 
+is typically $\sim$ 40. \cite{dellago02AdvChemPhys123}  
+For complex systems such as enzymes we find that the lower the acceptance 
+percentage the quicker is the decorrelation. 
+%While a 40$\%$ acceptance has been found to provide the best compromise between the
+%number of accepted trajectories and decorrelation of the
+%trajectories from one another, 
+%we find that a lower acceptance
+%ratio provides quicker decorrelation from the initial constrained
+%trajectory, especially in more complex systems such as enzymes.
 %------------------------------------------------------------------------------ 
 \subsection{Free energy calculations}
 %------------------------------------------------------------------------------ 

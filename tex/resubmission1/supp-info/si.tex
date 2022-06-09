@@ -17,6 +17,10 @@
 \usepackage{caption}
 \usepackage{amsmath}
 \usepackage{mathptmx}
+\usepackage{multirow}
+\usepackage{tabularx,booktabs}
+\usepackage{color, colortbl}
+\usepackage{subcaption}
 \usepackage[scaled=0.92]{helvet}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
@@ -97,10 +101,86 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{tocentry}
 \section{Initial reactive trajectory}
+The reaction catalyzed by \textit{pv}ADA is between adenosine and OH$^{-}$ anion resulting
+in the formation of inosine. Experimental studies suggest that the GLU 223 residue 
+protonates the N1 atom of the adenosyl moeity and this transfer of proton is almost complete 
+at the transition state. \cite{Luo07JAmChemSoc129p8008} The protonation of the N1 atom 
+as observed in a representative reactive trajectory from the TPS ensemble is shown in 
+Fig. \ref{sfig:he2time}.  
+
+\begin{figure}
+\includegraphics[scale=1]{figures/ada-ohe-nhe60.pdf}
+\caption{The distance between the N1-HE2 atoms (d$_{\text{NH}}$) and the OE2-HE2 atoms 
+(d$_{\text{OH}}$)in {\AA} as a function of time. The proton is 
+transferred from the GLU 229 residue onto the N1 atom of the adenosyl moeity.}
+\label{sfig:he2time}
+\end{figure}
+
 \begin{figure}
 \includegraphics[scale=1]{figures/ada-oh-nh60.pdf}
 \caption{The distance between the N6-H1 atoms and O1-H1 atoms as a function of time. The proton transfer from the hydroxide
 anion to the NH$_2$ group occurs after the nucleophilic attack of the O1 atom on the C6 atom.}
 \end{figure}
+
+
+
+\section{Transition state ensemble for MAT2A enzyme}
+\begin{table*}[ht!]
+\caption{Order parameters d$_{\text{SC}}$ and d$_{\text{OC}}$ in {\AA} for the 11 transition states obtained from 
+the TPS ensemble along with the mean and standard deviation (Stddev).}
+\centering
+\begin{tabular}{l c c}
+\hline\hline
+Transition state & d$_{\text{SC}}$ ({\AA}) & d$_{\text{OC}}$ ({\AA})\\
+\hline
+1 & 2.30 & 2.10 \\
+2 & 2.31 & 2.08 \\
+3 & 2.31 & 2.09 \\
+4 & 2.34 & 2.14 \\
+5 & 2.35 & 2.17 \\
+6 & 2.41 & 2.16 \\
+7 & 2.41 & 2.11 \\
+8 & 2.40 & 2.15 \\
+9 & 2.35 & 2.13 \\
+10& 2.38 & 2.12 \\
+11& 2.29 & 2.06 \\
+\hline
+Mean & 2.35 & 2.12 \\
+Stddev & 0.04 & 0.03 \\
+\hline\hline
+\end{tabular}
+%
+\end{table*}
+
+
+\section{Transition state ensemble for \textit{pv}ADA enzyme}
+\begin{table*}[ht!]
+\caption{Order parameters d$_{\text{OC}}$ and d$_{\text{NC}}$ in {\AA} for the 11 transition states obtained from 
+the TPS ensemble along with the mean and standard deviation (Stddev).}
+\centering
+\begin{tabular}{l c c}
+\hline\hline
+Transition state & d$_{\text{OC}}$ ({\AA})& d$_{\text{NC}}$ ({\AA})\\
+\hline
+1& 1.48  &1.60 \\
+2& 1.45  &1.51 \\
+3& 1.48  &1.58 \\
+4& 1.5   &1.57 \\
+5& 1.55  &1.55 \\
+6& 1.55  &1.64 \\
+7& 1.52  &1.63 \\
+8& 1.52  &1.68 \\
+9& 1.49  &1.52 \\
+10&1.50  &1.64 \\
+11&1.49  &1.62 \\
+\hline
+Mean & 1.50 & 1.59 \\
+Stddev & 0.03 & 0.05 \\
+\hline\hline
+\end{tabular}
+%
+\end{table*}
+
+\bibliography{si}
 
 \end{document}
