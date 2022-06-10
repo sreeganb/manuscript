@@ -144,15 +144,16 @@ then fewer trajectoreis are sufficient for further committor analysis.
 To be sure that we do not use trajecotries that are correlated to the initial 
 biased trajectory we ignore the first 100 trajectories for committor analysis. 
 Additionally we have added a discussion on the acceptance percentage of reactive 
-trajectories in the manuscript. 
+trajectories in the manuscript. It has been observed that when the acceptance 
+percentage is low the trajectories decorrelate faster.  
 \end{response}
 
 \begin{response}
   {why should each reaction last 0.5 ps? How is it known if that time is too short 
   or too long?}
-We used longer trajectories (1 ps) and checked to make sure that the reaction occurs within
-the time that we used (0.5 ps) before collecting the TPS ensemble. 
-
+We used longer trajectories (1 ps) during the initial stages of our calculations
+and checked to make sure that the reaction occurs within
+the 0.5 ps time length before collecting the TPS ensemble. 
 \end{response}
 
 {\begin{response}
@@ -175,8 +176,8 @@ How many are needed to obtain a given precision or to obtain the given figure?
 process for several trajectories".}
 %reply
 Since this is the discussion of the committor analysis and committor distribution 
-analysis in general and not for the specific case for the enzymes we had not
-provided the number of trajectories that were used in these calculations.
+analysis in general and not for the specific case for the enzymes, we had not
+provided the number of trajectories that were used in these calculations. 
 \end{response}
 
 \begin{response}{Some of these questions arise because nowhere in 
@@ -248,7 +249,12 @@ a good reaction coordinate to describe the second step? If not, shouldn't that u
 the barrier, something that should be compensated by a (not calculated) transmission coefficient?}
 
 % REPLY
-
+The calculated geometry of the intermediate resembles that of the Meissenheimer complex which is
+similar to that predicted from experiments. In our TPS reactive trajectories we observe that 
+once the complex is formed there is a rapid proton transfer from the nucleophilic OH$^{-}$ 
+to the NH$_2$ group resulting in the release of NH$_3$ and the free energy change due to the 
+proton transfer is 1.7 kCal mol$^{-1}$. The order parameter that is chosen is based on the fact that
+it allows for the best definition of the reactant and product states.    
 \end{response}
 
 \begin{response}
@@ -259,6 +265,10 @@ there are jumps between the windows. The first point of this window and the next
 windows would show the effect of window size on the result (that would address one of my 
 questions regarding the choice of parameters).}
 % REPLY
+Since there are no bias forces constraining the trajectories to stay within a defined window, 
+in regions where the free energy curve has a large slope the trajectories tend to only sample 
+configurations almost completely outside the window with acceptance percentages $\leq 10$.
+This disconnection is simply an artifact of the histogram 
 \end{response}
 
 \begin{response}
