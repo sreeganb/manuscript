@@ -114,15 +114,22 @@ the manuscript.
 %energies along a pre-defined reaction coordinate. There are already several methods to calculate 
 %free energy profiles and many have been applied to enzymatic reactions, but none is a black-box, 
 %and therefore the implementation and application of this method to an enzymatic reaction is an 
-%important advance. The text is well written and clear.}
-%reply
+%important advance. The text is well written and clear.\newline
+%\begin{response}
+%Having said that, one has to keep in mind that this work does not introduce a new method, but 
+%applies a known method to some new systems. For these types of contributions to be really useful 
+%to the scientific community, one has to address the specific requirements or adaptations needed 
+%for these new systems and what are the advantages. Some of these aspects are missing in the 
+%current version of the manuscript. In other words, the paper has to explore and describe the 
+%necessary details to help others apply the method and decide whether it is worth applying.}
+%REPLY
+
 %TPS based free energy calculations have been attempted previously for the calculations
 %involving model problems involving analytical potential energy surfaces or for 
 %configurational or structural changes of an enzyme. A chemical reaction catalyzed by 
 %an enzyme can involve a complicated reaction coordinate and TPS based method using the 
 %shooting algorithm provides a bias free technique for calculating the free energy
 %of the reaction. 
-
 %\end{response}
 
 \begin{response}
@@ -134,18 +141,27 @@ For example:
 * why use 150 reactive trajectories?}
 %reply
 
+The number of reactive trajectories in a TPS ensemble is determined 
+by how quickly the shooting algorithm results in decorrelation of 
+the reactive trajectories from the initial biased trajectory. If the 
+decorrelation is rapid, then fewer trajectories are sufficient for 
+further committor analysis. To be sure that we do not use trajectories 
+that are correlated to the initial biased trajectory we ignore the 
+first 100 trajectories for committor analysis. We have added a discussion 
+on the acceptance percentage of reactive trajectories in the manuscript. 
+
 %The application of TPS for stuyding the kinetics and transition states of 
 %enzyme catalyzed reactions has been repeorted several times by our group as well
 %as by others we decided to not list out every detail. But we have now included 
 %some details about the choice the number of trajectories and so on.
-The number of reactive trajectories in a TPS ensemble is decided based 
-on how quickly the shooting algorithm results in decorrelation of the reactive 
-trajectories from the initial biased trajectory. If the decorrelation is fast 
-then fewer trajectoreis are sufficient for further committor analysis. 
-To be sure that we do not use trajecotries that are correlated to the initial 
-biased trajectory we ignore the first 100 trajectories for committor analysis. 
-Additionally we have added a discussion on the acceptance percentage of reactive 
-trajectories in the manuscript. 
+%The number of reactive trajectories in a TPS ensemble is decided based 
+%on how quickly the shooting algorithm results in decorrelation of the reactive 
+%trajectories from the initial biased trajectory. If the decorrelation is fast 
+%then fewer trajectoreis are sufficient for further committor analysis. 
+%To be sure that we do not use trajecotries that are correlated to the initial 
+%biased trajectory we ignore the first 100 trajectories for committor analysis. 
+%Additionally we have added a discussion on the acceptance percentage of reactive 
+%trajectories in the manuscript. 
 %It has been observed that when the acceptance 
 %percentage is low the trajectories decorrelate faster.  
 \end{response}
@@ -153,21 +169,22 @@ trajectories in the manuscript.
 \begin{response}
   {why should each reaction last 0.5 ps? How is it known if that time is too short 
   or too long?}
-We used longer trajectories (1 ps) during the initial stages of our calculations
-and checked to make sure that the reaction occurs within
+We used longer trajectories (1 ps) during the initial stages of our calculations 
+and checked to make sure that the reaction occurs within 
 the 0.5 ps time length before collecting the TPS ensemble. 
 \end{response}
 
 {\begin{response}
 {* why 20 windows?}
 %reply
-This choice was made based on the order parameter window that we are scanning.
-20 windows results in a window size of 0.39 angstroms and we use a overlap of
-0.09 angstroms on either side of the window to make sure that we have configurations
-that are common to neighboring windows which is necessary to obtain a continuous free energy
-profile. Smaller window sizes result in inefficient sampling because the TPS based method
-does not include bias forces to keep the trajectories within the windows and we end up
-sampling outside the windows especially in regions where the free energy has a steeper slope.  
+This choice was made based on the order parameter window that we are scanning. 
+20 windows results in a window size of 0.39 angstroms and we use a overlap of 
+0.09 {\AA} on either side of the window to make sure that we have configurations 
+that are common to neighboring windows which is necessary to obtain a continuous free energy 
+profile. Smaller window sizes result in inefficient sampling because the TPS based method 
+does not include bias forces to keep the trajectories within the windows and we end up 
+sampling outside the windows especially in regions where the free energy has a steeper slope. 
+To be honest, such choices lie in the art of doing such computations. 
 \end{response}
 
 \begin{response}
@@ -177,8 +194,8 @@ How many are needed to obtain a given precision or to obtain the given figure?
 * As before, when calculating the separatrix, you can not say "repeating this 
 process for several trajectories".}
 %reply
-We have included a few lines in the committor analysis 
-discussion where the details of the number of trajectories used is mentioned.  
+Completely reasonable criticism. We have included a few lines in the committor 
+analysis discussion where the details of the number of trajectories used is mentioned. 
 \end{response}
 
 \begin{response}{Some of these questions arise because nowhere in 
@@ -192,8 +209,8 @@ parameters of the transition state structures that we had calculated
 along with the mean and standard deviations. 
 The transition state structures depicted in Figs. 5 and 10 are 
 representatives from the ensemble. We have also updated Figs. 7 
-and 11 to contain standard deviations of the free energy that were
-calculated using the bootstrapping method within the windows.  
+and 11 to contain standard deviations of the free energy that were 
+calculated using the bootstrapping method within the windows. 
 \end{response}
 
 \begin{response}{Some of these questions also arise because the 
@@ -201,15 +218,15 @@ code to implement the method is not made public. Doing so would
 not only clarify some questions but also prevent others from 
 reinventing the wheel, that is, coding the implementation again 
 to check the results of this paper or to apply the method to their specific enzymes.}
-
 % REPLY
-We agree that the availability of code is necessary for reproducibility of the results.
+We agree that the availability of code is necessary for reproducibility of the results. 
 TPS based free energies calculations are akin to vanilla TPS calculations with 
-only a few modifications to the acceptance criteria as discussed in the manuscript as well
-as in the original BOLAS paper. We followed the algorithm stated in the manuscript
-and implemented it as python scripts but it was hard coded to model the MAT2A and 
-$\textit{pv}$ADA catalyzed reactions. We would release it in a public repository once it is 
-tailored for general purpose usage.  
+only a few modifications to the acceptance criteria as discussed in the manuscript as well 
+as in the original BOLAS paper. To be completely honest, we thought we had invented the 
+method until a careful search found the original manuscript. We followed the algorithm 
+stated in the manuscript and implemented it as python scripts but it was hard coded 
+to model the MAT2A and pvADA catalyzed reactions. We would release it in a public 
+repository once it is tailored for general purpose usage.
 \end{response}
 
 \begin{response}{The second piece of information needed is how the method 
@@ -221,11 +238,17 @@ the QM region and the QM method, among others. A comparison with Umbrella Sampli
 which also uses a reaction coordinate and also uses windows would be ideal. Again, 
 to make fair comparisons we would need error bars to estimate the convergence of 
 the results and reports of computational costs.}
-
-We have added discussions in the manuscript and a supporting information 
-document on the efficiency of sampling, 
-statistical analysis of the transition state structures and free energy profiles. 
-% REPLY
+%REPLY
+We have added discussions in the manuscript and a supporting information document 
+on the efficiency of sampling, statistical analysis of the transition state structures 
+and free energy profiles. We also must respectfully disagree – comparison with experiment 
+is exactly what we are interested in. The problems we have addressed are not “toy problems.” 
+There are full enzymatically catalyzed chemical reactions. The entire point to the 
+algorithm is the choice of coordinate along which windows are chosen is NOT a random guess – 
+it is what the actual dynamics of the system demands. Our goal is to provide evidence that 
+the method is capable of making mechanistic predictions PRIOR to experiment, and the way 
+for us to most efficiently do that is to verify our result by comparison to experiment – 
+not to other methods that have inherent limitations. 
 \end{response}
 
 \begin{response}{Beyond these general issues raised so far, there are some other points 
@@ -237,14 +260,22 @@ detailed. In particular, for the pvADA enzyme, which involves a two-step reactio
 do the way these 2 steps take place in the initial trajectory condition of the TPS ensemble?}
 
 % REPLY
-The reaction catalyzed by the \textit{pv}ADA enzyme consists of 
-the nucleophilic attack of the OH$^{-}$ on the C6 atom, proton transfer from the 
-GLU 223 residue to the N1 atom in the adenosyl moeity and finally the 
-the transfer of the proton from the OH$^{-}$ to the N6 atom resulting in the formation 
-of NH$_3$ and inosine. We have included the time series of the key distances in 
-the supporting information which shows that we collect trajectories which contain all these
-steps taking the system from the reactant state to the product state with the order of events
-as predicted from experiments. 
+We thank the reviewer for this question. We have added a discussion in the manuscript
+which contains the details about how the initial biased reactive trajectories were
+generated using harmonic distance constraints to form and break bonds for both the 
+MAT2A and $pv$ADA systems. We have also added a discussion about the 
+time series of certain distance parameters for the $pv$ADA reaction which provide 
+information about the sequence of the reactions steps as observed in a typical 
+TPS trajectory.    
+
+%The reaction catalyzed by the \textit{pv}ADA enzyme consists of 
+%the nucleophilic attack of the OH$^{-}$ on the C6 atom, proton transfer from the 
+%GLU 223 residue to the N1 atom in the adenosyl moeity and finally the 
+%the transfer of the proton from the OH$^{-}$ to the N6 atom resulting in the formation 
+%of NH$_3$ and inosine. We have included the time series of the key distances in 
+%the supporting information which shows that we collect trajectories which contain all these
+%steps taking the system from the reactant state to the product state with the order of events
+%as predicted from experiments. 
 \end{response}
 
 \begin{response}{2. Related to the previous question, considering that the barriers 
@@ -255,13 +286,12 @@ a good reaction coordinate to describe the second step? If not, shouldn't that u
 the barrier, something that should be compensated by a (not calculated) transmission coefficient?}
 
 % REPLY
-The calculated geometry of the intermediate resembles that of the Meissenheimer complex which is
-similar to that predicted from experiments. In our TPS reactive trajectories we observe that 
-once the complex is formed there is a rapid proton transfer from the nucleophilic OH$^{-}$ 
-to the NH$_2$ group resulting in the release of NH$_3$ and the free energy change due to the 
-proton transfer is 1.7 kCal mol$^{-1}$. 
-%The order parameter that is chosen is based on the fact that
-%it allows for the best definition of the reactant and product states.    
+The calculated geometry of the intermediate resembles that of the Meissenheimer complex 
+which is similar to that predicted from experiments. In our TPS reactive trajectories we 
+observe that once the complex is formed there is a rapid proton transfer from the 
+nucleophilic OH$^{-}$ to the NH$_2$ group resulting in the release of NH$_3$ and the free 
+energy change due to the proton transfer is 1.7 kcal mol$^{-1}$. 
+   
 \end{response}
 
 \begin{response}
@@ -274,20 +304,20 @@ questions regarding the choice of parameters).}
 % REPLY
 Since there are no bias forces constraining the trajectories to stay within a defined window, 
 in regions where the free energy curve has a large slope the trajectories tend to only sample 
-configurations that are almost completely outside the window with acceptance percentages $\leq 10$.
+configurations that are almost completely outside the window with acceptance percentages $\leq 10$. 
 This results in populations that are skewed in favor of regions with lower free energies. We sampled 
-3000 trajectories within each window and made sure that the change in the free energy profile
+3000 trajectories within each window and made sure that the change in the free energy profile 
 is negligible as a function of number of sampled trajectories to make sure we have achieved 
 convergence. Moreover the largest standard deviations that we obtained from bootstrapping 
-analysis was 0.9 kCal mol$^{-1}$ which also provides a measure for convergence. 
+analysis was 0.9 kcal mol$^{-1}$ which also provides a measure for convergence. 
 
 \end{response}
 
 \begin{response}
 {4. The author should check they cite the appropriate works. I am afraid 
 ref 20 is not an application of TPS to enzyme catalysis. To my knowledge, The first 
-applications of TPS to enzyme catalysis are  $J. Am. Chem. Soc.2005, 127, 13822-13831$ 
-and $J. Phys. Chem. B 2007, 111, 20, 5708-5718$.}
+applications of TPS to enzyme catalysis are  \textit{J. Am. Chem. Soc.} 2005, 127, 13822-13831 
+and \textit{J. Phys. Chem. B} 2007, 111, 20, 5708-5718.}
 % REPLY
 
 We thank the Reviewer for pointing out this mistake. We have made the appropriate changes to that
@@ -300,14 +330,15 @@ deeper into the scientific details to be useful to other members of the
 community, because what the manuscript should be describing is not that the 
 method works --we already knew that-- but how to make it work in enzymatic reactions.}
 % REPLY
+We thank the reviewer for the constructive comments to make the manuscript better. We 
+have addressed the questions by adding more statistical analysis and discussions of 
+the details of the calculations in the manuscript and supporting information. 
 \end{response}
-We thank the reviewer for the constructive comments to make the manuscript better. We have 
-addressed the questions by adding more statistical analysis and discussions of the details 
-of the calculations. 
+
 \section*{Other Changes}
-
-
-
+We have provided a diff.pdf file which contains a color coded presentation of 
+all the changes that were made to the manuscript after we received the reviewer's 
+comments. 
 \end{document}
 
 

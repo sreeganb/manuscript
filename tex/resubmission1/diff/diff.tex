@@ -1,4 +1,7 @@
 \pdfoptionpdfminorversion=4
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL ../../manuscript.tex   Tue Jun  7 13:21:04 2022
+%DIF ADD ../manuscript.tex      Mon Jun 13 13:44:49 2022
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% This is a (brief) model paper using the achemso class
@@ -87,6 +90,85 @@
 %% The manuscript does not need to include \maketitle, which is
 %% executed automatically.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -156,8 +238,12 @@ This has helped in proposing mechanisms and explanations for
 enzyme activity, fast high throughput screening of thousands of inhibitor 
 molecules in drug lead discovery, \cite{Jorgensen09AccChemRes42p724,Sliwoski14PharmacolRev66p334} 
 directed evolution for designing enzymes with enhanced catalytic 
-activities, \cite{Nunez06JPhysChemA110p463,Thyme09Nature461p1300,
-Bloom09PNAS106p9995,Zoi16JAmChemSoc138p3403,Schafer19JAmChemSoc141p10431} etc.    
+activities, \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Thyme09Nature461p1300,Bloom09PNAS106p9995,Schafer19JAmChemSoc141p10431} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Nunez06JPhysChemA110p463,Thyme09Nature461p1300,
+Bloom09PNAS106p9995,Zoi16JAmChemSoc138p3403,Schafer19JAmChemSoc141p10431} }\hspace{0pt}%DIFAUXCMD
+}\DIFaddend etc.    
 Straightforward MD simulations adequately sample 
 the long-lived stable reactant and product states 
 but the high energy barrier-crossing events that occur rarely and at long 
@@ -184,8 +270,13 @@ Therefore the TPS ensemble can be used to obtain
 kinetic information such as the rate of the reaction as well as to elucidate 
 the transition state, reaction coordinate and the reaction mechanism. 
 TPS has been successfully applied to study problems such as enzyme catalysis, 
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Antoniou01JPhysChemB105p5553,Hay12NatChem4p161,Schwartz09NatChemBiol5p551} 
+}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
 \cite{Basner05JAmChemSoc127p13822,Ramon07JPhysChemB111p5708,Hay12NatChem4p161,Schwartz09NatChemBiol5p551} 
-and protein folding. \cite{Bolhuis03ProcNatlAcadSci100p12129,Juraszek12ChemPhys396p30}
+}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend and protein folding. \cite{Bolhuis03ProcNatlAcadSci100p12129,Juraszek12ChemPhys396p30}
 
 Calculating equilibrium properties such as the free energy of an enzymatic 
 catalysis reaction within TPS is not straightforward. 
@@ -460,38 +551,40 @@ resulting in the formation of inosine and ammonia.}
 
 A biased initial reactive trajectory is obtained by using harmonic restraint forces 
 for both the MAT2A and $pv$ADA systems.
-For the MAT2A system harmonic constraint with a force constant of 35 kcal mol$^{-1}$ {\AA}$^{-2}$
+\DIFaddbegin \DIFadd{For the MAT2A system harmonic constraint with a force constant of 35 kcal mol$^{-1}$ }{\DIFadd{\AA}}\DIFadd{$^{-2}$
 was used for the bond breaking C5-O5 distance and the bond forming SD-C5 distance,
 and dynamics was run for $500\;fs$.  
-For the $pv$ADA system harmonic constraints with a force constant of 40 kcal mol$^{-1}${\AA}$^{-2}$ 
+For the $pv$ADA system harmonic constraints with a force constant of 40 kcal mol$^{-1}$}{\DIFadd{\AA}}\DIFadd{$^{-2}$ 
 was used for the bond breaking (C6-N6) and bond forming (O1-C6) distances, and for the proton 
 transfer distances between the OE2 atom on the ASP 223 residue to the N1 atom on 
 the adenosyl moeity and the dynamics was propagated for $500\;fs$.  
-Using the biased trajectory as the starting point and after removing the restraint 
+}\DIFaddend Using the biased trajectory as the starting point and after removing the restraint 
 forces, the shooting algorithm \cite{dellago02AdvChemPhys123} was used to generate
 new trajectories. The shooting algorithm begins with the choice of a 
 random time slice from the biased initial reactive trajectory and perturbs 
 the momenta of all the atoms in the system. Then the dynamics is propagated for 
 250 steps forwards and backwards using $1\;fs$ time steps
 resulting in a trajectory with a time period of $0.5\;ps$.
-The trajectories were propagated for a longer $1\;ps$ time period 
+\DIFaddbegin \DIFadd{The trajectories were propagated for a longer $1\;ps$ time period 
 to make sure that the chemical reaction occurs within $0.5\;ps$. 
-A total of 150 reactive trajectories were generated for both the MAT2A and $pv$ADA
-systems. The percentage of TPS trajectories that were accepted were 24$\%$ and 
+}\DIFaddend A total of 150 reactive trajectories were generated for both the MAT2A and $pv$ADA
+systems. \DIFaddbegin \DIFadd{The percentage of TPS trajectories that were accepted were 24$\%$ and 
 19$\%$ for the MAT2A and $pv$ADA systems, respectively.
 For optimal sampling with a good balance between the number of 
 accepted reactive trajectories and decorrelation from the initial constrained
 trajectory as well from one another, the acceptance percentage 
-is typically $\sim$ 40. \cite{dellago02AdvChemPhys123}  
+is typically $\sim$ 40. \mbox{%DIFAUXCMD
+\cite{dellago02AdvChemPhys123}  
+}\hspace{0pt}%DIFAUXCMD
 For complex systems such as enzymes we find that the lower the acceptance 
 percentage the quicker is the decorrelation. 
-%While a 40$\%$ acceptance has been found to provide the best compromise between the
-%number of accepted trajectories and decorrelation of the
-%trajectories from one another, 
-%we find that a lower acceptance
-%ratio provides quicker decorrelation from the initial constrained
-%trajectory, especially in more complex systems such as enzymes.
-%------------------------------------------------------------------------------ 
+%DIF > While a 40$\%$ acceptance has been found to provide the best compromise between the
+%DIF > number of accepted trajectories and decorrelation of the
+%DIF > trajectories from one another, 
+%DIF > we find that a lower acceptance
+%DIF > ratio provides quicker decorrelation from the initial constrained
+%DIF > trajectory, especially in more complex systems such as enzymes.
+}\DIFaddend %------------------------------------------------------------------------------ 
 \subsection{Free energy calculations}
 %------------------------------------------------------------------------------ 
 We follow the algorithm discussed previously to calculate the free energy
@@ -552,14 +645,14 @@ Committor analysis is carried out for a reactive trajectory
 from the TPS ensemble by choosing a time slice randomly from the trajectory, assigning
 momenta picked at random from the Boltzmann distribution for all the atoms, and running 
 dynamics for $250\;fs$. The commitment probability of a time slice is calculated by 
-repeating this procedure at least 50 times for each time slice and finding the fraction of trajectories that go 
+repeating this procedure \DIFdelbegin \DIFdel{many times }\DIFdelend \DIFaddbegin \DIFadd{at least 50 times for each time slice }\DIFaddend and finding the fraction of trajectories that go 
 to the reactant, product or neither. The transition state for the reaction is defined as 
 the structure from the time slice that has equal probability to commit to the reactant 
 and the product state. Repeating this process for several trajectories from the TPS
-ensemble results in a collection of transition states called the separatrix. We calculated 
-11 transition state structures for the MAT2A and the \textit{pv}ADA enzymes and details 
+ensemble results in a collection of transition states called the separatrix. \DIFaddbegin \DIFadd{We calculated 
+11 transition state structures for the MAT2A and the }\textit{\DIFadd{pv}}\DIFadd{ADA enzymes and details 
 regarding them are reported in the supporting information. 
-\begin{figure}[ht!]
+}\DIFaddend \begin{figure}[ht!]
 \includegraphics[scale=0.12]{figures/mat2a-trans-labelled.png}
 \caption{Transition state structure of the reaction catalyzed by the human MAT2A enzyme.
 The bond parameters d$_{\text{SC}}$ and d$_{\text{OC}}$ are $2.31$ {\AA} and $2.09$ {\AA}, 
@@ -625,11 +718,13 @@ of the order parameter a continuous function.}
 \label{fig:mat2a-fenergy}
 \end{figure}
 The free energy profile from our TPS based calculations is shown in 
-Fig. \ref{fig:mat2a-fenergy}. It includes standard deviations calculated 
+Fig. \ref{fig:mat2a-fenergy}\DIFdelbegin \DIFdel{where the }\DIFdelend \DIFaddbegin \DIFadd{. It includes standard deviations calculated 
 using the bootstrapping method for the populations of configurations 
-sampled within each window. \cite{Hub10JChemTheoryComput6p3713}
-The calculated free energy barrier is $16\;\text{Kcal mol}^{-1}$.
-which is in excellent agreement with the experimental result.  
+sampled within each window. \mbox{%DIFAUXCMD
+\cite{Hub10JChemTheoryComput6p3713}
+}\hspace{0pt}%DIFAUXCMD
+The calculated free energy }\DIFaddend barrier is $16\;\text{Kcal mol}^{-1}$.
+\DIFdelbegin \DIFdel{This }\DIFdelend \DIFaddbegin \DIFadd{which }\DIFaddend is in excellent agreement with the experimental result.  
 %------------------------------------------------------------------------------ 
 \subsection{$pv$ADA}
 %------------------------------------------------------------------------------ 
@@ -693,11 +788,13 @@ calculated within the individual windows which is adjusted to make the free ener
 of the order parameter a continuous function.}
 \label{fig:ada-fenergy}
 \end{figure}
-The free energy profile along with standard deviations calculated 
+The free energy \DIFaddbegin \DIFadd{profile along with standard deviations calculated 
 using the bootstrapping method for the populations of configurations 
-sampled within each window \cite{Hub10JChemTheoryComput6p3713} is 
+sampled within each window \mbox{%DIFAUXCMD
+\cite{Hub10JChemTheoryComput6p3713} }\hspace{0pt}%DIFAUXCMD
+is 
 depicted in Fig. \ref{fig:ada-fenergy}.
-The free energy barrier is calculated to be $21\;\text{Kcal}\;\text{mol}^{-1}$
+The free energy }\DIFaddend barrier is calculated to be $21\;\text{Kcal}\;\text{mol}^{-1}$
 and the overall shape of the function is very similar to that hypothesized 
 by Luo et al. \cite{Luo07JAmChemSoc129p8008}
 %------------------------------------------------------------------------------ 
@@ -733,7 +830,7 @@ with a double well shape similar to that measured from experiments.
 These results show that free energy simulations based on unbiased transition 
 path sampling computations can result in accurate and computationally
 efficient predictions of both free energy profiles and mechanisms.
-Free energy calculations within the TPS shooting algorithm do not employ any 
+\DIFaddbegin \DIFadd{Free energy calculations within the TPS shooting algorithm do not employ any 
 bias forces constraining the trajectories within a defined window. 
 We observe that in regions where the free energy curve has a large 
 slope the trajectories tend to majorly sample configurations that are 
@@ -741,7 +838,7 @@ outside the window with acceptance percentages $\leq 10$. While this improves
 the decorrelation time of the sampled trajectories, techniques within 
 TPS to enhance the sampling in these regions will be necessary for its
 widespread applications to complex biomolecular systems.  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}\DIFaddend %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
 %% classes.  This should be given within the "acknowledgement"
 %% environment, which will make the correct section or running title.
@@ -754,18 +851,22 @@ SGB acknowledges funding from the NIH through grant number GM127594.
 %% The same is true for Supporting Information, which should use the
 %% suppinfo environment.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{suppinfo}
-The supporting information is available free of charge at
+%DIF < \begin{suppinfo}
+\DIFaddbegin \begin{suppinfo}
+\DIFadd{The supporting information is available free of charge at
+}\DIFaddend 
 
 
 
-\end{suppinfo}
+%DIF < \end{suppinfo}
+\DIFaddbegin \end{suppinfo}
+\DIFaddend 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The appropriate \bibliography command should be placed here.
 %% Notice that the class file automatically sets \bibliographystyle
 %% and also names the section correctly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliography{manuscript}
+\bibliography{diff}
 
 \end{document}
