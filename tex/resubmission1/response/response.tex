@@ -129,6 +129,7 @@ the manuscript.
 {First one needs to know how the specific parameters of the method affect 
 the results. Or at least, how or why they were chosen. If not for all parameters, 
 at least for the most relevant ones (but this needs also to be specified). 
+\newline
 For example:
 * why use 150 reactive trajectories?}
 %reply
@@ -144,8 +145,9 @@ then fewer trajectoreis are sufficient for further committor analysis.
 To be sure that we do not use trajecotries that are correlated to the initial 
 biased trajectory we ignore the first 100 trajectories for committor analysis. 
 Additionally we have added a discussion on the acceptance percentage of reactive 
-trajectories in the manuscript. It has been observed that when the acceptance 
-percentage is low the trajectories decorrelate faster.  
+trajectories in the manuscript. 
+%It has been observed that when the acceptance 
+%percentage is low the trajectories decorrelate faster.  
 \end{response}
 
 \begin{response}
@@ -175,9 +177,8 @@ How many are needed to obtain a given precision or to obtain the given figure?
 * As before, when calculating the separatrix, you can not say "repeating this 
 process for several trajectories".}
 %reply
-Since this is the discussion of the committor analysis and committor distribution 
-analysis in general and not for the specific case for the enzymes, we had not
-provided the number of trajectories that were used in these calculations. 
+We have included a few lines in the committor analysis 
+discussion where the details of the number of trajectories used is mentioned.  
 \end{response}
 
 \begin{response}{Some of these questions arise because nowhere in 
@@ -186,10 +187,13 @@ profile nor in the transition state structure distances (Fig. 5).
 Therefore the effect of these parameters on the precision of the 
 results is not known.
 }
-We have added a supporting information file which contains analysis on the transition
-state ensemble providing more information about the structures that we had calculated. 
-The transition state structure depicted in Fig. 5 is a representative
-from the ensemble of transition states.
+We have added a supporting information file which contains geometrical 
+parameters of the transition state structures that we had calculated 
+along with the mean and standard deviations. 
+The transition state structures depicted in Figs. 5 and 10 are 
+representatives from the ensemble. We have also updated Figs. 7 
+and 11 to contain standard deviations of the free energy that were
+calculated using the bootstrapping method within the windows.  
 \end{response}
 
 \begin{response}{Some of these questions also arise because the 
@@ -218,8 +222,10 @@ which also uses a reaction coordinate and also uses windows would be ideal. Agai
 to make fair comparisons we would need error bars to estimate the convergence of 
 the results and reports of computational costs.}
 
+We have added discussions in the manuscript and a supporting information 
+document on the efficiency of sampling, 
+statistical analysis of the transition state structures and free energy profiles. 
 % REPLY
-
 \end{response}
 
 \begin{response}{Beyond these general issues raised so far, there are some other points 
@@ -253,8 +259,9 @@ The calculated geometry of the intermediate resembles that of the Meissenheimer 
 similar to that predicted from experiments. In our TPS reactive trajectories we observe that 
 once the complex is formed there is a rapid proton transfer from the nucleophilic OH$^{-}$ 
 to the NH$_2$ group resulting in the release of NH$_3$ and the free energy change due to the 
-proton transfer is 1.7 kCal mol$^{-1}$. The order parameter that is chosen is based on the fact that
-it allows for the best definition of the reactant and product states.    
+proton transfer is 1.7 kCal mol$^{-1}$. 
+%The order parameter that is chosen is based on the fact that
+%it allows for the best definition of the reactant and product states.    
 \end{response}
 
 \begin{response}
@@ -267,8 +274,13 @@ questions regarding the choice of parameters).}
 % REPLY
 Since there are no bias forces constraining the trajectories to stay within a defined window, 
 in regions where the free energy curve has a large slope the trajectories tend to only sample 
-configurations almost completely outside the window with acceptance percentages $\leq 10$.
-This disconnection is simply an artifact of the histogram 
+configurations that are almost completely outside the window with acceptance percentages $\leq 10$.
+This results in populations that are skewed in favor of regions with lower free energies. We sampled 
+3000 trajectories within each window and made sure that the change in the free energy profile
+is negligible as a function of number of sampled trajectories to make sure we have achieved 
+convergence. Moreover the largest standard deviations that we obtained from bootstrapping 
+analysis was 0.9 kCal mol$^{-1}$ which also provides a measure for convergence. 
+
 \end{response}
 
 \begin{response}
@@ -289,7 +301,9 @@ community, because what the manuscript should be describing is not that the
 method works --we already knew that-- but how to make it work in enzymatic reactions.}
 % REPLY
 \end{response}
-
+We thank the reviewer for the constructive comments to make the manuscript better. We have 
+addressed the questions by adding more statistical analysis and discussions of the details 
+of the calculations. 
 \section*{Other Changes}
 
 

@@ -543,11 +543,13 @@ Committor analysis is carried out for a reactive trajectory
 from the TPS ensemble by choosing a time slice randomly from the trajectory, assigning
 momenta picked at random from the Boltzmann distribution for all the atoms, and running 
 dynamics for $250\;fs$. The commitment probability of a time slice is calculated by 
-repeating this procedure many times and finding the fraction of trajectories that go 
+repeating this procedure at least 50 times for each time slice and finding the fraction of trajectories that go 
 to the reactant, product or neither. The transition state for the reaction is defined as 
 the structure from the time slice that has equal probability to commit to the reactant 
 and the product state. Repeating this process for several trajectories from the TPS
-ensemble results in a collection of transition states called the separatrix.
+ensemble results in a collection of transition states called the separatrix. We calculated 
+11 transition state structures for the MAT2A and the \textit{pv}ADA enzymes and details 
+regarding them are reported in the supporting information. 
 \begin{figure}[ht!]
 \includegraphics[scale=0.12]{figures/mat2a-trans-labelled.png}
 \caption{Transition state structure of the reaction catalyzed by the human MAT2A enzyme.
@@ -614,8 +616,11 @@ of the order parameter a continuous function.}
 \label{fig:mat2a-fenergy}
 \end{figure}
 The free energy profile from our TPS based calculations is shown in 
-Fig. \ref{fig:mat2a-fenergy} where the barrier is $16\;\text{Kcal mol}^{-1}$.
-This is in excellent agreement with the experimental result.  
+Fig. \ref{fig:mat2a-fenergy}. It includes standard deviations calculated 
+using the bootstrapping method for the populations of configurations 
+sampled within each window. \cite{Hub10JChemTheoryComput6p3713}
+The calculated free energy barrier is $16\;\text{Kcal mol}^{-1}$.
+which is in excellent agreement with the experimental result.  
 %------------------------------------------------------------------------------ 
 \subsection{$pv$ADA}
 %------------------------------------------------------------------------------ 
@@ -679,6 +684,10 @@ calculated within the individual windows which is adjusted to make the free ener
 of the order parameter a continuous function.}
 \label{fig:ada-fenergy}
 \end{figure}
+The free energy profile along with standard deviations calculated 
+using the bootstrapping method for the populations of configurations 
+sampled within each window \cite{Hub10JChemTheoryComput6p3713} is 
+depicted in Fig. \ref{fig:ada-fenergy}.
 The free energy barrier is calculated to be $21\;\text{Kcal}\;\text{mol}^{-1}$
 and the overall shape of the function is very similar to that hypothesized 
 by Luo et al. \cite{Luo07JAmChemSoc129p8008}
@@ -714,7 +723,15 @@ The free energy barrier for this reaction for found to be $21\;\text{Kcal}\;\tex
 with a double well shape similar to that measured from experiments. 
 These results show that free energy simulations based on unbiased transition 
 path sampling computations can result in accurate and computationally
-efficient predictions of both free energy profiles and mechanisms.  
+efficient predictions of both free energy profiles and mechanisms.
+Free energy calculations within the TPS shooting algorithm do not employ any 
+bias forces constraining the trajectories within a defined window. 
+We observe that in regions where the free energy curve has a large 
+slope the trajectories tend to majorly sample configurations that are 
+outside the window with acceptance percentages $\leq 10$. While this improves
+the decorrelation time of the sampled trajectories, techniques within 
+TPS to enhance the sampling in these regions will be necessary for its
+widespread applications to complex biomolecular systems.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
 %% classes.  This should be given within the "acknowledgement"
@@ -728,10 +745,12 @@ SGB acknowledges funding from the NIH through grant number GM127594.
 %% The same is true for Supporting Information, which should use the
 %% suppinfo environment.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{suppinfo}
+\begin{suppinfo}
+The supporting information is available free of charge at
 
 
-%\end{suppinfo}
+
+\end{suppinfo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The appropriate \bibliography command should be placed here.
