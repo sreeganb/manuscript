@@ -462,12 +462,12 @@ A biased initial reactive trajectory is obtained by using harmonic restraint for
 for both the MAT2A and $pv$ADA systems.
 For the MAT2A system harmonic constraint with a force constant of 35 kcal mol$^{-1}$ {\AA}$^{-2}$
 was used for the bond breaking C5-O5 distance and the bond forming SD-C5 distance,
-and dynamics was run for $500\;fs$.  
+and dynamics was run for $500\;fs$ starting with the reactant state and ending up in the product state.   
 For the $pv$ADA system harmonic constraints with a force constant of 40 kcal mol$^{-1}${\AA}$^{-2}$ 
 was used for the bond breaking (C6-N6) and bond forming (O1-C6) distances, and for the proton 
-transfer distances between the OE2 atom on the ASP 223 residue to the N1 atom on 
-the adenosyl moeity and the dynamics was propagated for $500\;fs$.  
-Using the biased trajectory as the starting point and after removing the restraint 
+transfer distances between the OE2 atom on the GLU229 residue to the N1 atom on 
+the adenosyl moeity and the dynamics was propagated for $500\;fs$ going from the reactant to 
+the product state. Using the biased trajectory as the starting point and after removing the restraint 
 forces, the shooting algorithm \cite{dellago02AdvChemPhys123} was used to generate
 new trajectories. The shooting algorithm begins with the choice of a 
 random time slice from the biased initial reactive trajectory and perturbs 

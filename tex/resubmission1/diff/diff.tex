@@ -1,7 +1,7 @@
 \pdfoptionpdfminorversion=4
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL ../../manuscript.tex   Tue Jun  7 13:21:04 2022
-%DIF ADD ../manuscript.tex      Mon Jun 13 13:44:49 2022
+%DIF ADD ../manuscript.tex      Mon Jun 13 16:26:13 2022
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% This is a (brief) model paper using the achemso class
@@ -553,12 +553,12 @@ A biased initial reactive trajectory is obtained by using harmonic restraint for
 for both the MAT2A and $pv$ADA systems.
 \DIFaddbegin \DIFadd{For the MAT2A system harmonic constraint with a force constant of 35 kcal mol$^{-1}$ }{\DIFadd{\AA}}\DIFadd{$^{-2}$
 was used for the bond breaking C5-O5 distance and the bond forming SD-C5 distance,
-and dynamics was run for $500\;fs$.  
+and dynamics was run for $500\;fs$ starting with the reactant state and ending up in the product state.   
 For the $pv$ADA system harmonic constraints with a force constant of 40 kcal mol$^{-1}$}{\DIFadd{\AA}}\DIFadd{$^{-2}$ 
 was used for the bond breaking (C6-N6) and bond forming (O1-C6) distances, and for the proton 
-transfer distances between the OE2 atom on the ASP 223 residue to the N1 atom on 
-the adenosyl moeity and the dynamics was propagated for $500\;fs$.  
-}\DIFaddend Using the biased trajectory as the starting point and after removing the restraint 
+transfer distances between the OE2 atom on the GLU229 residue to the N1 atom on 
+the adenosyl moeity and the dynamics was propagated for $500\;fs$ going from the reactant to 
+the product state. }\DIFaddend Using the biased trajectory as the starting point and after removing the restraint 
 forces, the shooting algorithm \cite{dellago02AdvChemPhys123} was used to generate
 new trajectories. The shooting algorithm begins with the choice of a 
 random time slice from the biased initial reactive trajectory and perturbs 
@@ -867,6 +867,6 @@ SGB acknowledges funding from the NIH through grant number GM127594.
 %% Notice that the class file automatically sets \bibliographystyle
 %% and also names the section correctly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliography{diff}
+\bibliography{manuscript}
 
 \end{document}
