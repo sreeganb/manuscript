@@ -171,7 +171,8 @@ on the acceptance percentage of reactive trajectories in the manuscript.
   or too long?}
 We used longer trajectories (1 ps) during the initial stages of our calculations 
 and checked to make sure that the reaction occurs within 
-the 0.5 ps time length before collecting the TPS ensemble. 
+the 0.5 ps time length before collecting the TPS ensemble. A statement regarding this 
+is added to the manuscript. 
 \end{response}
 
 {\begin{response}
@@ -265,8 +266,8 @@ which contains the details about how the initial biased reactive trajectories we
 generated using harmonic distance constraints to form and break bonds for both the 
 MAT2A and $pv$ADA systems. We have also added a discussion about the 
 time series of certain distance parameters for the $pv$ADA reaction which provide 
-information about the sequence of the reactions steps as observed in a typical 
-TPS trajectory.    
+information about the sequence of the steps that are part of the reaction as observed 
+in a typical TPS trajectory.    
 
 %The reaction catalyzed by the \textit{pv}ADA enzyme consists of 
 %the nucleophilic attack of the OH$^{-}$ on the C6 atom, proton transfer from the 
@@ -290,7 +291,9 @@ The calculated geometry of the intermediate resembles that of the Meissenheimer 
 which is similar to that predicted from experiments. In our TPS reactive trajectories we 
 observe that once the complex is formed there is a rapid proton transfer from the 
 nucleophilic OH$^{-}$ to the NH$_2$ group resulting in the release of NH$_3$ and the free 
-energy change due to the proton transfer is 1.7 kcal mol$^{-1}$. 
+energy change due to the proton transfer is 1.7 kcal mol$^{-1}$. We believe that d(NC)-d(OC) 
+is still a good reaction coordinate to describe the proton transfer step which is accompanied by 
+the release of NH$_3$. 
    
 \end{response}
 
@@ -303,11 +306,11 @@ windows would show the effect of window size on the result (that would address o
 questions regarding the choice of parameters).}
 % REPLY
 Since there are no bias forces constraining the trajectories to stay within a defined window, 
-in regions where the free energy curve has a large slope the trajectories tend to only sample 
-configurations that are almost completely outside the window with acceptance percentages $\leq 10$. 
+in regions where the free energy curve has a large slope the trajectories more often tend to sample 
+configurations that are outside the window with acceptance percentages $\leq 10$. 
 This results in populations that are skewed in favor of regions with lower free energies. We sampled 
 3000 trajectories within each window and made sure that the change in the free energy profile 
-is negligible as a function of number of sampled trajectories to make sure we have achieved 
+is negligible as a function of the number of sampled trajectories to make sure that we have achieved 
 convergence. Moreover the largest standard deviations that we obtained from bootstrapping 
 analysis was 0.9 kcal mol$^{-1}$ which also provides a measure for convergence. 
 
@@ -336,9 +339,8 @@ the details of the calculations in the manuscript and supporting information.
 \end{response}
 
 \section*{Other Changes}
-We have provided a diff.pdf file which contains a color coded presentation of 
-all the changes that were made to the manuscript after we received the reviewer's 
-comments. 
+We have provided a diff.pdf file which highlights all the changes that were made to 
+the manuscript after we received the reviewer's comments. 
 \end{document}
 
 
